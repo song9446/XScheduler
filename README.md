@@ -12,13 +12,17 @@ Before commit, please pull the last version of branch and try to build it.
 
 # 3. Dependency
 Whatever static http server support php with mysql is ok.
+
 anyway I use php-mysql and php built in server.
+
 `php -S 0.0.0.0:80 -t docs`
 
 # 4. Build
 It doesn't need to compile or build.
+
 just serve `docs` directory as root directory
 
 # 5. Database server
 It uses database server as AWS RDS(mysql) at 
+
 `xscheduler.c4l3nt5dolim.ap-northeast-2.rds.amazonaws.com:3306`
