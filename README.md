@@ -11,8 +11,8 @@ Before commit, please pull the last version of branch and try to build it.
 6) git push
 
 # 3. Dependency
-Whatever static http server support php is ok.
-anyway I use php built in server.
+Whatever static http server support php with mysql is ok.
+anyway I use php-mysql and php built in server.
 `php -S 0.0.0.0:80 -t docs`
 
 # 4. Build
