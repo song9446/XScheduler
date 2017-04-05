@@ -27,3 +27,7 @@ just serve `docs` directory as root directory
 It uses database server as AWS RDS(mysql) at 
 
 `xscheduler.c4l3nt5dolim.ap-northeast-2.rds.amazonaws.com:3306`
+
+you can connect with mysql cli client via
+
+`mysql -u root -p -h xscheduler.c4l3nt5dolim.ap-northeast-2.rds.amazonaws.com`
