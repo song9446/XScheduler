@@ -31,3 +31,6 @@ It uses database server as AWS RDS(mysql) at
 you can connect with mysql cli client via
 
 `mysql -u root -p -h xscheduler.c4l3nt5dolim.ap-northeast-2.rds.amazonaws.com`
+
+# 6. Host
+52.78.81.68
