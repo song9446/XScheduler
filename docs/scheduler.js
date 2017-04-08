@@ -1,3 +1,33 @@
+/*
+    createScheduler(container[, yaer, month, id]);
+        container must already be added in document.
+        It creates scheduler element inside container lement
+*/
+var createAction = function (op, args) {
+    this.op = op;
+    this.args = args;
+};
+var performAction = function (action) {
+    switch(action.op){
+    case "add_schedule": 
+    break;
+    case "update_schedule":
+    break;
+    case "update_schedule":
+    break;
+    }
+};
+var undoAction = function (action) {
+    switch(action.op){
+    case "add_schedule": 
+    break;
+    case "update_schedule":
+    break;
+    case "update_schedule":
+    break;
+    }
+}
+
 var __id_auto_increament = 0;
 var createScheduler = function (container, year, month, id) {
     this.id = id || "scheduler" + (++__id_auto_increament);
@@ -16,21 +46,21 @@ var createScheduler = function (container, year, month, id) {
     createDateController(cont, this.id, year, month);
     createSchedulerViewElement(cont, year, month);
     return cont;
-}
+};
 var createDateController = function (container, id, year, month) {
     var div = document.createElement("div");
     div.className = "date_controller";
     var ret = "".concat("<span onclick='setDate(\"",id,"\",",year,",",month-1, ")'><  </span><span id='", id,"-date", "'>", year, "-", month, "</span><span onclick='setDate(\"",id,"\",",year,",",month+1, ")'>  ></span>");
     div.innerHTML = ret;
     container.appendChild(div);
-}
+};
 function setDate(id, year, month) {
     var el = document.getElementById(id),
         cont = el.parentElement;
     cont.removeChild(el);
     el.id = null;
     createScheduler(cont, year, month, id);
-}
+};
 var createSchedulerViewElement = function (container, year, month) {
     var date = new Date();
     year = year || date.getFullYear();
