@@ -1,0 +1,37 @@
+.scheduler {
+    display:inline-block;
+    background-color:#eee;
+    padding: 20px;
+}
+.scheduler .date_controller {
+    text-align:center;
+    font-size:60px;
+    margin-bottom: 20px;
+}
+.schedule_box {
+    text-shadow: 0 0 3px #000;
+    -moz-text-shadow: 0 0 3px #000;
+    -webkit-text-shadow: 0 0 3px #000;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+}
+.schedule_box .start_time {
+    color:#DCDCDC;
+    flex: 0 1 0;
+    align-self: flex-start;
+    text-align: left;
+}
+.schedule_box .end_time {
+    color:#DCDCDC;
+    flex: 0 1 0;
+    align-self:flex-end;
+    text-align:right;
+}
+.schedule_box .name {
+    color:#FFFFFF;
+    flex: 0 1 0;
+    align-self:center;
+    text-align:center;
+}
