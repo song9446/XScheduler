@@ -1,0 +1,428 @@
+Programming Assignment 1: Breadth-First Search, Depth-First Search, and A* Search
+
+Table of Contents
+
+Announcement
+Introduction
+Download the maze simulator
+Run the maze simulator with the sample programs
+Communication between an agent and the simulator
+Implement your search algorithms
+Compile and run your program
+Evaluation of your implementations
+Submit your program
+Grading Scheme
+Bug reports
+1. Announcement
+
+(April 2, 2017) I updated the maze simulator again. The speed of simulation is now called ¡°simulation delay.¡± Please download the maze simulator again.
+(March 12, 2017) I updated the maze simulator. You can now select the speed of the simulation. Please download the maze simulator again.
+(March 12, 2017) The deadline of this assignment is 23:59pm on April 8, 2017. Please put your programs and documentation in one zip file and upload it to Blackboard.
+
+2. Introduction
+
+Many problems in Artificial Intelligence can be formulated as search problems, which, in principle, can be seen as solving a maze?how should an agent explore a maze in order to find the shortest path to the exit, given that the agent has no prior knowledge about the maze? In this exercise, you will implement three search algorithms for finding the shortest path in a maze: breadth-first search, A* search, and depth-first search.
+
+
+3. Download the maze simulator
+
+We have developed a maze simulator for this exercise. First of all, download the maze simulator and the code templates from this link: maze_v2.tar.gz. This zip file contains all the files you need to do this assignment. Here is the list of the files in this zip file.
+
+MazeGame.jar ? The maze simulator written in Java.
+bfs ? The sample program of the breadth-first search agent. It can only run in Ubuntu on our server.
+astar ? The sample program of the A* search agent. It can only run in Ubuntu on our server.
+dfs ? The sample program of the depth-first search agent. It can only run in Ubuntu on our server.
+bfs.cpp ? The code template of the breadth-first search agent.
+astar.cpp ? The code template of the A* search agent.
+dfs.cpp ? The code template of the depth-first search agent.
+mazegame.tar.gz ? The source code of the simulator.
+map_sample.out ? The data file containing the maze being used in the examples on this webpage.
+
+4. Run the maze simulator with the sample programs
+
+The maze simulator program is written in Java. You need to install the latest version of JDK (version 8 or above) in order to run it. We have already installed JDK on our server.
+
+Since the maze simulator involves a GUI, you need to set up a X11 server on your local machine and use X11 forwarding in order to open the GUI. If your local machine is not running a X11 server that our server can remotely connect to it, the GUI will fail to display. You can easily find some free X11 servers for different platforms on the Internet.
+
+X11 forwarding can be set automatically by using -X option when you ssh to our server:
+
+ssh -X cXXXXXXX@our_server_ip
+where XXXXXXX is your student ID and our_server_ip is the IP address of our server. If you fail to open the GUI remotely via X11 forwarding, you can schedule a meeting with our TA to test your program directly on our server.
+
+After that, you should be able to start the maze simulator by the following command:
+
+java -jar MazeGame.jar
+Then you will see the following window on your computer screen.
+
+
+Initially, the size of maze is 120¡¿80. You can generate a new maze with a different size by entering new values in the text fields called ¡°Width¡± and ¡°Height¡± and then click the "Generate new maze" button. The minimum size is 3¡¿4 or 4¡¿3, and the maximum size is 300¡¿300. When testing your algorithms, you should use smaller mazes for debugging. However, in our evaluation, we will test your programs using much larger mazes (up to 300¡¿300).
+
+The maze generator also computes the actual shortest distance between the start position and the exit. With full knowledge about the maze, the maze generator can use a shortest path algorithm such as Dijkstra's algorithm to find the length of the shortest paths. In this example, the actual shortest distance is 105.
+
+In the figure, the blue dot and the blue circle refer to the start position of the agent, whereas the red dot and the red circle refer to the exit. They are randomly chosen by the maze generator. It is possible that the blue dot and the red dot are at the same position, and your agent should be able to handle this special case.
+
+The maze simulator will run into a stack overflow error if it tries to generate a large maze (e.g., 300¡¿300). To avoid the error, turning on -Xss option of the Java Virtual Machine:
+
+java -Xss4m -jar MazeGame.jar
+After generating a maze, you can solve it using the sample programs we provide. The three sample programs are bfs, astar, and dfs. These programs are compiled on Ubuntu 16.10 using g++ 6.2. Hence, they cannot be run on MS Windows and Mac OS X.
+
+These sample programs should be put in the same directory of MazeGame.jar; otherwise, the maze simulator cannot locate these programs. In addition, the sample program should have the ¡°execute¡± permission. You can change the permission by the following command:
+
+chmod 755 bfs astar dfs
+dfs needs a larger stack size than the default stack size in order to run correctly. Use the following command to increase stack size in Ubuntu on our server:
+
+ulimit -s 100000
+Now you are ready to run the programs using the maze simulator. In the GUI of the maze simulator, select ¡°BFS search¡± on the left side of panel and click ¡°Start Agent¡±. Then the maze simulator will start to run the program bfs and interact with it in order to solve the maze. When the simulation delay is a positive integer, the simulator will draw the intermediate steps. The larger the simulation delay, the larger the delay between the drawings of the intermediate steps. To speed up the simulation, set the simulation delay to 0 milliseconds. Then the simulator will not draw the intermediate steps.
+
+In the next section, we will describe the interaction between the simulator and the programs. When bfs terminates, the GUI will show the positions visited by the agent as well as the shortest path. In the above example, the bfs program should produce the following screen:
+
+
+You can see that bfs solved the maze and returned one of the shortest paths (the yellow line) whose length is exactly the same as the actual shortest distance computed by the maze generator. bfs explored 2530 empty spaces (the green area) before it returns this shortest path, as indicated in the text above the maze (¡°Number of moves = 2530¡±). The color of the text is blue because the agent found a shortest path; otherwise, the color is red.
+
+Everytime the maze generator generates a new maze, it will generate a data file called map.out in the current directory. map.out contains all the information about the maze. You do not need to know the format of the data file; all you need to know is that you can save this file and reload the maze into the simulator. In the above example, we have saved the data file as map_sample.out. You can load this data file into the maze simulator by this command:
+
+java -jar MazeGame.jar map_sample.out
+Then you can replicate the above result and generate the above figure by clicking the ¡°Start Agent¡± button.
+
+Likewise, you can use A* search to solve the above maze. After selecting ¡°A-star search¡± and clicking the ¡°Start Agent¡± button, the simulator will start to interact with the program astar to solve the maze using A* search. The result shall be similar to the figure below.
+
+
+Since A* search depends on a heuristic function which is noisy, the results of the A* search are slightly different in different runs. If you click the ¡°Start Agent¡± button repeatedly, you should see that the green areas are different in different runs.
+
+However, you will run into problems if you run depth-first search to solve the maze. First, the program dfs may crash if you forget to increase the stack size by ulimit as discussed before. Second, the simulator seems to hang after clicking the ¡°Start Agent¡± button. It is because the maze is too large to be solved by dfs; it will take a lot more time to solve the maze than bfs and astar. In our evaluation, we only allow the search algorithms to run for a few minutes only. If a search algorithm fails to return a solution within the time limit, we deem that the algorithm cannot solve the problem. In this case, you should type Ctrl-C in the command prompt to stop the simulator. In our evaluation, we will test dfs with small mazes only.
+
+We also provide you the source code of the maze simulator: mazegame.tar.gz. You can generate MazeGame.jar from the source code using these commands:
+
+ tar -zxvf mazegame.tar.gz
+ javac mazegame/MazeGame.java
+ jar cvfe MazeGame.jar mazegame.MazeGame mazegame/*.class
+ However, since we have already compiled the source code for you, there is no need for you to compile the source code yourself. In fact, you do not have to read and understand the code of the maze simulator, as your task is the write the agent programs in C++. Nonetheless, we provide you the source code for debugging and understanding the behavior of the maze simulator.
+
+
+ 5. Communication between an agent and the simulator
+
+ The simulator solves the maze by calling three external programs called bfs, astar, and dfs. Basically these programs are simple text-based programs that communicate with the simulator by the standard input and the standard output. To observe the communication between an agent and the simulator, you can turn on the -v option of the program:
+
+ java -jar MazeGame.jar -v
+ You can also provide a maze data file while turning on the -v option.
+
+ java -jar MazeGame.jar -v map_sample.out
+ After you start running bfs, the simulator will dump the communication between the agent and the simulator to the standard output. What you should see is below:
+
+ 0 0 0 0 1
+ 1 0
+ 0 1 1 0 0
+ 0 -1
+ 0 0 1 1 0
+ 0 1
+ 0 1 0 1 0
+ 2 0
+ 0 1 0 1 0
+ -1 -1
+
+   .
+     .
+       .
+
+       0 0 0 1 1
+       -29 2
+       0 0 0 1 0
+       -24 17
+       1 1 1 0 0
+       PATH
+       0 0
+       0 1
+       -1 1
+       -2 1
+       -2 2
+
+         .
+           .
+             .
+
+             -26 16
+             -26 17
+             -25 17
+             -24 17
+             END
+             The output consists of two sections separated by the keyword PATH. Before PATH is the sequence of sensing information and actions interleaving with each other. The lines with 5 integers are sensing information provided by the simulator to the agent. The agent will receive these information from the standard input. The lines with 2 integers are the coordinates chosen by the agent to explore. The agent will send these information to the standard output to the simulator. Each line ends with a new line character.
+
+             After PATH is the sequence of coordinates starting from (0,0) which constitute the shortest path found by the agent. Each line contains two integers and ends with a new line character. The sequence ends with the keyword END. The agent will send these information to the standard output.
+
+             Let me explain exactly what these information means. First off, you need to understand the two coordinate systems being used in the simulation. The first coordinate system is for the simulator and the second one is for agents. The coordinate system for the simulator has an origin at the upper left corner of the maze. The x-axis is from left to right, and the y-axis is from top to bottom. This coordinate system is only used in the simulator internally and your programs will not use it. Instead, your programs will use the coordinate system for agents, whose origin is at the start position of the agent in the maze. This coordinate system is consistent with the fact that an agent has no knowledge about the maze, hence it cannot determine its start position in the coordinate system for the simulator. The communication between an agent and the simulator will use the coordinate system for agents.
+
+             In the coordinate system for agents, the coordinate of the start position is always (0, 0). Once again, the start position is not necessary at the lower-left or upper-left corner of the maze. The x-axis is from left to right and the y-axis is from top to bottom. Hence negative values can appear in a coordinate. For example, the coordinate of the position on the left of the start position is (-1, 0), while the coordinate of the position on the right of the start position is (1, 0). The coordinate of the position on the left of the left position of the start position is (-2, 0), the coordinate of the position on the right of the right of the start position is (2, 0). Similarly, the coordinate of the position above the start position is (0, -1), while the coordinate of the position below the start position is (0, 1).
+
+             Once you understand the coordinate system for agents, you should be able to interpret the actions and the shortest path generated by sample programs. The actions chosen by the agent implemented by your program must be the next position the agent should explore. The coordinate of the next position is a pair of integer values separated with some white spaces. Notice that the next position cannot be a position that is either (1) a wall or (2) a position not adjacent to a visited position without a wall between them. Otherwise, the next position can be any position including the visited positions. If your program sends an invalid position to the simulator, the simulator will show an error message and stop the simulation.
+
+             When your agent reaches the exit, your program should send a word ¡°PATH¡± to the simulator to signify the end of the search. After that your program should print a sequence of coordinates on the path from the start position to the exit. The sequence should end with a word ¡°END¡±. The simulator will also check whether it is a valid path; if it is not a valid path, it will show an error message. If the path is not a shortest path, the text above the maze will turn red; otherwise, the color of the text is blue.
+
+             Whenever your agent move to a position, the simulation will generate sensing information to tell the agent the environment around the position. Your agent will have to utilize these sensing information to make decisions about the next position to explore. The five integers in each line of the sensing information are actually Boolean values. For example, the first line in the above example is ¡°0 0 0 0 1¡±, which is the sensing information at the origin that is also the current position of the agent at the beginning. The first integer tells the agent whether the position is the exit. Hence, 0 means that the current position is not an exit. The other four Boolean values are (1) whether there is a wall below the position; (2) whether there is a wall above the position; (3) whether there is a wall at the right side of the position; and (4) whether there is a wall at the left side of the position. Here, only the last Boolean value is 1, meaning that there is a wall at the left side of the position but no wall in other directions. After bfs chooses to explore (1,0) (i.e., visit the position at the left of the origin), the new sensing information is ¡°0 1 1 0 0¡±, which means that there are walls above and below the current position which is not the exit. Other sensing information and actions in the above example are interpreted in the same way.
+
+             The sensing information for A* search includes a floating-point number in addition to the five Boolean values. The floating-point number is a heuristic value telling the agent approximately how far away the agent from the exit:
+
+             0 0 0 0 1 29.83960618
+             1 0
+             0 1 1 0 0 30.67313253
+             0 -1
+             0 0 1 1 0 30.43731143
+             0 1
+
+               .
+                 .
+                   .
+                   The heuristic function the simulator uses is both admissible and consistent. But it does not return the exact distance from the current position to the exit?the distance measurement has some noise, causing the reported distance to incur an error that is up to 20% of the actual distance.
+
+                   In our simulation, the only way an A* search agent can get the heuristic values is to visit a position. There is no other way an agent can obtain the heuristic values.
+
+                   To help you understand the communication protocol and debug your program, we suggest you to run the sample programs directly in command prompt without using the maze simulator:
+
+                   bfs 120 80
+                   If you feed the same sensing information to bfs, you should see the same actions chosen by bfs.
+
+
+                   6. Implement your search algorithms
+
+                   You will write three programs that interact with the maze simulator in C++. The three programs must be named bfs.cpp, astar.cpp, and dfs.cpp. They must be self-contained, meaning that all codes that are needed to compile the program must be in the same file. We do not accept any other file except these three files.
+
+                   In fact, we provide you the code templates so that you do not have to write your program from scratch: bfs.cpp, astar.cpp, and dfs.cpp. Although you are allowed to modify any part of the code templates, we highly recommend that you do not alter the existing codes in the code templates; instead you should just insert your codes in the code templates.
+
+                   In this exercise, you are free to use any C++14's language features and any classes and functions in the C++ Standard Library, as long as they can be compiled successfully using the g++ compiler on our server. Notice that the version of the g++ compiler on our server is 6.2, which supports all the language features in C++14 but it does not officially support any language feature in C++17. Some language features in C++17 such as the optional template class are implemented in the experimental namespace in the gcc library. The code template has included some codes that can correctly include the optional header file to the program with backward compatibility. You are free to include other header file from the C++ Standard Library.
+
+                   Your main task is to implement the following three classes: BreadthFirstSearchAgent, AStarFirstSearchAgent, and DepthFirstSearchAgent:
+
+                   class BreadthFirstSearchAgent {
+
+                         BreadthFirstSearchAgent(int size_x, int size_y) {
+
+                                 // enter your code here
+
+                                   }
+
+                                   public:
+
+                                     optional<Coordinate> move(bool isExit,
+                                                                 bool hasWallSouth, bool hasWallNorth,
+                                                                                             bool hasWallEast, bool hasWallWest)
+                                       {
+
+                                               // enter your code here
+
+                                                 }
+
+                                                   list<Coordinate> getShortestPath() {
+
+                                                           // enter your code here
+
+                                                             }
+
+                   };
+                   class AStarFirstSearchAgent {
+
+                         AStarFirstSearchAgent(int size_x, int size_y) {
+
+                                 // enter your code here
+
+                                   }
+
+                                   public:
+
+                                     optional<Coordinate> move(bool isExit,
+                                                                 bool hasWallSouth, bool hasWallNorth,
+                                                                                             bool hasWallEast, bool hasWallWest,
+                                                                                                                         double distance)
+                                       {
+
+                                               // enter your code here
+
+                                                 }
+
+                                                   list<Coordinate> getShortestPath() {
+
+                                                           // enter your code here
+
+                                                             }
+
+                   };
+                   class DepthFirstSearchAgent {
+
+                         DepthFirstSearchAgent(int size_x, int size_y) {
+
+                                 // enter your code here
+
+                                   }
+
+                                   public:
+
+                                     optional<Coordinate> move(bool isExit,
+                                                                 bool hasWallSouth, bool hasWallNorth,
+                                                                                             bool hasWallEast, bool hasWallWest)
+                                       {
+
+                                               // enter your code here
+
+                                                 }
+
+                                                   list<Coordinate> getShortestPath() {
+
+                                                           // enter your code here
+
+                                                             }
+
+                   };
+                   There are three methods in the each class. The parameters of constructors, size_x and size_y, are the size of maze including the border. When the maze simulator starts the programs, it will provide the values of size_x and size_y as the arguments of the programs. We will talk about these arguments again when we discuss the main function of the code templates below.
+
+                   The move() member functions implement the agent functions. As discussed in our lecture, an agent is supposed to get percepts repeatedly from the environment and generate an action after receiving a percept. This control-loop will continue until the agent finds the shortest path to the exit. move() is supposed to do exactly just this. The return type of move() is optional, which uses the optional template class in C++17. Please refer to this page for more information about how to use the optional template class. The following code is the Coordinate class, which holds a pair of integers as a coordinate.
+
+                   class Coordinate {
+
+                         int x, y;
+
+                         public:
+                           Coordinate(int x, int y) : x(x), y(y) {}
+
+                             int getX() const {
+                                     return x;
+                                       }
+
+                                         int getY() const {
+                                                 return y;
+                                                   }
+
+                                                     bool operator==(const Coordinate &rhs) const {
+                                                             return x == rhs.x && y == rhs.y;
+                                                               }
+
+                                                                 bool operator!=(const Coordinate &rhs) const {
+                                                                         return !(rhs == *this);
+                                                                           }
+                   };
+                   The parameters of move() are the sensing information (i.e., percepts) received by the agent from the simulator. For DepthFirstSearchAgent and BreadthFirstSearchAgent, there are five parameters:
+
+                   isExit - whether the current position is an exit position.
+                   hasWallSouth - whether there is a wall below the current position.
+                   hasWallNorth - whether there is a wall above the current position.
+                   hasWallEast - whether there is a wall at the left of the current position.
+                   hasWallWest - whether there is a wall at the right of the current position.
+                   The move() function in AStarSearchAgent has one more parameter.
+
+                   distance - the approximate distance between the current position and the exit position.
+                   In short, these input parameters correspond to the sensing information in the communication between an agent and the simulator. Your agents have to utilize these sensing information to make decisions about the next position in move(). If an agent decides to continue to explore the maze, move() should return a coordinate that is a non-wall position adjacent to a visited position which may not be the last visited position. If an agent decides to terminate the exploration, move() should return an empty optional object that does not contain a value.
+
+                   After move() returns an empty optional object, the main function will call getShortestPath() to get the shortest path found by your agent. getShortestPath() should return a list of coordinates start with (0,0), which presents a shortest path from the start position to the exit. The main function will send this path to the maze simulator.
+
+                   To make sense about the agent classes, please take a look at the source code of the main function for bfs below. Please take a look at how an agent class is instantiated with the size of the maze as well as the control-loop (i.e., the while loop). The main function for astar is slightly different because it needs to handle the heuristic values.
+
+                   int main(int argc, char *argv[]) {
+
+                         int size_x, size_y;
+
+                           if (argc == 3) {
+                                   size_x = atoi(argv[1]);
+                                       size_y = atoi(argv[2]);
+                                         } else {
+                                                 cerr << "Error: wrong arguments." << endl;
+                                                     return -1;  // do nothing
+                                                       }
+
+                                                         BreadthFirstSearchAgent agent(size_x, size_y);
+
+                                                           while(true) {
+                                                                   string s1, s2, s3, s4, s5;
+                                                                       cin >> s1 >> s2 >> s3 >> s4 >> s5;
+
+                                                                           bool isExit = (s1 != "0");
+                                                                               bool hasWallSouth = (s2 != "0");
+                                                                                   bool hasWallNorth = (s3 != "0");
+                                                                                       bool hasWallEast = (s4 != "0");
+                                                                                           bool hasWallWest = (s5 != "0");
+
+                                                                                               auto coord = agent.move(isExit, hasWallSouth, hasWallNorth, hasWallEast, hasWallWest);
+
+                                                                                                   if (coord) {
+                                                                                                             cout << coord->getX() << " " << coord->getY() << endl;
+                                                                                                                 } else {
+                                                                                                                           break;
+                                                                                                                               }
+                                                                                                                                 }
+
+                                                                                                                                   list<Coordinate> path = agent.getShortestPath();
+
+                                                                                                                                     cout << "PATH" << endl;
+                                                                                                                                       for(auto&& coord : path) {
+                                                                                                                                               cout << coord.getX() << " " << coord.getY() << endl;
+                                                                                                                                                 }
+                                                                                                                                                   cout << "END" << endl;
+
+                                                                                                                                                     return 0;
+                   }
+
+                   7. Compile and run your program
+
+                   You should develop and test your programs on your personal computer. We recommend you use the g++ 6.2 compiler in Ubuntu 16.10 when you develop your programs. Using other compilers may not guarantee to produce the same results in our evaluation.
+
+                   Before you submit your programs, please make sure that they work on our server as our TA will evaluate your programs on our server only. Our TA will use the following commands to compile your programs.
+
+                    g++ -O3 -Wall -Werror bfs.cpp -o bfs
+                    g++ -O3 -Wall -Werror astar.cpp -o astar
+                    g++ -O3 -Wall -Werror dfs.cpp -o dfs
+                    The -Werror option treats all warnings in your codes as errors. Please make sure that your programs are free of any errors or warnings. We will consider your programs fail to be compiled even if there are no compilation errors but warnings in your code.
+
+                    Before you run the simulator, make sure that the stack size is large enough for your programs. We will use the following stack size when evaluating your programs. If your programs have a different requirement about the stack size and the heap size, please state them in the README file that you will submit with your programs.
+
+                    ulimit -s 100000
+                    Then you should test whether your programs can work with the simulator. Start the simulator using this command:
+
+                    java -Xss4m -jar MazeGame.jar -v
+                    Remember to put the binary executables in the same directory of MazeGame.jar.
+
+
+                    8. Evaluation of your implementations
+
+                    In this exercise, your agents should aim to find the shortest path?we will not accept a suboptimal path as a solution.
+
+                    Since depth-first search does not guarantee optimality, you need to modify the depth-first search algorithm to make it returns the shortest path. You should consider using some forms of branch-and-bound algorithms to achieve optimality. Clearly the implementation of depth-first search requires some ingenuity, and you are encouraged to explore other ideas. At the end, please state your approach in the README file as well as at the top of your program.
+                    There are three performance measures:
+
+                    The length of the shortest paths found by your agents, which must be equal to the actual shortest distance. Please report whether your program can always return a shortest path.
+                    The number of moves, which cannot be much larger than the number of visited spaces of our sample programs. Please report the average number of moves your programs use at different maze sizes.
+                    The maximum maze size your programs can solve. For each agent, you will have to report the largest mazes it can consistently solve given 2 minutes of execution time. The consistency at a particular maze size means that if we randomly generate a number of mazes of that size, your programs can still solve all of them within 2 minutes. The largest mazes your programs can solve should not be substantially smaller than what our sample programs can solve. Please report the maximum sizes your agents can solve consistently within 2 minutes in the README file.
+                    You will have to report the performance of your agents according to these measures in the README file when you submit your programs. Please test your programs with mazes of different sizes include the maximum possible sizes and the minimum possible sizes. We expect that both breadth-first search and A* search can solve mazes of all sizes, but depth-first search can only solve small mazes. Once again, please state the maximum sizes your agents can solve consistently within 2 minutes in the README file. Don't report the maze size that you can occasionally but not always solve. Notice that the start position and the exit can be the same position, and your program should be able to handle this special case.
+
+                    An out-of-memory error should not occur during execution on our machines which has 32GB of memory. If you have any special requirement about the stack size and the heap size, please state the commands to set those values in the README file. Please make the life of our TA easier by clearly telling him what to do.
+
+
+                    9. Submit your program
+
+                    Please write your name, your student ID, and your email address at the top of your programs. Please also briefly describe your implementations at the top of the programs.
+
+                    You should submit four files only: bfs.cpp, astar.cpp, dfs.cpp, and readme.txt. Please put them in a zip file and upload it to Blackboard. After uploading the file, please download it from Blackboard to make sure that you have submitted the correct files. We will not offer you a second chance to upload your files if you found you have uploaded wrong files later.
+
+                    The deadline of this assignment is 23:59pm on April 8, 2017.
+
+
+                    10. Grading Scheme
+
+                    Our tentative grading scheme is as follows:
+
+                    SHOREST PATH FOR BFS (5%): the path returns by your BFS procedure is indeed one of the shortest paths.
+                    SHOREST PATH FOR A* (5%): the path returns by your A* search procedure is indeed one of the shortest paths.
+                    SHOREST PATH FOR DFS (5%): the path returns by your DFS procedure is indeed one of the shortest paths.
+                    NUMBER OF VISITED STATES FOR BFS (15%): the number of visited states by BFS is reasonable.
+                    NUMBER OF VISITED STATES FOR A* (15%): the number of visited states by the A* search is reasonable.
+                    NUMBER OF VISITED STATES FOR DFS (5%): the number of visited states by the DFS search is reasonable.
+                    THE SIZE OF THE LARGEST MAZES FOR BFS (15%): the size of the largest mazes by BFS is reasonable.
+                    THE SIZE OF THE LARGEST MAZES FOR A* (15%): the size of the largest mazes by the A* search is reasonable.
+                    THE SIZE OF THE LARGEST MAZES FOR DFS (5%): the size of the largest mazes handled by the DFS search is reasonable.
+                    READABILITY (10%): How clean your code is, and whether your code is well-documented.
+                    README FILE (5%): the report of the performance of your agents.
+                    10% of your grade is dedicated to the readability of your programs. Please follow the standard practice of programming such as making your codes well-organized, choosing meaningful variable names, and adding comments to your code. We won't hesitate to give you 0 point for readability if we fail to understand any part of your code.
+
+                    Our grading scheme is subject to amendment.
+
+
+                    11. Bug reports
+
+                    If you find any bug in our maze simulator and the code templates, please report it to Tsz-Chiu Au at chiu@unist.ac.kr.
+
+
