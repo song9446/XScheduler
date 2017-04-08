@@ -35,3 +35,16 @@
     align-self:center;
     text-align:center;
 }
+.calendar .datecell .time_line{
+    top: 0;
+    height: 80px;
+    overflow: visible;
+    line-height: normal;
+    margin-top: -80px;
+    width: 0;
+    color:#CC6600;
+    font-size: 15px;
+    border:none;
+    border-left:1px solid #CC6600;
+    position:relative;
+}

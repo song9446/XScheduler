@@ -19,13 +19,13 @@ $date_format = "%Y%m%d%H%i%s";
 $query = "";
 
 if(strcmp($op, "get_schedule") == 0){
-    $query = <<<HERE
+    $query = <<<QUERY
         SELECT s_id, s_name, DATE_FORMAT(start_time, '$date_format') AS start_time, DATE_FORMAT(end_time, '$date_format') AS end_time 
         FROM p_schedule 
         WHERE u_id='$token' AND
               end_time >= STR_TO_DATE('$start_time', '$date_format') AND
               start_time < STR_TO_DATE('$end_time', '$date_format'); 
-HERE;
+QUERY;
     //What I really want : 
     //WHERE u_id=(SELECT u_id from user where token='$token') 
     $result = mysqli_query($conn, $query);
@@ -42,12 +42,12 @@ HERE;
     echo json_encode($arr);
 }
 
-else if(strcmp($op, "put_schedule") == 0){
+else if(strcmp($op, "add_schedule") == 0){
     $s_name = $_GET['s_name'];
-    $query = <<<HERE
+    $query = <<<QUERY
         INSERT INTO p_schedule (s_name, start_time, end_time, u_id) 
         VALUES ('$s_name', STR_TO_DATE('$start_time', '$date_format'), STR_TO_DATE('$end_time', '$date_format'), '$token'); 
-HERE;
+QUERY;
     //What I really want : 
     //WHERE u_id=(SELECT u_id from user where token='$token') 
     $result = mysqli_query($conn, $query);

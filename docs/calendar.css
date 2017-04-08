@@ -1,5 +1,6 @@
 .calendar {
     border-collapse: collapse;
+    table-layout: fixed;
 }
 .calendar .holiday {
     color:#bd2031;
@@ -12,8 +13,10 @@
     vertical-align:middle;
     text-align:center;
     font-size:60px;
-    width:80px;
-    height:80px;
+    min-width:100px;
+    max-width:100px;
+    min-height:80px;
+    max-height:80px;
     line-height: 80px;
     background-color: #fff;
 }

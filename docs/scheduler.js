@@ -1,32 +1,88 @@
 /*
+    createAction(op, args);
+    performAction(action);
+    undoAction(action);
     createScheduler(container[, yaer, month, id]);
         container must already be added in document.
         It creates scheduler element inside container lement
 */
+var ActionStack = [];
 var createAction = function (op, args) {
     this.op = op;
     this.args = args;
 };
 var performAction = function (action) {
-    switch(action.op){
+    var op = action.op,
+        args = action.args;
+    switch(op){
     case "add_schedule": 
+        args.op = "add_schedule";
+        action.result = xmlRequestJson(
+            'GET', 
+            args,
+            '/schedule.php'
+            );
     break;
     case "update_schedule":
+        args.op = "update_schedule";
+        action.result = xmlRequestJson(
+            'GET', 
+            args,
+            '/schedule.php'
+            );
     break;
-    case "update_schedule":
+    case "delete_schedule":
+        args.op = "delete_schedule";
+        action.result = xmlRequestJson(
+            'GET', 
+            args,
+            '/schedule.php'
+            );
     break;
     }
+    ActionStack.push(action);
 };
 var undoAction = function (action) {
+    var op = action.op,
+        args = action.args;
     switch(action.op){
     case "add_schedule": 
+        args = {};
+        args.op = "delete_schedule";
+        args.s_id = action.result.s_id
+        result = xmlRequestJson(
+            'GET', 
+            args,
+            '/schedule.php'
+            );
     break;
     case "update_schedule":
     break;
-    case "update_schedule":
+    case "delete_schedule":
     break;
     }
 }
+
+var createScheduleController = function (scheduler) {
+    var calendar = scheduler.getElementsByClassName("calendar")[0];
+    var datecells = calendar.getElementsByClassName("datecell");
+    var timeline = document.createElement("div");
+    timeline.className = "time_line";
+    timeline.innerHTML = "00:00";
+    for(var i=0, l=datecells.length; i<l; i++){
+        datecells[i].onmousemove = function (evt) {
+            if(timeline.parentElement && timeline.parentElement != this)timeline.parentElement.removeChild(timeline);
+            var left = this.getBoundingClientRect().left;
+                width = this.getBoundingClientRect().right - left;
+            var time = (evt.pageX-left)*1440/width,
+                hour = ~~(time/60),
+                miniute = ~~(time%60);
+            timeline.style.marginLeft = (evt.pageX - left-1) + "px"
+            timeline.innerHTML = "".concat(hour, ":", miniute);
+            if(timeline.parentElement == null)this.appendChild(timeline);
+        }
+    }
+};
 
 var __id_auto_increament = 0;
 var createScheduler = function (container, year, month, id) {
@@ -103,7 +159,7 @@ var drawSchedule = function (calendar, id, name, startTime, endTime) {
         w = calendar.clientWidth;
     var box_class = "schedule_box";
     var box_style = {
-        backgroundColor: genRandomColor(name, 0.7),
+        backgroundColor: genRandomColor(name, 0.9),
     };
     var container = document.createElement("div");
     container.style.position = "absolute";
