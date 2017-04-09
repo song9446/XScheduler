@@ -43,7 +43,10 @@ If you don't have one, you can work on my aws ubuntu server at
 
 # 8. Authors
 Song, Eunchul
+
 Dongju Sin
+
 Jason Kim
+
 
 this page is written by Song, eunchul
