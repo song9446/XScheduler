@@ -1,4 +1,4 @@
-# 1. Intro.
+# 1. Discription
 This is helping scheduling service application.
 
 # 2. Get the repository
