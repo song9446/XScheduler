@@ -49,6 +49,7 @@ var createCalendarElement = function(container, year, month) {
     el.id = id;
     el.year = year;
     el.month = month;
+    el.className = "calendar";
     el.style.display="inline-block";
     container.appendChild(el);
     var todayElement = document.getElementById(id+"-"+dateFormat(today.getFullYear(), today.getMonth()+1, today.getDate()))
