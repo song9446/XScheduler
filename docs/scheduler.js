@@ -306,7 +306,7 @@ var createScheduleController = function (container, scheduleView) {
                     width = this.getBoundingClientRect().right - left;
                 var _time;
                 if(Math.abs(box.getBoundingClientRect().left - evt.clientX) < Math.abs(box.getBoundingClientRect().right - evt.clientX))
-                    _time = (box.getBoundingClientRect().left+1-left)*1440/width;
+                    _time = (box.getBoundingClientRect().left-left)*1440/width;
                 else
                     _time = (box.getBoundingClientRect().right-left)*1440/width;
                 var time = _time - _time%30,

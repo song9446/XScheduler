@@ -1,4 +1,3 @@
-edited
 # 1. Get the repository
 `git clone https://github.com/song9446/XScheduler`
 
@@ -31,3 +30,16 @@ It uses database server as AWS RDS(mysql) at
 you can connect with mysql cli client via
 
 `mysql -u root -p -h xscheduler.c4l3nt5dolim.ap-northeast-2.rds.amazonaws.com`
+
+# 6. Host
+It will be more convinience with working on Linux distro., because I've working on that.
+
+If you don't have one, you can work on my personal ubuntu server at
+
+`52.78.81.68`
+
+# 7. author
+Song, Eunchul
+Dongju Sin
+Jason Kim
+this readme page is written by Song, eunchul
