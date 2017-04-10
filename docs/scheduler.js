@@ -125,11 +125,13 @@ var createScheduleController = function (container, scheduleView) {
                 else return value;
             }),
             function (action) {
+                writeSchedule(calendar, action.result.s_id, action.args.s_name, action.args.start_time, action.args.end_time);
                 var boxCont = drawSchedule(calendar, action.result.s_id, action.args.s_name, action.args.start_time, action.args.end_time);
                 for(var i=0, l=boxCont.children.length; i<l; i++)
                     boxCont.children[i].onclick = function () {
                         focusOn(this.classList[0]);
                     }
+                clearHelper();
             }));
     }
     deleteButton.onclick = function () {
@@ -393,7 +395,14 @@ var writeSchedule = function (calendar, id, name, startTime, endTime) {
         var content = document.createElement("div");
         content.className = id + " schedule_writed";
         content.innerHTML = name;
-        tds[i].getElementsByClassName("datecell_discription")[0].appendChild(content);
+        content.startTime = startTime;
+        content.endTime = endTime;
+        var cont = tds[i].getElementsByClassName("datecell_discription")[0];
+        var writes = cont.children;
+        for(var j=0, l=writes.length; j<l; j++)
+            if(writes[j].startTime > startTime)break;
+        if(j==l)cont.appendChild(content);
+        else cont.insertBefore(content, writes[j]);
     }
 }
 var drawSchedule = function (calendar, id, name, startTime, endTime) {
