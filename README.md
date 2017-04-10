@@ -35,11 +35,13 @@ you can connect with mysql cli client via
 `mysql -u root -p -h xscheduler.c4l3nt5dolim.ap-northeast-2.rds.amazonaws.com`
 
 # 7. Host
-It will be more convenient with working on Linux env., because I've working on that.
-
-If you don't have one, you can work on my aws ubuntu server at
+The application is served in host server(AWS EC2) at
 
 `52.78.81.68`
+
+It will be more convenient with working on Linux env., because I've working on there.
+
+If you don't have one, you can use this server.
 
 # 8. Authors
 Song, Eunchul
@@ -47,6 +49,7 @@ Song, Eunchul
 Dongju Sin
 
 Jason Kim
+
 
 
 this page is written by Song, eunchul

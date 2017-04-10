@@ -302,7 +302,7 @@ var createScheduleController = function (container, scheduleView) {
             if(!pinnedEndTimeLine && pinnedStartTimeLine){
                 var box = document.elementFromPoint(evt.clientX, evt.clientY);
                 if(box.classList[0] !== placeholderId && box.classList[1] !== "schedule_box") return;
-                var left = this.getBoundingClientRect().left;
+                var left = this.getBoundingClientRect().left-1;
                     width = this.getBoundingClientRect().right - left;
                 var _time;
                 if(Math.abs(box.getBoundingClientRect().left - evt.clientX) < Math.abs(box.getBoundingClientRect().right - evt.clientX))
@@ -357,8 +357,21 @@ var createScheduleViewElement = function (container, year, month) {
          "end_time": dateFormat(year, month+1, 1)},
         '/schedule.php'
         );
-    for(var i=0, l=schedules.length; i<l; i++)
+    for(var i=0, l=schedules.length; i<l; i++){
         drawSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
+        writeSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
+    }
+
+    /*
+    var names = calendar.getElementsByClassName("name");
+    var i=0, j=0, l=names.length;
+    for(i=0; i<l; i++)
+        for(j=i+1; j<l; j++)
+            if(collision(names[i], names[j])){
+                names[j].style.paddingTop = parseFloat(names[i].style.paddingTop || 0) + 1.2 + "em";
+                console.log(names[i].innerText, names[j].innerText);
+            }
+            */
     return calendar;
 };
 
@@ -369,6 +382,20 @@ var eraseSchedule = function (calendar, id) {
         ss[i].parentElement.removeChild(ss[i]);
         */
 };
+var writeSchedule = function (calendar, id, name, startTime, endTime) {
+    var tds = calendar.getElementsByClassName("datecell");
+    var startId = calendar.id + "-" + startTime.substr(0, 8) + "000000",
+        endId = calendar.id + "-" + endTime.substr(0, 8) + "000000";
+    var startIndex = startId.substr(4, 2) < tds[0].id.substr(4, 2)? 0 : startTime.substr(6, 2)-1, 
+        endIndex = endId.substr(4, 2) > tds[tds.length-1].id.substr(4, 2)? tds.length-0 : endTime.substr(6, 2)-0; 
+    if(endTime.substr(8, 6) === "000000") endIndex-=1;
+    for(var i=startIndex; i<endIndex; i++){
+        var content = document.createElement("div");
+        content.className = id + " schedule_writed";
+        content.innerHTML = name;
+        tds[i].getElementsByClassName("datecell_discription")[0].appendChild(content);
+    }
+}
 var drawSchedule = function (calendar, id, name, startTime, endTime) {
     var startCalendarDateElement = document.getElementById(calendar.id + "-" + startTime.substr(0,8) + "000000");
     var endCalendarDateElement = document.getElementById(calendar.id + "-" + endTime.substr(0, 8) + "000000");
@@ -380,31 +407,29 @@ var drawSchedule = function (calendar, id, name, startTime, endTime) {
     var dh = tds[0].offsetHeight,
         dw = tds[0].offsetWidth,
         sx = startCalendarDateElement? startCalendarDateElement.offsetLeft 
-                                     + ~~((startHour*60 + startMiniute)/1440*dw)
+                                     + (startHour*60 + startMiniute)/1440*dw 
                                      : tds[0].offsetLeft, 
-        sy = startCalendarDateElement? startCalendarDateElement.offsetTop
+        sy = startCalendarDateElement? startCalendarDateElement.offsetTop 
                                      : tds[0].offsetTop,
         ex = endCalendarDateElement? endCalendarDateElement.offsetLeft 
-                                     + ~~((endHour*60 + endMiniute)/1440*dw)
+                                     + (endHour*60 + endMiniute)/1440*dw
                                      : tds[tds.length-1].offsetLeft+dw,
-        ey = endCalendarDateElement? endCalendarDateElement.offsetTop
-                                     : tds[tds.length-1].offsetTop,
+        ey = endCalendarDateElement? endCalendarDateElement.offsetTop 
+                                     : tds[tds.length-1].offsetTop, 
         w = calendar.clientWidth;
     var box_class = "schedule_box";
     var box_style = {
-        backgroundColor: genRandomColor(id, 0.9),
+        backgroundColor: genRandomColor(id, 0.3),
         color: genCounterBlackOrWhite(id),
     };
     var container = document.createElement("div");
     container.style.position = "absolute";
     container.style.top = 0;
     container.style.left = 0;
-    var contentStartTime = "<span class='start_time'>".concat(
-        startCalendarDateElement? timeStringTime(startTime): timeStringMonth(startTime), 
-        "~", "</span>");
-    var contentEndTime = "<span class='end_time'>".concat("~", 
-        endCalendarDateElement? timeStringTime(endTime): timeStringMonth(endTime), 
-        "</span>");
+    var parsedStartTime = startCalendarDateElement? timeStringTime(startTime): timeStringMonth(startTime), 
+        parsedEndTime = endCalendarDateElement? timeStringTime(endTime): timeStringMonth(endTime);
+    var contentStartTime = "<span class='start_time'>".concat(parsedStartTime, "~", "</span>");
+    var contentEndTime = "<span class='end_time'>".concat("~", parsedEndTime, "</span>");
     var contentName = "<span class='name'>".concat(name, "</span>");
     var contentEmpty = "<span class='name'>".concat("&nbsp;", "</span>");
 
@@ -427,6 +452,12 @@ var drawSchedule = function (calendar, id, name, startTime, endTime) {
     calendar.appendChild(container);
     return container;
 };
+function collision(e1, e2){
+    var r1 = e1.getBoundingClientRect(),
+        r2 = e2.getBoundingClientRect();
+    if (r1.bottom < r2.top || r1.top > r2.bottom || r1.right < r2.left || r1.left > r2.right) return false;
+    return true;
+}
 //var _z_index_autodecreament = 1000;
 function createBox(container, x, y, w, h, className, style, inner){
     var box = document.createElement("div");
@@ -454,8 +485,8 @@ function genRandomColor(num, alpha) {
     var 
         h = code%360,
         s = h*31%100,
-        l = s*31%30 + 70;
-    s=100;// l=10;
+        l = s*31%100;
+    s=100;//l=50;// l=10;
     return "hsla(".concat(h, ",", s, "%,", l, "%,", alpha, ")");
 }
 function genCounterBlackOrWhite(num) {
@@ -467,7 +498,8 @@ function genCounterBlackOrWhite(num) {
     var
         h = code%360,
         s = h*31%100,
-        l = s*31%30 + 70;
+        l = s*31%100;
+    //l=50;
     if(l > 50)
         return "black";
     else
