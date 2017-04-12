@@ -1,6 +1,6 @@
 <!DOCTYPE html>
     <div class="headerMenu">
-        <button type="button" id="sidebar_button" onclock"sidebar_toggle('sidebar_button')" value="0">SBB</button>
+        <button type="button" id="sidebar_button" onclock="sidebar_toggle('sidebar_button')" value="0">SBB</button>
             <div class="logo">
                 <a href="home.php" class="logo">
                     <img src="./img/logo.png" />
