@@ -18,7 +18,7 @@ include ( "./inc/connect.inc.php" );
                 <span>Test-sidebar</span>
             </div>
             <div id="content">
-                <span>Test-content</span>
+                <span>Test-content++</span>
             </div>
         </div>
 
