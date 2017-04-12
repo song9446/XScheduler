@@ -6,12 +6,12 @@ include ( "./inc/connect.inc.php" );
 <!doctype html>
 <html>
     <head>
-            <title>UniScheduler</title>
+        <title>UniScheduler</title>
             <link rel="stylesheet" type="text/css" href="./css/menu_header.css" />
             <link rel="stylesheet" type="text/css" href="./css/style.css" />
     </head>
     <body>
-        <?php include ( "./headerMenu.php"); ?>
+        <?php include ( "./headerMenu.php" ); ?>
 
         <div id="inner">
             <div id="sidebar">
