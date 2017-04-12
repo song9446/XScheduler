@@ -1,7 +1,7 @@
-<?php
-session_start();
-include ( "./inc/connect.inc.php" );
->?
+//<?php
+//session_start();
+//include ( "./inc/connect.inc.php" );
+//>?
 
 <!doctype html>
 <html>
