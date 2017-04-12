@@ -3,11 +3,10 @@ session_start();
 //include ( "./inc/connect.inc.php" );
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>UniScheduler</title>
-        <link rel="stylesheet" type="text/css" href="./css/menu_header.css" />
         <link rel="stylesheet" type="text/css" href="./css/style.css" />
     </head>
     <body>
@@ -18,7 +17,7 @@ session_start();
                 <span>Test-sidebar</span>
             </div>
             <div id="content">
-                <span>Test-content++</span>
+                <span>Test-content</span>
             </div>
         </div>
 
