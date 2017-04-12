@@ -26,7 +26,7 @@ session_start();
     </body>
 </html>
 
-<?php
-    echo "<meta http-equiv='refresh' content='0;url=home.php'>";
-?>
+//<?php
+//    echo "<meta http-equiv='refresh' content='0;url=home.php'>";
+//?>
 
