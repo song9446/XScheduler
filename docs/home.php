@@ -6,13 +6,12 @@ session_start();
 <!DOCTYPE html>
 <html>
     <head>
-        <title>uniSchduler</title>
-        <link rel="stylesheet" type="text/css" href="./css/menu_header.css" />
+        <title>UniSchduler</title>
         <link rel="stylesheet" type="text/css" href="./css/style.css" />
     </head>
 
     <body>
-        <?php include "./headerMenu.php" ); ?>
+        <?php include ( "./headerMenu.php" ); ?>
 
         <div id="inner">
             <div id="sidebar">
