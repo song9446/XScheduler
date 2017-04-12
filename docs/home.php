@@ -1,9 +1,9 @@
 <?php
 session_start();
 //include ( "./inc/connect.inc.php" );
->?
+?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>uniSchduler</title>
