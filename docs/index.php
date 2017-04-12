@@ -1,15 +1,32 @@
+<?php
+session_start();
+include ( "./inc/connect.inc.php" );
+?>
+
+<!doctype html>
 <html>
     <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="calendar.css"></link>
-    <link rel="stylesheet" href="scheduler.css"></link>
-    <title> UniScheduler </title>
+            <title>UniScheduler</title>
+            <link rel="stylesheet" type="text/css" href="./css/menu_header.css" />
+            <link rel="stylesheet" type="text/css" href="./css/style.css" />
     </head>
     <body>
-    <script src="calendar.js"></script>
-    <script src="scheduler.js"></script>
-    <script>
-    var scheduler = createScheduler(document.body);
-    </script>
+        <?php include ( "./headerMenu.php"); ?>
+
+        <div id="inner">
+            <div id="sidebar">
+                <span>Test-sidebar</span>
+            </div>
+            <div id="content">
+                <span>Test-content</span>
+            </div>
+        </div>
+
+        <script src="./js/script1.js?></script>
     </body>
 </html>
+
+//<?php
+//    echo "<meta http-equiv='refresh' content='0;url=home.php>";
+//?>
+
