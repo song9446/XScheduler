@@ -6,7 +6,7 @@ include ( "./inc/connect.inc.php" );
 <!doctype html>
 <html>
     <head>
-        <titile>uniSchduler</title>
+        <title>uniSchduler</title>
         <link rel="stylesheet" type="text/css" href="./css/menu_header.css" />
         <link rel="stylesheet" type="text/css" href="./css/style.css" />
     </head>
