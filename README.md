@@ -39,9 +39,9 @@ The application is served in host server(AWS EC2) at
 
 `52.78.81.68`
 
-It will be more convenient with working on Linux env., because I've working on there.
+At the server, It automatically pulls and serves the most recent master branch commit.
 
-If you don't have one, you can use this server.
+So after you update the master branch, you just wait 5 to 10 seconds and then you can check it's working state in `http://52.78.81.68`
 
 # 8. Authors
 Song, Eunchul
