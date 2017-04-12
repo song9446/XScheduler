@@ -7,8 +7,8 @@ session_start();
 <html>
     <head>
         <title>UniScheduler</title>
-            <link rel="stylesheet" type="text/css" href="./css/menu_header.css" />
-            <link rel="stylesheet" type="text/css" href="./css/style.css" />
+        <link rel="stylesheet" type="text/css" href="./css/menu_header.css" />
+        <link rel="stylesheet" type="text/css" href="./css/style.css" />
     </head>
     <body>
         <?php include ( "./headerMenu.php" ); ?>
@@ -21,17 +21,12 @@ session_start();
                 <span>Test-content++</span>
             </div>
         </div>
-    <?php
-    echo "<meta http-equiv='refresh' content='0;url=home.php'>";
-    ?>
 
-
-
-        <script src="./js/script1.js></script>
+        <script src="./js/script1.js"></script>
     </body>
 </html>
 
-//<?php
-//    echo "<meta http-equiv='refresh' content='0;url=home.php'>";
-//?>
+<?php
+    echo "<meta http-equiv='refresh' content='0;url=home.php'>";
+?>
 
