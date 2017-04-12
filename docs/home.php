@@ -6,7 +6,7 @@ session_start();
 <!DOCTYPE html>
 <html>
     <head>
-        <title>UniSchduler</title>
+        <title>UniScheduler</title>
         <link rel="stylesheet" type="text/css" href="./css/style.css" />
     </head>
 
