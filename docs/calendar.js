@@ -65,7 +65,7 @@ var createCalendarElement = function(container, year, month) {
         nowElement = document.getElementById(id+"-"+dateFormat(now.getFullYear(), now.getMonth()+1, now.getDate()));
         if(nowElement) nowElement.appendChild(nowLine);
     }
-    setInterval(drawNow(), 1000*1800);
+    setInterval(drawNow, 1000*900);
     drawNow();
     return el;
 };
