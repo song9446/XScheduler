@@ -22,7 +22,7 @@ include ( "./inc/connect.inc.php" );
             </div>
         </div>
 
-        <script src="./js/script1.js?></script>
+        <script src="./js/script1.js></script>
     </body>
 </html>
 
