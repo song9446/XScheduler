@@ -1,0 +1,150 @@
+html *{
+    margin: 0;
+    padding: 0;
+}
+.scheduler {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+.scheduler .title {
+    display: block;
+    font-size: 30px;
+    margin-bottom : 20px;
+}
+.scheduler .calendar_container {
+    display:inline-block;
+    background-color:#efebd6;
+    padding: 20px;
+}
+.scheduler .controller_container {
+    border: 1px;
+    display:inline-block;
+    background-color:#c6c787;
+    padding: 20px;
+    text-align: center;
+    white-space: nowrap;
+}
+.scheduler .controller_container label{
+    vertical-align:top;
+    display:inline-block;
+    text-align: right;
+    width: 5em;
+    margin-right: 0.5em;
+    margin-bottom: 5px;
+}
+.scheduler input,textarea{
+    width: 11em;
+}
+.scheduler button{
+    color: #fff;
+    transition: background-color 0.2s linear;
+    transition: color 0.2s linear;
+    /*background-color: #6496c8;*/
+    background-color: #BD2031;
+    border: 1px solid #BD2031;
+    margin: 5px;
+    margin-top:20px;
+    margin-bottom:20px;
+    padding: 10px;
+}
+.scheduler button:hover{
+    transition: background-color 0.2s linear;
+    transition: color 0.2s linear;
+    background-color: #fff;
+    border: 1px solid #BD2031;
+    color: #BD2031;
+}
+.scheduler button:active{
+    background-color: #27496d;
+}
+
+.scheduler .date_controller {
+    text-align:center;
+    font-size:60px;
+    margin-bottom: 20px;
+}
+.schedule_writed{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    font-size: 10px;
+}
+.schedule_writed:before {
+    content:" - ";
+}
+.schedule_box {
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;  
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+    font-size: 15px;
+    white-space:nowrap;
+    /*border-left: 1px solid black;
+    border-right: 1px solid black;*/
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAHklEQVQIW2NkQAX1jEj8eiC7ESYA5oAkQQJwDkgAAGKuA4R0d0m8AAAAAElFTkSuQmCC");
+   /* z-index: -1; */
+}
+.schedule_box.highlight {
+    /*background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAGElEQVQIW2NkQID/jFD2fyDNCOKAGSBBADZSAwNOQHx1AAAAAElFTkSuQmCC");*/
+    background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 50%, black 50%, black 75%, transparent 75%, transparent);
+    background-size: 2px 2px;
+    border: 1px solid #bd2031;
+}
+.schedule_box.helper_box {
+    pointer-events: none;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAa0lEQVQYV2NkgIKmQ37/6+w2MYK4xpnX/h9piWDgFL4E54MZhBSdna7FyEiMIpBhYBNxWQcyCWYjTjchKwK5nRGbw9EVga3+/lbvP7LvsCkCGYbiRlyKdtW2QDwD0oFPkbDUMogbCSkCGQYAka1/qtkEIQkAAAAASUVORK5CYII=");
+}
+.schedule_box .start_time {
+    display: none;
+    pointer-events: none;
+    flex: 0 1 0;
+    align-self: flex-start;
+    font-size:9px;
+    text-align: left;
+}
+.schedule_box .end_time {
+    display: none;
+    pointer-events: none;
+    flex: 0 1 0;
+    align-self:flex-end;
+    font-size:9px;
+    text-align:right;
+}
+.schedule_box .name {
+    display: none;
+    /*z-index: 999;*/
+    pointer-events: none;
+    flex: 0 1 0;
+    align-self:center;
+    max-height: 90px;
+    font-size:11px;
+    text-align:center;
+    text-overflow:ellipsis;
+}
+.calendar .datecell .time_line{
+     pointer-events: none;
+     text-shadow:
+         -1px -1px 0 #fff,
+         1px -1px 0 #fff,
+         -1px 1px 0 #fff,
+         1px 1px 0 #fff,  
+         0 0 1px #fff;
+    top: 0;
+    height: 90px;
+    overflow: visible;
+    line-height: normal;
+    margin-top: -90;
+    width: 0;
+    color:#000000;
+    font-size: 15px;
+    border:none;
+    border-left:1px solid #000000;
+    position:relative;
+    white-space:nowrap;
+}
