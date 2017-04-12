@@ -152,6 +152,7 @@ var createScheduleController = function (container, scheduleView) {
                 eraseSchedule(calendar, action.args.s_id);
                 focusOn(null);
                 var boxCont = drawSchedule(calendar, action.result.s_id, action.args.s_name, action.args.start_time, action.args.end_time);
+                writeSchedule(calendar, action.result.s_id, action.args.s_name, action.args.start_time, action.args.end_time);
                 for(var i=0, l=boxCont.children.length; i<l; i++)
                     boxCont.children[i].onclick = function () {
                         focusOn(this.classList[0]);
@@ -379,7 +380,7 @@ var createScheduleViewElement = function (container, year, month) {
 
 var eraseSchedule = function (calendar, id) {
     var ss = calendar.getElementsByClassName(id);
-    if(ss.length>0)ss[0].parentElement.parentElement.removeChild(ss[0].parentElement);
+    for(var i=0, l=ss.length; i<l; i++) if(ss[i])ss[i].parentElement.removeChild(ss[i]);
     /*for(var i=0, l=ss.length; i<l; i++)
         ss[i].parentElement.removeChild(ss[i]);
         */
@@ -428,13 +429,14 @@ var drawSchedule = function (calendar, id, name, startTime, endTime) {
         w = calendar.clientWidth;
     var box_class = "schedule_box";
     var box_style = {
-        backgroundColor: genRandomColor(id, 0.3),
-        color: genCounterBlackOrWhite(id),
+        backgroundColor: genRandomColor(name, 0.3),
+        color: genCounterBlackOrWhite(name),
     };
     var container = document.createElement("div");
     container.style.position = "absolute";
     container.style.top = 0;
     container.style.left = 0;
+    container.id = id;
     var parsedStartTime = startCalendarDateElement? timeStringTime(startTime): timeStringMonth(startTime), 
         parsedEndTime = endCalendarDateElement? timeStringTime(endTime): timeStringMonth(endTime);
     var contentStartTime = "<span class='start_time'>".concat(parsedStartTime, "~", "</span>");
