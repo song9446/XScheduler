@@ -28,7 +28,8 @@ session_start();
                         echo "<p>Logged in as ". $_SESSION['u_id'] . "</p>";
                     }
 
-                    echo "<a href='prev_index.php'> Calendar </a>";
+                    echo "<a href='prev_index.php' font-size: 20px> Calendar <-- Song's Beautiful Calendar </a>";
+                    echo "<a >Login is currently NOT working because it is not connected to our database.</a>";
                 ?>
             </div>
         </div>
