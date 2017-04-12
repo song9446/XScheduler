@@ -24,8 +24,7 @@ session_start();
         <script src="./js/script1.js"></script>
     </body>
 </html>
-sks
-//<?php
-//    echo "<meta http-equiv='refresh' content='0;url=home.php'>";
-//?>
 
+<?php
+//    echo "<meta http-equiv='refresh' content='0;url=home.php'>";
+?>
