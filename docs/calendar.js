@@ -27,7 +27,6 @@ var createCalendarElement = function(container, year, month) {
     ret += "</thead>";
     ret += "<tbody>";
     ret += "    <tr>";
-    console.log(startDay);
     for(i=0, l=startDay; i<l; i++)
     ret += "    <td></td>";
     for(l=monthLength[month-1]+i; i<l; i++){
@@ -36,9 +35,9 @@ var createCalendarElement = function(container, year, month) {
     t = (startDay + d) % 7;
     d++
     if(t==0 || t==6)
-    ret += "    <td class='datecell holiday' id='" + id+"-"+dateFormat(year, month, d) +  "'>" + d + "<div class='noon_line'></div></td>";
+    ret += "    <td class='datecell holiday' id='" + id+"-"+dateFormat(year, month, d) +  "'><div class='datecell_discription'>" + d + "</div><div class='noon_line'></div></td>";
     else
-    ret += "    <td class='datecell' id='" + id+"-"+dateFormat(year, month, d) +  "'>" + d +  "<div class='noon_line'></div></td>";
+    ret += "    <td class='datecell' id='" + id+"-"+dateFormat(year, month, d) +  "'><div class='datecell_discription'>" + d +  "</div><div class='noon_line'></div></td>";
     }
     ret += "    </tr>";
     ret += "</tbody>";
@@ -49,12 +48,25 @@ var createCalendarElement = function(container, year, month) {
     el.id = id;
     el.year = year;
     el.month = month;
+    el.className = "calendar";
     el.style.display="inline-block";
     container.appendChild(el);
     var todayElement = document.getElementById(id+"-"+dateFormat(today.getFullYear(), today.getMonth()+1, today.getDate()))
-    console.log(id+"-"+dateFormat(today.getFullYear(), today.getMonth()+1, today.getDate()))
-    console.log(todayElement);
     if(todayElement)todayElement.classList.add("today");
+    var nowElement = null,
+        nowLine = document.createElement("div");
+    nowLine.className = "now_line";
+    nowLine.innerHTML = "<div class='now_deco'>↶now</div>"
+    var drawNow = function(){
+        var now = new Date(),
+            nowFormat = dateFormat(now.getFullYear(), now.getMonth()+1, now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds());
+        if(nowElement)nowElement.removeChild(nowLine);
+        nowLine.style.left = ((now.getHours()*60 + now.getMinutes())*100/1440) + "%";
+        nowElement = document.getElementById(id+"-"+dateFormat(now.getFullYear(), now.getMonth()+1, now.getDate()));
+        if(nowElement) nowElement.appendChild(nowLine);
+    }
+    setInterval(drawNow, 1000*900);
+    drawNow();
     return el;
 };
 
