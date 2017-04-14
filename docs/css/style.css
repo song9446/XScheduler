@@ -1,0 +1,206 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, Sans-serif;
+    font-size: 12px;
+    background-color: #FFFFFF;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.headerMenu {
+    background-color: #eff5f9;
+    height: 42px;
+    padding-left: auto;
+    padding-right: auto;
+    width: 100%;
+}
+
+#sidebar_button {
+    height: 30px;
+    width: 50px;
+    left: 10px;
+    position: absolute;
+    margin: 5px 0px 0px 0px;
+}
+
+$sidebar_button:hover {
+    border: 1px;
+}
+
+.logo {
+    background-color: #eff5f9;
+    border: 0px;
+    height: 42px;
+    width: 100px;
+    margin-left: 70px;
+    position: absolute;
+}
+
+.logo a {
+    margin: 0px;
+}
+
+.logo img {
+    border: 0px;
+    width: 60px;
+    height: 42px;
+    margin-left: 10px;
+}
+
+#login_button {
+    position: absolute;
+    top: 2px;
+    right: 50px;
+    width: 70px;
+}
+
+#login_headerMenu_toggle {
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: 42px;
+    background-color: #000000;
+    width: 250px;
+    opacity: 0.8;
+}
+
+#login_headerMenu_toggle input[type="text"] {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E2E2;
+    font-size: 16px;
+    padding: 5px;
+    width: 150px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    outline: none;
+}
+
+$login_headerMenu_toggle input[type="text"]:hover {
+    border: 1px solid #006FC4;
+}
+
+#login_headerMenu_toggle input[type="submit"] {
+    background-color: #006FC4;
+    border: 2px solid #00508D;
+    font-size: 16px;
+    color: #FFFFFF;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 11px;
+    margin-top: 11px;
+    border-radius: 10px;
+}
+
+#login_headerMenu_toggle input[type="submit"]:hover {
+    border: 2px solid #000;
+}
+
+#register_button {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    width: 70px;
+}
+
+#register_headerMenu_toggle {
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: 42px;
+    background-color: #000000;
+    width: 400px;
+    opacity: 0.8;
+}
+
+#register_headerMenu_toggle input[type="text"] {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E2E2;
+    font-size: 16px;
+    padding: 5px;
+    width: 300px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    outline: none;
+}
+
+
+#register_headerMenu_toggle input[type="text"]:hover {
+    border: 1px solid #006FC4;
+}
+
+#register_headerMenu_toggle input[type="submit"] {
+    background-color: #006FC4;
+    border: 2px solid #00508D;
+    font-size: 16px;
+    color: #FFFFFF;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 11px;
+    margin-top: 11px;
+    border-radius: 10px;
+}
+
+
+#register_headerMenu_toggle input[type="submit"]:hover {
+    border: 2px solid #000;
+}
+
+a.logout_button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+    position: absolute;
+    font-size: 14px;
+    top: 7px;
+    right: 50px;
+    padding: 6px;
+}
+
+
+#sidebar {
+    width: 0px;
+    position: absolute;
+    min-height: 1000px;
+    background: #ddd;
+    z-index: -1;
+}
+
+#content {
+    min-height: 1000px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    background: #ccc;
+    z-index: -1;
+}
+
+div.harbor_main_container {
+    width: 250px;
+    height: 200px;
+    margin: 50px 25px 25px 50px;
+    display: inline-block;
+}
+
+img.harbor_main_logo {
+    width: 250px;
+    height: 150px;
+}
+
+
