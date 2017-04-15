@@ -9,8 +9,8 @@ if (isset($_POST["user_id_login"]) && isset($_POST["password_login"])) {
     $user_id_login = preg_replace('#[^A-Za-z0-9]#i', '', $_POST["user_id_login"]); // filters everything except numbers and letters
     $password_login = preg_replace('#[^A-Za-z0-9]#i', '', $_POST["password_login"]);
 
-    $sql = ("SELECT u_id FROM user WHERE u_id='$user_id_login' AND password='$password_login'  LIMIT 1"); // selects username = user in db and password = to password in db if one returned code continues
-
+echo "1";
+    $sql = ("SELECT u_id FROM user WHERE u_id='$user_id_login' AND u_password='$password_login'  LIMIT 1"); // selects username = user in db and password = to password in db if one returned code continues
     // Check for their existance
     $runCount = mysqli_query($conn, $sql) or die("Error: ". mysqli_error($sql));
     $userCount = mysqli_num_rows($runCount); // Count the number of rows returned
