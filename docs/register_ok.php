@@ -14,6 +14,7 @@ $pswd = "";
 $uid = strip_tags(@$_POST['u_id_register']);
 $pswd = strip_tags(@$_POST['password_register']);
 
+echo "!";
 if ($reg) {
     if ($uid && $pswd) {
         if (strlen($uid) > 25) {
@@ -33,7 +34,7 @@ if ($reg) {
         }
     }
     else {
-        echo "Please fill in all of the fileds";
+        echo "Please fill in all of the fields.";
     }
 }
 
