@@ -27,16 +27,9 @@ include ( "./inc/connect.inc.php" );
                     if (isset($_SESSION['u_id'])) {
                         echo "<p>Logged in as ". $_SESSION['u_id'] . "</p>";
                     }
-<<<<<<< HEAD
-
                     echo "<a href='prev_index.php' font-size: 20px> Calendar <-- Song's Beautiful Calendar\n </a>";
                     echo "<a >Login is currently NOT working because it is not connected to our database.</a>";
                     echo "<a >Previous 'index.php' has been moved to 'prev_index.php'.\n</a>";
-=======
-                    echo "<a href='prev_index.php' font-size: 20px> Calendar <-- Song's Beautiful Calendar\n </a>";
-                    echo "<a >Login is currently NOT working because it is not connected to our database.</a>";
-                                        echo "<a >Previous 'index.php' has been moved to 'prev_index.php'.\n</a>";
->>>>>>> 730dcdbab1ecaeabbc4c7e910855f1b0f68aba16
                 ?>
             </div>
         </div>
