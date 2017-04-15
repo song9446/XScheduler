@@ -7,7 +7,7 @@
             <input type="text" name="u_id_register" placeholder="User ID" />
             <input type="text" name="password_register" placeholder="Password" />
         
-            <input type="submit" name"reg" value="Sign Up!" />
+            <input type="submit" name="reg" value="Sign Up!" />
 
         </form>
     </div>
