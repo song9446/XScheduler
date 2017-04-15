@@ -26,7 +26,7 @@ if ($reg) {
             }
 
             else {
-                $query = mysqli_query($conn, "INSERT INTO users VALUES ('$uid', '$pswd')");
+                $query = mysqli_query($conn, "INSERT INTO user VALUES ('$uid', '$pswd')");
                 echo "<h2><a href='index.php'>Welcome to UniScheduler</a></h2>";
 
             }
