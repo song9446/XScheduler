@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8" />
-    <button type="button" id="register_button" onclick="login_toggle('register_button', 'register_headerMenu_toggle')", value="0">Register</button>
+    <button type="button" id="register_button" onclick="login_toggle('register_button', 'register_headerMenu_toggle')" value="0">Register</button>
 
     <div id="register_headerMenu_toggle">
         <form action="register_ok.php" method="POST">
