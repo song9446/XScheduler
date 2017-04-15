@@ -1,16 +1,10 @@
 <?php
-$token = "asdf";
-$conn = mysqli_connect(
-    "xscheduler.c4l3nt5dolim.ap-northeast-2.rds.amazonaws.com",
-    "root",
-    "qwer1234",
-    "XScheduler"
-    );
+session_start();
+include ( "./inc/connect.inc.php" );
+?>
 
-if(mysqli_connect_errno()) {
-    echo mysqli_connect_error();
-    die();
-}
+<?php
+$token = $_SESSION['u_id'];
 
 $op = $_GET['op'];
 $date_format = "%Y%m%d%H%i%s";

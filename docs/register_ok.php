@@ -14,16 +14,13 @@ $pswd = "";
 $uid = strip_tags(@$_POST['u_id_register']);
 $pswd = strip_tags(@$_POST['password_register']);
 
-echo "!";
 if ($reg) {
-echo "asd $uid $pswd";
     if ($uid && $pswd) {
         if (strlen($uid) > 25) {
             echo "The maximum length of user id is 25 characters!";
         }
 
         else {
-echo "!!";
             if (strlen($pswd)>30 || strlen($pswd)<5) {
                 echo "Your password must be between 5 and 30 characters long!";
             }
