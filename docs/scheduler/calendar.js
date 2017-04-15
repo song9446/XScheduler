@@ -37,7 +37,7 @@ var createCalendarElement = function(container, year, month) {
     if(t==0 || t==6)
     ret += "    <td class='datecell holiday' id='" + id+"-"+dateFormat(year, month, d) +  "'><div class='datecell_description'>" + d + "</div><div class='noon_line'></div></td>";
     else
-    ret += "    <td class='datecell' id='" + id+"-"+dateFormat(year, month, d) +  "'><div class='datecell_Description'>" + d +  "</div><div class='noon_line'></div></td>";
+    ret += "    <td class='datecell' id='" + id+"-"+dateFormat(year, month, d) +  "'><div class='datecell_description'>" + d +  "</div><div class='noon_line'></div></td>";
     }
     ret += "    </tr>";
     ret += "</tbody>";
