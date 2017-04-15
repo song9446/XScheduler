@@ -1,3 +1,6 @@
+<?php
+ini_set('upload_tmp_dir','/home/song/Projects/XScheduler/docs/tmp/');
+?>
 <html>
     <head>
     <meta charset="UTF-8">

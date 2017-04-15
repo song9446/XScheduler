@@ -22,7 +22,7 @@ var performAction = function (action) {
         action.result = xmlRequestJson(
             'GET', 
             args,
-            '/schedule.php'
+            'schedule.php'
             );
     break;
     case "update_schedule":
@@ -30,7 +30,7 @@ var performAction = function (action) {
         action.result = xmlRequestJson(
             'GET', 
             args,
-            '/schedule.php'
+            'schedule.php'
             );
     break;
     case "delete_schedule":
@@ -38,7 +38,7 @@ var performAction = function (action) {
         action.result = xmlRequestJson(
             'GET', 
             args,
-            '/schedule.php'
+            'schedule.php'
             );
     break;
     }
@@ -57,7 +57,7 @@ var undoAction = function (action) {
         result = xmlRequestJson(
             'GET', 
             args,
-            '/schedule.php'
+            'schedule.php'
             );
     break;
     case "update_schedule":
@@ -106,7 +106,7 @@ var createScheduleController = function (container, scheduleView) {
     ret += "<p><label id='s_name'>Name</label><input id='s_name' name='s_name'></p>";
     ret += "<p><label id='start_time'>Start time</label><input id='start_time' name='start_time'></p>";
     ret += "<p><label id='end_time'>End time</label><input id='end_time' name='end_time'></p>";
-    ret += "<p><label id='discription'>Discription</label><textarea id='discription' name='discription' rows=4></textarea></p>";
+    ret += "<p><label id='description'>Discription</label><textarea id='description' name='description' rows=4></textarea></p>";
     form.innerHTML += ret;
     var addButton = document.createElement("button"),
         updateButton = document.createElement("button"),
@@ -190,7 +190,7 @@ var createScheduleController = function (container, scheduleView) {
                     {"op": "get_schedule",
                         "s_id": s_id,
                     },
-                    '/schedule.php'
+                    'schedule.php'
                 )[0];
                 for(var name in schedule){
                     if(form[name] != null){
@@ -235,7 +235,7 @@ var createScheduleController = function (container, scheduleView) {
             hour = ~~(time/60),
             miniute = ~~(time%60);
         form.s_name.value = "";
-        form.discription.value = "";
+        form.description.value = "";
         endTime = startTime = "" + (datecell.id.substr(-14, 14)-0 + hour*10000 + miniute*100);
         form.start_time.value = timeString(startTime); 
         form.end_time.value = timeString(endTime);
@@ -358,7 +358,7 @@ var createScheduleViewElement = function (container, year, month) {
         {"op": "get_schedule_in_range",
          "start_time": dateFormat(year, month, 1),
          "end_time": dateFormat(year, month+1, 1)},
-        '/schedule.php'
+        'schedule.php'
         );
     for(var i=0, l=schedules.length; i<l; i++){
         drawSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
@@ -398,7 +398,7 @@ var writeSchedule = function (calendar, id, name, startTime, endTime) {
         content.innerHTML = name;
         content.startTime = startTime;
         content.endTime = endTime;
-        var cont = tds[i].getElementsByClassName("datecell_discription")[0];
+        var cont = tds[i].getElementsByClassName("datecell_description")[0];
         var writes = cont.children;
         for(var j=0, l=writes.length; j<l; j++)
             if(writes[j].startTime > startTime)break;
@@ -561,6 +561,7 @@ function xmlRequestJson(type, json, target, callback){
         console.log(target + "?" + jsonToQueryString(json));
         xhr.send();
     }
+    console.log(xhr.responseText);
     return decodeJSON(JSON.parse(xhr.responseText));
 }
 function encodeJSON(json){
