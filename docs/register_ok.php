@@ -22,6 +22,7 @@ if ($reg) {
         }
 
         else {
+echo "!!";
             if (strlen($pswd)>30 || strlen($pswd)<5) {
                 echo "Your password must be between 5 and 30 characters long!";
             }
