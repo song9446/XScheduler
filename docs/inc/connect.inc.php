@@ -1,17 +1,14 @@
 <?php
-$servername = "localhost";
+$servername = "xscheduler.c4l3nt5dolim.ap-northeast-2.rds.amazonaws.com";
 $username = "root";
-$password = "";
-$dbname = "unisprout";
+$password = "qwer1234";
+$dbname = "UniScheduler";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die ("Connection failed: " . $conn->connect_error);
 }
 
-//echo "Connected successfully";
-
+//echo "Connected successfully!";
 ?>
