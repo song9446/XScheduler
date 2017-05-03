@@ -3,7 +3,7 @@
         <button type="button" id="sidebar_button" onclick="sidebar_toggle('sidebar_button')" value="0">SBB</button>
             <div class="logo">
                 <a href="home.php" class="logo">
-                    <img src="./img/logo.png" />
+                    <img src="./img/logo.png" width="42" height="42"/>
                 </a>
             </div>
             
