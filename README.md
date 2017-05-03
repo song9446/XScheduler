@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-edited++++++    ++
-# 1. Get the repository
-=======
 # 1. Discription
 This is helping scheduling service application.
 
 # 2. Get the repository
->>>>>>> b1985abb589ea507629dfcf4d55b2b2ac9ddda69
 `git clone https://github.com/song9446/XScheduler`
 
 # 3. In the repository

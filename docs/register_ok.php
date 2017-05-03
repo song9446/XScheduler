@@ -14,7 +14,6 @@ $pswd = "";
 $uid = strip_tags(@$_POST['u_id_register']);
 $pswd = strip_tags(@$_POST['password_register']);
 
-echo "!";
 if ($reg) {
 echo "$uid  $pswd";
     if ($uid && $pswd) {
@@ -23,7 +22,6 @@ echo "$uid  $pswd";
         }
 
         else {
-echo "!!";
             if (strlen($pswd)>30 || strlen($pswd)<5) {
                 echo "Your password must be between 5 and 30 characters long!";
             }

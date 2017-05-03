@@ -68,7 +68,7 @@ $sidebar_button:hover {
     opacity: 0.8;
 }
 
-#login_headerMenu_toggle input[type="text"] {
+#login_headerMenu_toggle input[type="text"],input[type="password"] {
     background-color: #FFFFFF;
     border: 1px solid #E2E2E2;
     font-size: 16px;

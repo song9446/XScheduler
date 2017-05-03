@@ -5,7 +5,7 @@
     <div id="login_headerMenu_toggle">
         <form action="login_ok.php" method="POST">
             <input type="text" name="user_id_login" size"25" placeholder="User ID"/>
-            <input type="text" name="password_login" size="25" placeholder="Password" />
+            <input type="password" name="password_login" size="25" placeholder="Password" />
             <input type="submit" name="login" value="Login" />
         </form>
     </div>
