@@ -6,7 +6,7 @@
                 <img src="./img/logo.png" width="42" height="42"/>
             </a>
         </div>
-        <nav id="topMenu">
+        <div id="topMenu">
           <ul>
               <li>
                 <a class="menuLink" href="#">Personal schedule</a>
@@ -15,7 +15,7 @@
                 <a class="menuLink" href="#">Group schedule</a>
               </li>
           </ul>
-        </nav>
+        </div>
             <?php
                 if (isset($_SESSION['u_id'])){
                     echo "<a href='logout.php' class='logout_button'>Logout</a>";
