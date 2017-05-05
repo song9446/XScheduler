@@ -17,7 +17,7 @@ include ( "./inc/connect.inc.php" );
             <div id="sidebar">
                 <?php
                     if (isset($_SESSION['u_id'])){
-                        echo "<a href='friend/index.php' font-size: 20px> Friend </a>";
+                        echo "<a href='friends/index.php' font-size: 20px> Friend </a>";
                     }
                 ?>
             </div>
