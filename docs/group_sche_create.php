@@ -13,6 +13,16 @@
         <label for="group_name">Group name: </label>
         <input type="text" id="group_name" placeholder="Enter group name">
       </div>
+      <div class="friends-select">
+        <select name='select' size='5' multiple>
+          <option value="1">Jason</option>
+          <option value="2">Eunchul</option>
+          <option value="3">Dongju</option>
+        </select>
+        <div id="selected"> Should be implemented...
+        </div>
+      </div>
+      <input type="submit" id="btn-submit" value="Submit">
     </form>
   </body>
 </html>
