@@ -17,3 +17,5 @@
                 }
             ?>
     </div>
+
+    <script src="./js/script1.js"></script>
