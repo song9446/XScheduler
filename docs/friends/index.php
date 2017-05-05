@@ -70,7 +70,7 @@ include ( "../inc/connect.inc.php" );
                         echo '<td>' . htmlspecialchars($field) . '</td>';
                     }
                 }
-                echo '</tr>;'
+                echo '</tr>';
                 echo ("</table>");
             }
         ?>
