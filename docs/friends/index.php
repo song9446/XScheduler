@@ -25,7 +25,7 @@ include ( "../inc/connect.inc.php" );
             $result = mysqli_query($conn, $query);
             echo ("<table>");
             $first_row = true;
-/*    
+    
             while ($row = mysqli_fetch_assoc ($result)) {
                 if ($first_row) {
                     $first_row = false;
@@ -44,7 +44,6 @@ include ( "../inc/connect.inc.php" );
                 echo '</tr>';
             }
             echo ("</table>");
-*/
         ?>
 
 
