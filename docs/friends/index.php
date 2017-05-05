@@ -13,34 +13,36 @@ include ( "../inc/connect.inc.php" );
 
 
 
-<body>
-    <?php include ( "../headerMenu.php" ); ?>
-        echo "<h2>Friend List: </h2>";
+    <body>
+        <?php include ( "../headerMenu.php" ); ?>
 
-        $query = "SELECT * FROM friend WHERE u_id = $_SESSION['u_id']";
-        $result = mysqli_query($conn, $query);
-        echo ("<table>");
-        $firest_row = true;
+        <?php
+            echo "<h2>Friend List: </h2>";
 
-        while ($row = mysqli_fetch_assoc ($result)) {
-            if ($first_row) {
-                $first_row = false;
-                // OUTput header row from keys.
+            $query = "SELECT * FROM friend WHERE u_id = $_SESSION['u_id']";
+            $result = mysqli_query($conn, $query);
+            echo ("<table>");
+            $first_row = true;
+    
+            while ($row = mysqli_fetch_assoc ($result)) {
+                if ($first_row) {
+                    $first_row = false;
+                    // OUTput header row from keys.
+                    echo '<tr>';
+                    foreach ($row as $key => $field) {
+                        echo '<th>' . htmlspecialchars($key) . '</th>';
+                    }
+                    echo '</tr>';
+                }
+
                 echo '<tr>';
-                foreach ($row as $key => $field) {
-                    echo '<th>' . htmlspecialchars($key) . '</th>';
+                foreach($row as $key => $field) {
+                    echo '<td>' . htmlspecialchars($field) . '</td>';
                 }
                 echo '</tr>';
             }
-
-            echo '<tr>';
-            foreach($row as $key => $field) {
-                echo '<td>' . htmlspecialchars($field) . '</td>';
-            }
-            echo '</tr>';
-        }
-        echo ("</table>");
-
+            echo ("</table>");
+        ?>
 
 
         <form action="add_friend.php" method="POST">
