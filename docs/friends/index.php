@@ -47,7 +47,7 @@ include ( "../inc/connect.inc.php" );
         ?>
 
 
-        <form action="add_friend.php" method="POST">
+        <form action="index.php" method="POST">
             <input type="text" name="search_u_id" size"25" placeholder="Search ID" />
             <input type="submit" name="search" value="Search" />
         </form>
