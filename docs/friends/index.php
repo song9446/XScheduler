@@ -17,6 +17,7 @@ include ( "../inc/connect.inc.php" );
         <?php include ( "../headerMenu.php" ); ?>
 
         <?php
+/*
             echo "<h2>Friend List: </h2>";
 
             $query = "SELECT * FROM friend WHERE u_id = '$_SESSION['u_id']'";
@@ -42,6 +43,7 @@ include ( "../inc/connect.inc.php" );
                 echo '</tr>';
             }
             echo ("</table>");
+*/
         ?>
 
 
