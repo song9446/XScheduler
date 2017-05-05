@@ -19,7 +19,7 @@ include ( "../inc/connect.inc.php" );
         <?php
             echo "<h2>Friend List: </h2>";
 
-            $query = "SELECT * FROM friend WHERE u_id = $_SESSION['u_id']";
+            $query = "SELECT * FROM friend WHERE u_id = '$_SESSION['u_id']'";
             $result = mysqli_query($conn, $query);
             echo ("<table>");
             $first_row = true;
