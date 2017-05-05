@@ -20,8 +20,6 @@ include ( "./inc/connect.inc.php" );
                 <span>Test-content</span>
             </div>
         </div>
-
-        <script src="./js/script1.js"></script>
     </body>
 </html>
 

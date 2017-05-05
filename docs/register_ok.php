@@ -15,6 +15,7 @@ $uid = strip_tags(@$_POST['u_id_register']);
 $pswd = strip_tags(@$_POST['password_register']);
 
 if ($reg) {
+echo "$uid  $pswd";
     if ($uid && $pswd) {
         if (strlen($uid) > 25) {
             echo "The maximum length of user id is 25 characters!";
@@ -26,6 +27,7 @@ if ($reg) {
             }
 
             else {
+echo "!!!";
                 $query = mysqli_query($conn, "INSERT INTO user VALUES ('$uid', '$pswd')");
                 echo "<h2><a href='index.php'>Welcome to UniScheduler</a></h2>";
 
