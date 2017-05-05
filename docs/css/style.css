@@ -229,10 +229,15 @@ img.harbor_main_logo {
 #description {
   width: 500px;
   height: 400px;
-  text-align: center;
+  /*text-align: center;*/
   background-color: rgba(52, 73, 94, 0.7);
   border-radius: 10px;
   margin: 0px auto;
   margin-top: 150px;
 }
-
+#description p1 {
+  font-size: 23px;
+}
+#description p2 {
+  font-size: 18px;
+}
