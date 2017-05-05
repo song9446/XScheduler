@@ -226,7 +226,7 @@ img.harbor_main_logo {
   width: 150px;
   background-color: #eff5f9;
 }
-/*#description {
+#description {
   width: 500px;
   height: 400px;
   text-align: center;
@@ -239,5 +239,5 @@ img.harbor_main_logo {
 #info {
   font-size: 18px;
   margin-top: 20px;
-}*/
+}
 
