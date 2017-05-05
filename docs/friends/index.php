@@ -55,7 +55,23 @@ include ( "../inc/connect.inc.php" );
 
         <?php
             if ( isset($_SESSION['u_id']) && isset($_POST['search_u_id']) ) {
-                
+                echo "<h2>Search Result: </h2>";
+
+                $search_u_id = $_POST['search_u_id'];
+                $query = "SELECT u_id FROM user WHERE u_id = '$search_u_id'";
+                $result = mysqli_query($conn, $query);
+
+                echo ("<table>");
+                echo '<tr>';
+                while ( $row = mysqli_fetch_assoc($result) ){
+                    echo "<td>" . "<a href='add_friend.php?add_friend_u_id=" . $row['u_id'] . "' >ADD" . "</a>" . "</td>";
+
+                    foreach ($row as $key => $field) {
+                        echo '<td>' . htmlspecialchars($field) . '</td>';
+                    }
+                }
+                echo '</tr>;'
+                echo ("</table>");
             }
         ?>
 
