@@ -47,13 +47,16 @@ include ( "../inc/connect.inc.php" );
         ?>
 
 
-        <form action="add_friend.php" method="POST">
+        <form action="index.php" method="POST">
             <input type="text" name="search_u_id" size"25" placeholder="Search ID" />
             <input type="submit" name="search" value="Search" />
         </form>
 
 
         <?php
+            $curr_u_id = $_SESSION['u_id'];
+            $curr_search_u_id = $_POST['search_u_id'];
+            echo "$curr_u_id  $curr_search_u_id";
             if ( isset($_SESSION['u_id']) && isset($_POST['search_u_id']) ) {
                 echo "<h2>Search Result: </h2>";
 
@@ -70,7 +73,7 @@ include ( "../inc/connect.inc.php" );
                         echo '<td>' . htmlspecialchars($field) . '</td>';
                     }
                 }
-                echo '</tr>;'
+                echo '</tr>';
                 echo ("</table>");
             }
         ?>
