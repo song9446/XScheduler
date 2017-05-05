@@ -230,9 +230,9 @@ img.harbor_main_logo {
   width: 500px;
   height: 400px;
   text-align: center;
-  background-color:
+  background-color: rgba(52, 73, 94, 0.7);
   border-radius: 10px;
-  margin: 0px;
+  margin: 0px auto;
   margin-top: 150px;
 }
 
