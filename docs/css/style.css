@@ -203,4 +203,24 @@ img.harbor_main_logo {
     height: 150px;
 }
 
+#topMenu {
+  height: 42px;
+  width: 300px;
+}
+#topMenu ul li {
+  list-style: none;
+  background-color: #eff5f9;
+  float: left;
+  line-height: 30px;
+  vertical-align: middle;
+  text-align: center;
+
+}
+#topMenu .menuLink {
+  text-decoration: none;
+  
+}
+/* #topMenu .menuLink:hover {
+
+}*/
 
