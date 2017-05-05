@@ -187,7 +187,9 @@ a.logout_button {
     position: absolute;
     left: 0px;
     right: 0px;
-    background: #ccc;
+    /*background: #ccc;*/
+    background-image: url("../img/bg.png");
+    background-repeat: no-repeat;
     z-index: -1;
 }
 
