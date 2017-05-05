@@ -17,7 +17,7 @@ include ( "./inc/connect.inc.php" );
             <div id="sidebar">
                 <?php
                     if (isset($_SESSION['u_id'])){
-                        echo "<a href='friends/index.php' font-size: 20px> Friend </a>";
+                        echo "HI";
                     }
                 ?>
             </div>
@@ -28,8 +28,11 @@ include ( "./inc/connect.inc.php" );
                         echo "<p>Logged in as ". $_SESSION['u_id'] . "</p>";
                     }
                     echo "<a href='scheduler/index.php' font-size: 20px> Calendar <-- Song's Beautiful Calendar\n </a>";
+                    echo "<a >Login is currently NOT working because it is not connected to our database.</a>";
                 ?>
             </div>
         </div>
+
+        <script src="./js/script1.js"></script>
     </body>
 </html>
