@@ -30,9 +30,9 @@ include ( "./inc/connect.inc.php" );
                     echo "<a href='scheduler/index.php' font-size: 20px> Calendar <-- Song's Beautiful Calendar\n </a>";
                 ?>
                 <div id="description">
-                  UniScheduler<br/>
-                  This is Database lecture project.<br/>
-                  Contributor : Jason Kim, Eunchul Song, Dongju Shin
+                  <p id="p1">UniScheduler</p></br>
+                  <p id="p2">This is Database lecture project.<br/>
+                  Contributor : Jason Kim, Eunchul Song, Dongju Shin</p>
                 </div>
             </div>
         </div>
