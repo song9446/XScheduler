@@ -54,6 +54,9 @@ include ( "../inc/connect.inc.php" );
 
 
         <?php
+            $curr_u_id = $_SESSION['u_id'];
+            $curr_search_u_id = $_POST['search_u_id'];
+            echo "$curr_u_id  $curr_search_u_id";
             if ( isset($_SESSION['u_id']) && isset($_POST['search_u_id']) ) {
                 echo "<h2>Search Result: </h2>";
 
