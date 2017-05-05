@@ -35,8 +35,8 @@ $sidebar_button:hover {
     background-color: #eff5f9;
     border: 0px;
     height: 42px;
-    width: 100px;
-    margin-left: 70px;
+    width: 60px;
+    margin-left: 0px;
     position: absolute;
 }
 
@@ -48,7 +48,7 @@ $sidebar_button:hover {
     border: 0px;
     width: 60px;
     height: 42px;
-    margin-left: 10px;
+    margin-left: 0px;
 }
 
 #login_button {
@@ -206,18 +206,21 @@ img.harbor_main_logo {
 #topMenu {
   height: 42px;
   width: 300px;
+  margin-left: 100px;
 }
 #topMenu ul li {
   list-style: none;
-  background-color: #eff5f9;
+  /*background-color: #eff5f9;*/
   float: left;
-  line-height: 30px;
+  line-height: 42px;
   vertical-align: middle;
   text-align: center;
 
 }
 #topMenu .menuLink {
   text-decoration: none;
+  display: block;
+  width: 150px;
   
 }
 /* #topMenu .menuLink:hover {
