@@ -12,7 +12,7 @@
                 <a class="menuLink" href="#">Personal schedule</a>
               </li>
               <li>
-                <a class="menuLink" href="#">Group schedule</a>
+                <a class="menuLink" href="group_sche_create.php">Group schedule</a>
               </li>
           </ul>
         </nav>
