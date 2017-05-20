@@ -5,6 +5,7 @@
   width: 400px;
   padding-left: 100px;
   padding-top: 50px;
+  float: left;
 }
 #Send {
   margin-bottom: 15px;
