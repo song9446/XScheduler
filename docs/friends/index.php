@@ -7,12 +7,11 @@ include ( "../inc/connect.inc.php" );
 <html>
     <head>
         <title>UniScheduler</title>
-        <link rel="stylesheet" type="text/css" href="../css/style.css" />
     </head>
 
 
 
-
+<!--
     <body>
         <?php include ( "../headerMenu.php" ); ?>
 
@@ -112,6 +111,6 @@ include ( "../inc/connect.inc.php" );
     </body>
 
 
-
+-->
 </html>
 
