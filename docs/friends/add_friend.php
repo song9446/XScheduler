@@ -3,9 +3,9 @@ session_start();
 include ( "../inc/connect.inc.php" );
 
   
-if (isset($_SESSION[`u_id`]))
+if ( isset($_SESSION[`u_id`]) )
 {
-    if(isset($_GET[`add_friend_u_id`]){
+    if( isset($_GET[`add_friend_u_id`]) ){
         $uif=$_SESSION[`u_id`] // u_id_from
         $uit=$_GET[`add_friend_u_id`]) // u_id_to
 
