@@ -22,6 +22,9 @@
           </select>
         </div>
         <div class="selected"> Should be implemented...
+          <select size='100'>
+            <option value='1'>Should be implemented</option>
+          </select>
         </div>
       </div>
       <input type="submit" id="btn-submit" value="Submit">
