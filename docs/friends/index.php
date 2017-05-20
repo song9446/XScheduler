@@ -37,7 +37,7 @@ include ( "../inc/connect.inc.php" );
 
                 echo '<tr>';
                 foreach($row as $key => $field) {
-                    echo '<td>' . "<a href='delete_friend.php?delete_friend_u_id=" . $row['f_u_id'] . "' >Delete" . "</a>" . <"/td">;
+                    echo '<td>' . "<a href='delete_friend.php?delete_friend_u_id=" . $row['f_u_id'] . "' >Delete" . "</a>" . "</td>";
                     echo '<td>' . htmlspecialchars($field) . '</td>';
                 }
                 echo '</tr>';
@@ -54,7 +54,6 @@ include ( "../inc/connect.inc.php" );
 
 
         <?php
-/*
             $curr_u_id = $_SESSION['u_id'];
             $curr_search_u_id = $_POST['search_u_id'];
 
@@ -80,11 +79,9 @@ include ( "../inc/connect.inc.php" );
                 }
                 echo ("</table>");
             }
-*/
         ?>
 
         <?php
-/*
             $curr_u_id = $_SESSION['u_id'];
             
             if ( isset($_SESSION['u_id']) ){
@@ -107,7 +104,6 @@ include ( "../inc/connect.inc.php" );
 
 
             }
-*/
         ?>            
 
 
