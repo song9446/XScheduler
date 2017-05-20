@@ -39,6 +39,7 @@ include ( "../inc/connect.inc.php" );
 
                 echo '<tr>';
                 foreach($row as $key => $field) {
+                    echo '<td>' . "<a href='delete_friend.php?delete_friend_u_id=" . $row['f_u_id'] . "' >Delete" . "</a>" . <"/td">;
                     echo '<td>' . htmlspecialchars($field) . '</td>';
                 }
                 echo '</tr>';
@@ -69,7 +70,7 @@ include ( "../inc/connect.inc.php" );
                 echo ("<table>");
                 while ( $row = mysqli_fetch_assoc($result) ){
                     echo '<tr>';
-                    echo "<td>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</td>";
+                    echo "<td>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >Send" . "</a>" . "</td>";
 
                     foreach ($row as $key => $field) {
                         echo '<td>' . htmlspecialchars($field) . '</td>';
@@ -94,7 +95,7 @@ include ( "../inc/connect.inc.php" );
                 while ( $row = mysqli_fetch_assoc($result) ){
                     echo '<tr>';
 
-                    echo "<td>" . "<a href='add_friend.php?add_friend_u_id=" . $row['u_id_from'] . "' >ADD" . "</a>" . "</td>";
+                    echo "<td>" . "<a href='add_friend.php?add_friend_u_id=" . $row['u_id_from'] . "' >Add" . "</a>" . "</td>";
                     foreach ($row as $key => $field) {
                         echo '<td>' . htmlspecialchars($field) . '</td>';
                     }

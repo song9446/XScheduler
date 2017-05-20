@@ -12,8 +12,9 @@ if ( isset($_SESSION['u_id']) )
 
         $query = "SELECT * FROM friend_request WHERE u_id_from = '$ui1' AND u_id_to = '$ui2'";
         $result = mysqli_query($conn, $query);
+        $count = mysqli_num_rows($result);
 
-        if ($result){
+        if ($count > 0){
             $query = "DELETE FROM friend request WHERE u_id_from = '$ui1' AND u_id_to = '$ui2'";
             $result = mysqli_query($conn, $query);
 
@@ -29,8 +30,9 @@ if ( isset($_SESSION['u_id']) )
 
         $query = "SELECT * FROM friend_request WHERE u_id_from = '$ui2' AND u_id_to = '$ui1'";
         $result = mysqli_query($conn, $query);
+        $count2 = mysqli_query($result);
 
-        if ($result){
+        if ($count > 0){
             $query = "DELETE FROM friend_request WHERE u_id_from = '$ui2' AND u_id_to ='$ui1'";
             $result = mysqli_query($conn, $query);
 
@@ -48,9 +50,12 @@ if ( isset($_SESSION['u_id']) )
         $query = "INSERT INTO friend (u_id, f_u_id) VALUES ('$ui1', '$ui2')";
         $result = mysqli_query($conn, $query);
 
-        if ($result){
+        $query2 = "INSERT INTO friend (u_id, f_u_id) VALUES ('$ui2', '$ui1')";
+        $result2 = mysqli_query($conn, $query);
+
+        if ($result && $result){
             echo "<br/>Friend " . $ui2 . " has been added.";
-            echo "<meta http=euiv='refresh' content='0;url=index.php'>";
+            echo "<meta http-euiv='refresh' content='0;url=index.php'>";
         }
 
         else {
