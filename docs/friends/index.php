@@ -15,7 +15,7 @@ include ( "../inc/connect.inc.php" );
         <?php include ( "../headerMenu.php" ); ?>
 
         <?php
-/*
+
             echo "<h2>Friend List: </h2>";
 
             $curr_u_id = $_SESSION['u_id'];
@@ -43,7 +43,7 @@ include ( "../inc/connect.inc.php" );
                 echo '</tr>';
             }
             echo ("</table>");
-*/
+
         ?>
 
 
