@@ -49,7 +49,7 @@ if ( isset($_SESSION['u_id']) )
         $result = mysqli_query($conn, $query);
 
         if ($result){
-            echo "<br/>Friend " . $ui2 . "has been added.";
+            echo "<br/>Friend " . $ui2 . " has been added.";
             echo "<meta http=euiv='refresh' content='0;url=index.php'>";
         }
 
