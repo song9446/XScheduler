@@ -11,12 +11,11 @@ include ( "../inc/connect.inc.php" );
 
 
 
-<!--
     <body>
         <?php include ( "../headerMenu.php" ); ?>
 
         <?php
-
+/*
             echo "<h2>Friend List: </h2>";
 
             $curr_u_id = $_SESSION['u_id'];
@@ -44,6 +43,7 @@ include ( "../inc/connect.inc.php" );
                 echo '</tr>';
             }
             echo ("</table>");
+*/
         ?>
 
 
@@ -54,6 +54,7 @@ include ( "../inc/connect.inc.php" );
 
 
         <?php
+/*
             $curr_u_id = $_SESSION['u_id'];
             $curr_search_u_id = $_POST['search_u_id'];
 
@@ -79,9 +80,11 @@ include ( "../inc/connect.inc.php" );
                 }
                 echo ("</table>");
             }
+*/
         ?>
 
         <?php
+/*
             $curr_u_id = $_SESSION['u_id'];
             
             if ( isset($_SESSION['u_id']) ){
@@ -104,6 +107,7 @@ include ( "../inc/connect.inc.php" );
 
 
             }
+*/
         ?>            
 
 
@@ -111,6 +115,5 @@ include ( "../inc/connect.inc.php" );
     </body>
 
 
--->
 </html>
 
