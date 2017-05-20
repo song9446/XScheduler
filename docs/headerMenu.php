@@ -14,7 +14,7 @@
               <li>
                 <a class="menuLink" href="group_sche_create.php">Group schedule</a>
               </li>
-              </i>
+              <li>
                 <a class="menuLink" href="friends/index.php">Friends</a>
               </li>
           </ul>
