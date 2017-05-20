@@ -56,12 +56,14 @@ include ( "../inc/connect.inc.php" );
         <?php
             $curr_u_id = $_SESSION['u_id'];
             $curr_search_u_id = $_POST['search_u_id'];
-            echo "$curr_u_id  $curr_search_u_id";
+
+            //echo "$curr_u_id  $curr_search_u_id";
+
             if ( isset($_SESSION['u_id']) && isset($_POST['search_u_id']) ) {
                 echo "<h2>Search Result: </h2>";
 
                 $search_u_id = $_POST['search_u_id'];
-                $query = "SELECT u_id FROM user U, friend_request FU  WHERE U.u_id = '$search_u_id' AND FU.u_id_to != '$search_u_id'";
+                $query = "SELECT u_id FROM user U, friend_request FU  WHERE U.u_id = '$search_u_id' AND FU.u_id_to <> '$search_u_id'";
                 $result = mysqli_query($conn, $query);
 
                 echo ("<table>");
