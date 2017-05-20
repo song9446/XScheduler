@@ -17,7 +17,7 @@ if ( isset($_SESSION['u_id']) )
             //echo "<meta http-equiv='refresh' content='0;url=index.php'>";
          }
          else {
-             echo "Deletion failed!"
+             echo "Deletion failed!";
          }
      }
 }
