@@ -40,6 +40,22 @@ include ( "../inc/connect.inc.php" );
         <form action="index.php" method="POST">
             <input type="text" name="search_u_id" size"25" placeholder="Search ID" />
             <input type="submit" name="search" value="Search" />
+            <div class="add_friends">
+              <div id="Send">Send Request</div>
+              <select size='100'>
+
+              </select>
+            </div>
+            <div class="get_friends">
+              <div id="Receive">Received Requests</div>
+              <select size='100'>
+
+              </select>
+            </div>
+            <div class="friends">
+              <div id="my_friends">Friends list</div>
+              <select size='100'>
+            </div>
         </form>
 
 
