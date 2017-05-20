@@ -12,7 +12,6 @@ include ( "../inc/connect.inc.php" );
 
 
 
-
     <body>
         <?php include ( "../headerMenu.php" ); ?>
 
@@ -21,29 +20,20 @@ include ( "../inc/connect.inc.php" );
             echo "<h2>Friend List: </h2>";
 
             $curr_u_id = $_SESSION['u_id'];
-            $query = "SELECT * FROM friend WHERE u_id = '$curr_u_id'";
+            $query = "SELECT f_u_id FROM friend WHERE u_id = '$curr_u_id'";
             $result = mysqli_query($conn, $query);
-            echo ("<table>");
-            $first_row = true;
-    
-            while ($row = mysqli_fetch_assoc ($result)) {
-                if ($first_row) {
-                    $first_row = false;
-                    // OUTput header row from keys.
-                    echo '<tr>';
-                    foreach ($row as $key => $field) {
-                        echo '<th>' . htmlspecialchars($key) . '</th>';
-                    }
-                    echo '</tr>';
-                }
 
+            echo ("<table>");
+            while ($row = mysqli_fetch_assoc ($result)) {
                 echo '<tr>';
                 foreach($row as $key => $field) {
                     echo '<td>' . htmlspecialchars($field) . '</td>';
                 }
+                echo '<td>' . "<a href='delete_friend.php?delete_friend_u_id=" . $row['f_u_id'] . "' >Delete" . "</a>" . "</td>";
                 echo '</tr>';
             }
             echo ("</table>");
+
         ?>
 
 
@@ -85,7 +75,7 @@ include ( "../inc/connect.inc.php" );
                 echo ("<table>");
                 while ( $row = mysqli_fetch_assoc($result) ){
                     echo '<tr>';
-                    echo "<td>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</td>";
+                    echo "<td>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >Send" . "</a>" . "</td>";
 
                     foreach ($row as $key => $field) {
                         echo '<td>' . htmlspecialchars($field) . '</td>';
@@ -110,7 +100,7 @@ include ( "../inc/connect.inc.php" );
                 while ( $row = mysqli_fetch_assoc($result) ){
                     echo '<tr>';
 
-                    echo "<td>" . "<a href='add_friend.php?add_friend_u_id=" . $row['u_id_from'] . "' >ADD" . "</a>" . "</td>";
+                    echo "<td>" . "<a href='add_friend.php?add_friend_u_id=" . $row['u_id_from'] . "' >Add" . "</a>" . "</td>";
                     foreach ($row as $key => $field) {
                         echo '<td>' . htmlspecialchars($field) . '</td>';
                     }
@@ -125,7 +115,6 @@ include ( "../inc/connect.inc.php" );
 
 
     </body>
-
 
 
 </html>
