@@ -7,8 +7,8 @@
   padding-top: 50px;
 }
 #Send {
-  margin-left: 150px;
-  margin-top: 100px;
+  margin-bottom: 15px;
+  font-size: 20px;
 }
 .get-friends form {
   width: 500px;
@@ -20,11 +20,41 @@
 }
 .get_friends input[type='submit'] {
   padding: 10px 20px;
-  border: none;
   text-align: center;
+  margin-left: 10px;
 }
 .get_friends select {
   width: 300px;
   height: 600px;
-  margin-top: 50px;
+  margin-top: 20px;
+}
+.add_friends {
+  width: 400px;
+  padding-left: 100px;
+  padding-top: 50px;
+  float: left;
+}
+#Receive {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+.add_friends select {
+  width: 300px;
+  height: 600px;
+  margin-top: 20px;
+}
+.friends {
+  width: 400px;
+  padding-left: 100px;
+  padding-top: 50px;
+  float: left;
+}
+#my_friends {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+.friends select {
+  width: 300px;
+  height: 600px;
+  margin-top: 20px;
 }
