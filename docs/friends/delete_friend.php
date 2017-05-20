@@ -1,4 +1,5 @@
-ession_start();
+<?php
+session_start();
 include ( "../inc/connect.inc.php" );
 
 
@@ -24,3 +25,5 @@ if ( isset($_SESSION['u_id']) )
 else{
     echo "Blocked! Not logged in!";
 }
+
+?>
