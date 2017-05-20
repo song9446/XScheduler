@@ -21,13 +21,13 @@
             <option value="3">Dongju</option>
           </select>
         </div>
-        <div class="selected"> Should be implemented...
+        <input type="submit" id="btn-submit" value="Submit">
+        <div class="selected">
           <select size='100'>
-            <option value='1'>Should be implemented</option>
+            <option value='1'>Should be implemented...</option>
           </select>
         </div>
       </div>
-      <input type="submit" id="btn-submit" value="Submit">
-    </form>
+          </form>
   </body>
 </html>
