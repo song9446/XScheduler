@@ -7,14 +7,14 @@ include ( "~/XScheduler/docs/inc/connect.inc.php" );
 <html>
     <head>
         <title>UniScheduler</title>
-        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+        <link rel="stylesheet" type="text/css" href="~/XScheduler/docs/css/style.css" />
     </head>
 
 
 
 
     <body>
-        <?php include ( "../headerMenu.php" ); ?>
+        <?php include ( "~/XScheduler/docs/headerMenu.php" ); ?>
 
         <?php
 
