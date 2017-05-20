@@ -90,9 +90,10 @@ include ( "../inc/connect.inc.php" );
                 $result = mysqli_query($conn, $query);
 
                 echo ("<table>");
-                while ( $row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
+                while ( $row = mysqli_fetch_assoc($result) ){
+                    echo '<tr>';
                     foreach ($row as $key => $field) {
+                        echo '<td>' . "hi" . '</td>';
                         echo '<td>' . htmlspecialchars($field) . '</td>';
                     }
                     echo '</tr>';
