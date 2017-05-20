@@ -86,8 +86,6 @@ include ( "../inc/connect.inc.php" );
             if ( isset($_SESSION['u_id']) ){
                 echo "<h2>Friend Requests: </h2>";
 
-echo "$curr_u_id";
-
                 $query = "SELECT u_id_from FROM friend_request WHERE u_id_to = '$curr_u_id'";
                 $result = mysqli_query($conn, $query);
 
