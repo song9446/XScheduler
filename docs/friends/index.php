@@ -81,7 +81,26 @@ include ( "../inc/connect.inc.php" );
         ?>
 
         <?php
+            $curr_u_id = $_SESSION['u_id'];
+            
+            if ( isset($_SESSION['u_id']) ){
+                echo "<h2>Friend Requests: </h2>";
 
+                $query = "SELECT u_id_FROM friend_request WHERE u_id_to = '$curr_u_id'";
+                $result = mysqli_query($conn, $query);
+
+                echo ("<table>");
+                while ( $row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    foreach ($row as $key => $field) {
+                        echo '<td>' . htmlspecialchars($field) . '</td>';
+                    }
+                    echo '</tr>';
+                }
+                echo ("</table>");
+
+
+            }
         ?>            
 
 
