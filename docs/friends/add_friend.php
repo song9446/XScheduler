@@ -9,7 +9,7 @@ if ( isset($_SESSION['u_id']) )
         $uif=$_SESSION['u_id']; // u_id_from
         $uit=$_GET['add_friend_u_id']; // u_id_to
 
-        $query = "INSERT INTO friend_request WHERE (u_id_from, u_id_to) VALUES ('$uif', '$uit')";
+        $query = "INSERT INTO friend_request (u_id_from, u_id_to) VALUES ('$uif', '$uit')";
         $result = mysqli_query($conn, $query);
 
         if ($result){
