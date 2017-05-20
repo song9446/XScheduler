@@ -13,7 +13,7 @@ if ( isset($_SESSION['u_id']) )
 
          if ($result) {
             echo "Successfully deleted   " . $delete_u_id . " from friend list.";
-            echo "<meta http-equiv='refresh' content='0;url=home.php'>";
+            echo "<meta http-equiv='refresh' content='0;url=index.php'>";
          }
          else {
              echo "Deletion failed!"
