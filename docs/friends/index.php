@@ -63,7 +63,7 @@ include ( "../inc/connect.inc.php" );
                 echo "<h2>Search Result: </h2>";
 
                 $search_u_id = $_POST['search_u_id'];
-                $query = "SELECT U.u_id FROM user U, friend_request FU  WHERE U.u_id = '$search_u_id' AND NOT FU.u_id_to = '$search_u_id'";
+                $query = "SELECT U.u_id FROM user AS U, friend_request AS FU  WHERE U.u_id = '$search_u_id' AND NOT FU.u_id_to = '$search_u_id'";
                 $result = mysqli_query($conn, $query);
 
                 echo ("<table>");
