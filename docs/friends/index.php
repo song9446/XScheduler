@@ -19,22 +19,11 @@ include ( "../inc/connect.inc.php" );
             echo "<h2>Friend List: </h2>";
 
             $curr_u_id = $_SESSION['u_id'];
-            $query = "SELECT * FROM friend WHERE u_id = '$curr_u_id'";
+            $query = "SELECT f_u_id FROM friend WHERE u_id = '$curr_u_id'";
             $result = mysqli_query($conn, $query);
-            echo ("<table>");
-            $first_row = true;
-    
-            while ($row = mysqli_fetch_assoc ($result)) {
-                if ($first_row) {
-                    $first_row = false;
-                    // OUTput header row from keys.
-                    echo '<tr>';
-                    foreach ($row as $key => $field) {
-                        echo '<th>' . htmlspecialchars($key) . '</th>';
-                    }
-                    echo '</tr>';
-                }
 
+            echo ("<table>");
+            while ($row = mysqli_fetch_assoc ($result)) {
                 echo '<tr>';
                 foreach($row as $key => $field) {
                     echo '<td>' . htmlspecialchars($field) . '</td>';
