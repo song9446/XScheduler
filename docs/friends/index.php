@@ -37,9 +37,9 @@ include ( "../inc/connect.inc.php" );
 
                 echo '<tr>';
                 foreach($row as $key => $field) {
-                    echo '<td>' . "<a href='delete_friend.php?delete_friend_u_id=" . $row['f_u_id'] . "' >Delete" . "</a>" . "</td>";
                     echo '<td>' . htmlspecialchars($field) . '</td>';
                 }
+                echo '<td>' . "<a href='delete_friend.php?delete_friend_u_id=" . $row['f_u_id'] . "' >Delete" . "</a>" . "</td>";
                 echo '</tr>';
             }
             echo ("</table>");
