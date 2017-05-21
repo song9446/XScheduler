@@ -7,7 +7,7 @@
   </head>
 
   <body>
-    <?php include ( "./headerMenu.php" ); ?>
+    <?php include ( "../headerMenu.php" ); ?>
     <form>
       <div class="textbox">
         <label for="group_name">Group name: </label>
