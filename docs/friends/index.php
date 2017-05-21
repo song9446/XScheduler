@@ -42,9 +42,9 @@ include ( "../inc/connect.inc.php" );
                 while ( $row = mysqli_fetch_assoc($result) ){
                   echo '<tr>';
                     foreach ($row as $key => $field) {
-                      echo "<td>" . htmlspecialchars($field) . '</td>';
+                      echo "<td height='23'>" . htmlspecialchars($field) . '</td>';
                     }
-                    echo "<td>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</td>";
+                    echo "<td height='23'>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</td>";
                   echo '</tr>';
                 }
                 echo ("</table>");
