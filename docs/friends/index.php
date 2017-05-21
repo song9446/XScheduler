@@ -17,35 +17,6 @@ include ( "../inc/connect.inc.php" );
     <body>
         <?php include ( "../headerMenu.php" ); ?>
 
-        <?php
-
-            echo "<h2>Friend List: </h2>";
-
-            $curr_u_id = $_SESSION['u_id'];
-            $query = "SELECT * FROM friend WHERE u_id = '$curr_u_id'";
-            $result = mysqli_query($conn, $query);
-            echo ("<table>");
-            $first_row = true;
-    
-            while ($row = mysqli_fetch_assoc ($result)) {
-                if ($first_row) {
-                    $first_row = false;
-                    // OUTput header row from keys.
-                    echo '<tr>';
-                    foreach ($row as $key => $field) {
-                        echo '<th>' . htmlspecialchars($key) . '</th>';
-                    }
-                    echo '</tr>';
-                }
-
-                echo '<tr>';
-                foreach($row as $key => $field) {
-                    echo '<td>' . htmlspecialchars($field) . '</td>';
-                }
-                echo '</tr>';
-            }
-            echo ("</table>");
-        ?>
         <div class='container'>
           <div class='get_friends'>
             <div id="Send">Send Request</div>
@@ -66,6 +37,24 @@ include ( "../inc/connect.inc.php" );
           <div class="friends">
             <div id="my_friends">Friends list</div>
             <select size='100'>
+                    <?php
+
+            echo "<h2>Friend List: </h2>";
+
+            $curr_u_id = $_SESSION['u_id'];
+            $query = "SELECT * FROM friend WHERE u_id = '$curr_u_id'";
+            $result = mysqli_query($conn, $query);
+            echo ("<table>");
+    
+            while ($row = mysqli_fetch_assoc ($result)) {
+                echo '<tr>';
+                foreach($row as $key => $field) {
+                    echo '<td>' . htmlspecialchars($field) . '</td>';
+                }
+                echo '</tr>';
+            }
+            echo ("</table>");
+        ?>
 
             </select>
           </div>
