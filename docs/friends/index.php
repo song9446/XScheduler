@@ -24,12 +24,6 @@ include ( "../inc/connect.inc.php" );
               <input type="text" name="search_u_id" size"25" placeholder="Search ID" />
               <input type="submit" name="search" value="Search" />
             </form>
-            <select size='100'>
-
-            </select>
-          </div>
-          <div class="add_friends">
-            <div id="Receive">Received Requests</div>
             <?php
             
               $curr_u_id = $_SESSION['u_id'];
@@ -56,6 +50,13 @@ include ( "../inc/connect.inc.php" );
                 echo ("</table>");
               }
             ?>
+
+          </div>
+          <div class="add_friends">
+            <div id="Receive">Received Requests</div>
+            <select size='100'>
+
+            </select>
           </div>
           <div class="friends">
             <div id="my_friends">Friends list</div>
