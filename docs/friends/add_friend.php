@@ -10,25 +10,6 @@ if ( isset($_SESSION['u_id']) )
         $ui2=$_GET['add_friend_u_id']; // u_id 2
 
 
-        $query = 
-            "DELETE 
-            FROM friend_request FR1
-            WHERE EXISTS (SELECT * 
-                          FROM friend_request FR2
-                          WHERE FR2.u_id_from = '$ui1' AND FR2.u_id_to = '$ui2') AND FR1.u_id_from = '$ui1' AND FR1.u_id_to = '$ui2'";
-
-        $result = mysqli_query($conn, $query);
-
-        $query2 =
-            "DELETE 
-            FROM friend_request FR1
-            WHERE EXISTS (SELECT * 
-                          FROM friend_request FR2
-                          WHERE FR2.u_id_from = '$ui1' AND FR2.u_id_to = '$ui2') AND FR1.u_id_from = '$ui1' AND FR1.u_id_to = '$ui2'";
-
-        $result2 = mysqli_query($conn, $query2);
-
-/*
         $query = "SELECT * FROM friend_request WHERE u_id_from = '$ui1' AND u_id_to = '$ui2'";
         $result = mysqli_query($conn, $query);
         $count = mysqli_num_rows($result);
@@ -49,7 +30,7 @@ if ( isset($_SESSION['u_id']) )
 
         $query2 = "SELECT * FROM friend_request WHERE u_id_from = '$ui2' AND u_id_to = '$ui1'";
         $result2 = mysqli_query($conn, $query2);
-        $count2 = mysqli_query($result2);
+        $count2 = mysqli_num_rows($result2);
 
         if ($count2 > 0){
             $query2_2 = "DELETE FROM friend_request WHERE u_id_from = '$ui2' AND u_id_to ='$ui1'";
@@ -63,7 +44,6 @@ if ( isset($_SESSION['u_id']) )
                 echo "Failed to delete a friend request2!";
             }
         }
-*/
 
 
         $query3 = "INSERT INTO friend (u_id, f_u_id) VALUES ('$ui1', '$ui2')";
