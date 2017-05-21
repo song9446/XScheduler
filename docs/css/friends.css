@@ -34,8 +34,8 @@
   height: 600px;
   margin-top: 20px;
 }
-.get_friends td {
-  padding: 0px;
+.get_friends tr {
+  height: 23px;
 }
 .add_friends {
   width: 300px;
