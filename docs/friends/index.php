@@ -25,20 +25,14 @@ include ( "../inc/connect.inc.php" );
               <input type="submit" name="search" value="Search" />
             </form>
             <?php
-            
               $curr_u_id = $_SESSION['u_id'];
               $curr_search_u_id = $_POST['search_u_id'];
 
-            //echo "$curr_u_id  $curr_search_u_id";
-
+              echo ("<table width='300'>");
               if ( isset($_SESSION['u_id']) && isset($_POST['search_u_id']) ) {
-                //echo "<h2>Search Result: </h2>";
-
                 $search_u_id = $_POST['search_u_id'];
                 $query = "SELECT u_id FROM user WHERE u_id = '$search_u_id'";
                 $result = mysqli_query($conn, $query);
-
-                echo ("<table width='300'>");
                 while ( $row = mysqli_fetch_assoc($result) ){
                   echo "<tr height='23'>";
                     foreach ($row as $key => $field) {
@@ -47,8 +41,8 @@ include ( "../inc/connect.inc.php" );
                     echo "<td>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</td>";
                   echo '</tr>';
                 }
-                echo ("</table>");
               }
+              echo ("</table>");
             ?>
 
           </div>
