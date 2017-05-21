@@ -40,7 +40,7 @@ include ( "../inc/connect.inc.php" );
 
                 echo ("<table>");
                 while ( $row = mysqli_fetch_assoc($result) ){
-                  echo "<tr height='100'>";
+                  echo "<tr height='23'>";
                     foreach ($row as $key => $field) {
                       echo "<td>" . htmlspecialchars($field) . '</td>';
                     }
