@@ -15,10 +15,10 @@ if ( isset($_SESSION['u_id']) )
         $count = mysqli_num_rows($result);
 
         if ($count > 0){
-            $query = "DELETE FROM friend request WHERE u_id_from = '$ui1' AND u_id_to = '$ui2'";
-            $result = mysqli_query($conn, $query);
+            $query_2 = "DELETE FROM friend request WHERE u_id_from = '$ui1' AND u_id_to = '$ui2'";
+            $result_2 = mysqli_query($conn, $query_2);
 
-            if ($result){
+            if ($result_2){
                 echo "Deleted successfully 1.";
             }
 
@@ -28,15 +28,15 @@ if ( isset($_SESSION['u_id']) )
         }
 
 
-        $query = "SELECT * FROM friend_request WHERE u_id_from = '$ui2' AND u_id_to = '$ui1'";
-        $result = mysqli_query($conn, $query);
-        $count2 = mysqli_query($result);
+        $query2 = "SELECT * FROM friend_request WHERE u_id_from = '$ui2' AND u_id_to = '$ui1'";
+        $result2 = mysqli_query($conn, $query2);
+        $count2 = mysqli_query($result2);
 
-        if ($count > 0){
-            $query = "DELETE FROM friend_request WHERE u_id_from = '$ui2' AND u_id_to ='$ui1'";
-            $result = mysqli_query($conn, $query);
+        if ($count2 > 0){
+            $query2_2 = "DELETE FROM friend_request WHERE u_id_from = '$ui2' AND u_id_to ='$ui1'";
+            $result2_2 = mysqli_query($conn, $query2_2);
 
-            if ($result){
+            if ($result2_2){
                 echo "Deleted successfully 2.";
             }
 
@@ -47,13 +47,13 @@ if ( isset($_SESSION['u_id']) )
 
 
 
-        $query = "INSERT INTO friend (u_id, f_u_id) VALUES ('$ui1', '$ui2')";
-        $result = mysqli_query($conn, $query);
+        $query3 = "INSERT INTO friend (u_id, f_u_id) VALUES ('$ui1', '$ui2')";
+        $result3 = mysqli_query($conn, $query3);
 
-        $query2 = "INSERT INTO friend (u_id, f_u_id) VALUES ('$ui2', '$ui1')";
-        $result2 = mysqli_query($conn, $query2);
+        $query4 = "INSERT INTO friend (u_id, f_u_id) VALUES ('$ui2', '$ui1')";
+        $result4 = mysqli_query($conn, $query4);
 
-        if ($result && $result2){
+        if ($result3 && $result4){
             echo "<br/>Friend " . $ui2 . " has been added.";
             echo "<meta http-euiv='refresh' content='0;url=index.php'>";
         }
