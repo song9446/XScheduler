@@ -2,7 +2,7 @@
 
 }
 .get_friends {
-  width: 400px;
+  width: 300px;
   padding-left: 100px;
   padding-top: 50px;
   float: left;
@@ -30,7 +30,7 @@
   margin-top: 20px;
 }
 .add_friends {
-  width: 400px;
+  width: 300px;
   padding-left: 100px;
   padding-top: 50px;
   float: left;
@@ -45,7 +45,7 @@
   margin-top: 20px;
 }
 .friends {
-  width: 400px;
+  width: 300px;
   padding-left: 100px;
   padding-top: 50px;
   float: left;

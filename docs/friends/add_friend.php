@@ -51,9 +51,9 @@ if ( isset($_SESSION['u_id']) )
         $result = mysqli_query($conn, $query);
 
         $query2 = "INSERT INTO friend (u_id, f_u_id) VALUES ('$ui2', '$ui1')";
-        $result2 = mysqli_query($conn, $query);
+        $result2 = mysqli_query($conn, $query2);
 
-        if ($result && $result){
+        if ($result && $result2){
             echo "<br/>Friend " . $ui2 . " has been added.";
             echo "<meta http-euiv='refresh' content='0;url=index.php'>";
         }
