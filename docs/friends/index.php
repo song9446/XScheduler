@@ -38,7 +38,7 @@ include ( "../inc/connect.inc.php" );
                 $query = "SELECT u_id FROM user WHERE u_id = '$search_u_id'";
                 $result = mysqli_query($conn, $query);
 
-                echo ("<table>");
+                echo ("<table width='300'>");
                 while ( $row = mysqli_fetch_assoc($result) ){
                   echo "<tr height='23'>";
                     foreach ($row as $key => $field) {
