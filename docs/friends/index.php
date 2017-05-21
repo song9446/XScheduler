@@ -30,36 +30,57 @@ include ( "../inc/connect.inc.php" );
           </div>
           <div class="add_friends">
             <div id="Receive">Received Requests</div>
-            <select size='100'>
+            <?php
+            
+              $curr_u_id = $_SESSION['u_id'];
+              $curr_search_u_id = $_POST['search_u_id'];
 
-            </select>
+            //echo "$curr_u_id  $curr_search_u_id";
+
+              if ( isset($_SESSION['u_id']) && isset($_POST['search_u_id']) ) {
+                //echo "<h2>Search Result: </h2>";
+
+                $search_u_id = $_POST['search_u_id'];
+                $query = "SELECT u_id FROM user WHERE u_id = '$search_u_id'";
+                $result = mysqli_query($conn, $query);
+
+                echo ("<table>");
+                while ( $row = mysqli_fetch_assoc($result) ){
+                  echo '<tr>';
+                    foreach ($row as $key => $field) {
+                      echo '<td>' . htmlspecialchars($field) . '</td>';
+                    }
+                    echo "<td>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</td>";
+                  echo '</tr>';
+                }
+                echo ("</table>");
+              }
+            ?>
           </div>
           <div class="friends">
             <div id="my_friends">Friends list</div>
             <select size='100'>
-                    <?php
+            <?php
+              echo "<h2>Friend List: </h2>";
 
-            echo "<h2>Friend List: </h2>";
+              $curr_u_id = $_SESSION['u_id'];
+              $query = "SELECT f_u_id FROM friend WHERE u_id = '$curr_u_id'";
+              $result = mysqli_query($conn, $query);
 
-            $curr_u_id = $_SESSION['u_id'];
-            $query = "SELECT f_u_id FROM friend WHERE u_id = '$curr_u_id'";
-            $result = mysqli_query($conn, $query);
-    
-            $count = 1;
-            while ($row = mysqli_fetch_assoc ($result)) {
-                foreach($row as $key => $field) {
-                    echo '<option value="' . $count . '">' . htmlspecialchars($field) . '</option>';
-                }
-
-                $count = $count+1;
-            }
-        ?>
-
+              $count = 1;
+              while ($row = mysqli_fetch_assoc ($result)) {
+                  foreach($row as $key => $field) {
+                      echo '<option value="' . $count . '">' . htmlspecialchars($field) . '</option>';
+                  }
+                  $count = $count+1;
+              }
+            ?>
             </select>
           </div>
         </div>
 
-        <?php
+       <?php
+        /*
             $curr_u_id = $_SESSION['u_id'];
             $curr_search_u_id = $_POST['search_u_id'];
 
@@ -85,6 +106,35 @@ include ( "../inc/connect.inc.php" );
                 }
                 echo ("</table>");
             }
+            */
+        ?>       <?php
+        /*
+            $curr_u_id = $_SESSION['u_id'];
+            $curr_search_u_id = $_POST['search_u_id'];
+
+            //echo "$curr_u_id  $curr_search_u_id";
+
+            if ( isset($_SESSION['u_id']) && isset($_POST['search_u_id']) ) {
+                echo "<h2>Search Result: </h2>";
+
+                $search_u_id = $_POST['search_u_id'];
+                $query = "SELECT u_id FROM user WHERE u_id = '$search_u_id'";
+                $result = mysqli_query($conn, $query);
+
+                echo ("<table>");
+                while ( $row = mysqli_fetch_assoc($result) ){
+                    echo '<tr>';
+                    echo "<td>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</td>";
+
+                    foreach ($row as $key => $field) {
+                        echo '<td>' . htmlspecialchars($field) . '</td>';
+                    }
+
+                    echo '</tr>';
+                }
+                echo ("</table>");
+            }
+            */
         ?>
 
         <?php

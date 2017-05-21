@@ -39,7 +39,12 @@
   margin-bottom: 15px;
   font-size: 20px;
 }
-.add_friends select {
+/*.add_friends select {
+  width: 300px;
+  height: 600px;
+  margin-top: 20px;
+}*/
+.add_friends table {
   width: 300px;
   height: 600px;
   margin-top: 20px;
