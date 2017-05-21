@@ -42,18 +42,17 @@ include ( "../inc/connect.inc.php" );
             echo "<h2>Friend List: </h2>";
 
             $curr_u_id = $_SESSION['u_id'];
-            $query = "SELECT * FROM friend WHERE u_id = '$curr_u_id'";
+            $query = "SELECT f_u_id FROM friend WHERE u_id = '$curr_u_id'";
             $result = mysqli_query($conn, $query);
-            echo ("<table>");
     
+            $count = 1;
             while ($row = mysqli_fetch_assoc ($result)) {
-                echo '<tr>';
                 foreach($row as $key => $field) {
-                    echo '<td>' . htmlspecialchars($field) . '</td>';
+                    echo '<option value="' . $count . '">' . htmlspecialchars($field) . '</option>';
                 }
-                echo '</tr>';
+
+                $count = $count+1;
             }
-            echo ("</table>");
         ?>
 
             </select>
