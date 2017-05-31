@@ -13,6 +13,7 @@ include ( "../inc/connect.inc.php" );
 
     <body>
         <?php
+        /*
             if ( isset($_SESSION['u_id']) ) {
                 $curr_id = $_SESSION['u_id'];
 
@@ -45,6 +46,7 @@ include ( "../inc/connect.inc.php" );
             else {
                 cout << "Error: You are currently NOT logged in - Invalid Approach!";
             }
+            */
         ?> 
     </body>
 </html>
