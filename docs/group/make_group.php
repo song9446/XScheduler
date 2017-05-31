@@ -16,24 +16,29 @@ include ( "../inc/connect.inc.php" );
             if ( isset($_SESSION['u_id']) ) {
                 $curr_id = $_SESSION['u_id'];
 
-                $query = "SELECT * FROM friend WHERE u_id = '$curr_id'";
+                $query = "SELECT f_u_id FROM friend WHERE u_id = '$curr_id'";
                 $result = mysqli_query($conn, $query);
 
                 if ($result) {
-                    echo ("<table>");
+                    echo "<form action='#' method='post'>";
+                    echo "<select name='group_members[]'>";
                     while ( $row = mysqli_fetch_assoc($result) ){
-                        echo '<tr>';
-                        foreach ($row as $key => $field) {
-                            echo "<td>" . htmlspecialchars($field) . '</td>';
-                        }
-                        echo "<td>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</td>";
-                        echo '</tr>';
+                        echo "<option value='" . $row['f_u_id'] . "'>" . $row['f_u_id'] . "</option>";
                     }
-                    echo ("</table>");
+                    echo "</select>";
+                    echo "<input type='submit' name='submit_group_members' value='get_selected_values' />";
+                    echo "</form>";
                 }
 
                 else {
                     cout << "Error: Failed to get friend data!";
+                }
+
+                if ( isset($_POST['submit_group_members']) ) {
+                    foreach ($_POST['group_members'] as member)
+                    {
+                        echo "You have selected :" . $member;
+                    }
                 }
             }
 
