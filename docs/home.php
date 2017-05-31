@@ -22,7 +22,7 @@ else {
         <?php include ( "./headerMenu.php" ); ?>
 
         <div id="inner">
-            <div id="content">
+            <div id="home_content">
                 <?php
                     $curr_u_id = $_SESSION['u_id'];
                     $query = "SELECT g_id, g_name, pic_main FROM groups G, group_member GM WHERE GM.u_id = '$curr_u_id' AND GM.g_id = G.g_id";
