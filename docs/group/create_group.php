@@ -11,7 +11,7 @@ include ( "../inc/connect.inc.php" );
         echo "curr_u_id: $curr_u_id";
         echo "gn: $gn";
 
-        $query = "INSERT INTO groups VALUES ('', '$gn', '$curr_u_id')";
+        $query = "INSERT INTO groups (g_id, g_name, g_creator) VALUES ('', '$gn', '$curr_u_id')";
         $result = mysqli_query ($conn, $query);
         
         $g_id = $conn->insert_id; // get id of last query. In this case, get the value of auto incrementing g_id.
