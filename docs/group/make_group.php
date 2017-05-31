@@ -21,7 +21,7 @@ include ( "../inc/connect.inc.php" );
                 $curr_id = $_SESSION['u_id'];
 
 
-                echo "<form action='#' method='post'>";
+                echo "<form action='create_group.php' method='post'>";
                 echo "<div class='textbox'>";
                 echo "<label for='group_name'>Group name: </label>";
                 echo "<input type='text' id='group_name' placeholder='Enter group name'>";
