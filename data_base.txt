@@ -40,6 +40,8 @@ create table `groups` (
     `g_id` int(11) not null auto_increment,
     `g_name` varchar(255),
     `g_creator` char(10) not null,
+    `pic_name` varchar(255),
+    `pic_main` longblob,
     primary key (`g_id`),
     foreign key (`g_creator`) references `user` (`u_id`) on delete cascade on update cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
