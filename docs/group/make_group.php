@@ -34,13 +34,13 @@ include ( "../inc/connect.inc.php" );
                 else {
                     cout << "Error: Failed to get friend data!";
                 }
-/*
+
                 if ( isset($_POST['submit_group_members']) ) {
-                    foreach ($_POST['group_members'] as member)
+                    foreach ($_POST['group_members'] as $member)
                     {
                         echo "You have selected :" . $member;
                     }
-                }*/
+                }
             }
 
             else {
