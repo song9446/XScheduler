@@ -19,10 +19,10 @@ include ( "../inc/connect.inc.php" );
 
                 $query = "SELECT f_u_id FROM friend WHERE u_id = '$curr_id'";
                 $result = mysqli_query($conn, $query);
-/*
+
                 if ($result) {
                     echo "<form action='#' method='post'>";
-                    echo "<select name='group_members[]'>";
+                    echo "<select name='group_members[]' multiple>";
                     while ( $row = mysqli_fetch_assoc($result) ){
                         echo "<option value='" . $row['f_u_id'] . "'>" . $row['f_u_id'] . "</option>";
                     }
@@ -41,7 +41,6 @@ include ( "../inc/connect.inc.php" );
                         echo "You have selected :" . $member;
                     }
                 }
-*/
             }
 
             else {
