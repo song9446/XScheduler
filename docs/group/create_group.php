@@ -4,7 +4,7 @@ include ( "../inc/connect.inc.php" );
 ?>
 
 <?php
-    if ( isset($_SESSION['u_id']) && isset($_POST['group_name']) && isset($_POST['group_members']) ){
+    if ( isset($_SESSION['u_id']) && isset($_POST['submit_group']) ){
         $curr_u_id = $_SESSION['u_id'];
         $gn = $_POST['group_name'];
 

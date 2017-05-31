@@ -38,7 +38,7 @@ include ( "../inc/connect.inc.php" );
                         echo "<option value='" . $row['f_u_id'] . "'>" . $row['f_u_id'] . "</option>";
                     }
                     echo "</select>";
-                    echo "<input type='submit' name='submit_group_members' value='get_selected_values' />";
+                    echo "<input type='submit' name='submit_group' value='get_selected_values' />";
                 }
 
                 else {
@@ -48,7 +48,7 @@ include ( "../inc/connect.inc.php" );
                 echo "</div>";
                 echo "</form>";
 
-                if ( isset($_POST['submit_group_members']) ) {
+                if ( isset($_POST['submit_group']) ) {
                     foreach ($_POST['group_members'] as $member)
                     {
                         echo "You have selected :" . $member;
