@@ -8,7 +8,7 @@ include ( "../inc/connect.inc.php" );
         $curr_u_id = $_SESSION['u_id'];
         $gn = $_POST['group_name'];
 
-        $query = "INSERT INTO 'group' (g_name, g_creator) VALUES ('$gn', '$curr_u_id')";
+        $query = "INSERT INTO group VALUES ('', '$gn', '$curr_u_id')";
         $result = mysqli_query ($conn, $query);
         
         $g_id = mysqli_insert_id();
