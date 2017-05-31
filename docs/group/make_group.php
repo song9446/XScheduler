@@ -24,7 +24,7 @@ include ( "../inc/connect.inc.php" );
                 echo "<form action='create_group.php' method='post'>";
                 echo "<div class='textbox'>";
                 echo "<h2>Group name: </h2>";
-                echo "<input type='text' name='group_name' placeholder='Enter group name'>";
+                echo "<input type='text' name='group_name' placeholder='Enter group name' />";
                 echo "</div>";
 
                 echo "<div class='container'>";
