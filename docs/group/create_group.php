@@ -8,6 +8,9 @@ include ( "../inc/connect.inc.php" );
         $curr_u_id = $_SESSION['u_id'];
         $gn = $_POST['group_name'];
 
+        echo "curr_u_id: $curr_u_id";
+        echo "gn: $gn";
+
         $query = "INSERT INTO group VALUES ('', '$gn', '$curr_u_id')";
         $result = mysqli_query ($conn, $query);
         
