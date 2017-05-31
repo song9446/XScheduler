@@ -14,7 +14,7 @@ include ( "../inc/connect.inc.php" );
         $query = "INSERT INTO groups VALUES ('', '$gn', '$curr_u_id')";
         $result = mysqli_query ($conn, $query);
         
-        //$g_id = mysqli_insert_id();
+        $g_id = mysqli_insert_id();
         echo "g_id: $g_id";
         if ($result) {
             foreach ($_POST['group_members'] as $member) {
