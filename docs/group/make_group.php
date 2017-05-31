@@ -33,7 +33,7 @@ include ( "../inc/connect.inc.php" );
                 $result = mysqli_query($conn, $query);
 
                 if ($result) {
-                    echo "<select name='group_members[]' size='100' multiple>";
+                    echo "<select name='group_members[]' size='10' multiple>";
                     while ( $row = mysqli_fetch_assoc($result) ){
                         echo "<option value='" . $row['f_u_id'] . "'>" . $row['f_u_id'] . "</option>";
                     }
