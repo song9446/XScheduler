@@ -22,12 +22,14 @@ include ( "../inc/connect.inc.php" );
                 $result = mysqli_query ($conn, $query);
 
                 if ($result){
-                    echo "meta http-equiv='refresh' content='0;url=index.php'>";
+
                 }
                 else {
                     echo "Error: Failed to add " . $member . " as a member.";
                 }
             }
+
+            //echo "<meta http-equiv='refresh' content='0;url=index.php'>";
         }
 
         else {
