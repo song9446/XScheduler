@@ -14,16 +14,8 @@ include ( "./inc/connect.inc.php" );
         <?php include ( "./headerMenu.php" ); ?>
 
         <div id="inner">
-            <div id="sidebar">
-                <?php
-                    if (isset($_SESSION['u_id'])){
-                        echo "<a href='friends/index.php' font-size: 20px> Friend </a>";
-                    }
-                ?>
-            </div>
-
             <div id="content">
-                <?php
+               <?php
                     if (isset($_SESSION['u_id'])) {
                         echo "<p>Logged in as ". $_SESSION['u_id'] . "</p>";
                     }

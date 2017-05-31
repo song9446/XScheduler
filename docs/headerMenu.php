@@ -9,7 +9,7 @@
         <nav id="topMenu">
           <ul>
               <li>
-                <a class="menuLink" href="#">Personal schedule</a>
+                <a class="menuLink" href="scheduler/index.php">Personal schedule</a>
               </li>
               <li>
                 <a class="menuLink" href="group/make_group.php">Group schedule</a>
