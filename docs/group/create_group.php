@@ -12,7 +12,7 @@ include ( "../inc/connect.inc.php" );
         $result = mysqli_query ($conn, $query);
         
         $g_id = mysqli_insert_id();
-        echo "$g_id";
+        echo "g_id: $g_id";
         if ($result) {
             foreach ($_POST['group_members'] as $member) {
                 $query = "INSERT INTO group_member (g_id, u_id) VALUES ('$g_id', '$member')";
