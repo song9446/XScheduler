@@ -195,7 +195,7 @@ a.logout_button {
 }
 
 #home_content {
-min-height: 1000px;
+    min-height: 1000px;
     position: absolute;
     left: 0px;
     right: 0px;

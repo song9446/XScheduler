@@ -25,7 +25,7 @@ else {
             <div id="home_content">
                 <?php
                     $curr_u_id = $_SESSION['u_id'];
-                    $query = "SELECT g_id, g_name, pic_main FROM groups G, group_member GM WHERE GM.u_id = '$curr_u_id' AND GM.g_id = G.g_id";
+                    $query = "SELECT G.g_id, G.g_name, G.pic_main FROM groups G, group_member GM WHERE GM.u_id = '$curr_u_id' AND GM.g_id = G.g_id";
                     $result = mysqli_query($conn, $query);
 
                     if ($result) {
