@@ -24,3 +24,30 @@ create table `p_schedule` (
     foreign key (`u_id`) references `user` (`u_id`) on delete cascade on update cascade
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+-- Jason Added
+create table `friend_request` (
+    `u_id_from` char(10) not null,
+    `u_id_to` char(10) not null,
+    primary key (`u_id_from`, `u_id_to`),
+    foreign key (`u_id_from`) references `user` (`u_id`) on delete cascade on update cascade,
+    foreign key (`u_id_to`) references `user` (`u_id`) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+create table `groups` (
+    `g_id` int(11) not null auto_increment,
+    `g_name` varchar(255),
+    `g_creator` char(10) not null,
+    primary key (`g_id`),
+    foreign key (`g_creator`) references `user` (`u_id`) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table `group_member` (
+    `g_id` int(11) not null,
+    `u_id` char(10) not null,
+    primary key (`g_id`, `u_id`),
+    foreign key (`g_id`) references `groups` (`g_id`) on delete cascade,
+    foreign key (`u_id`) references `user` (`u_id`) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
