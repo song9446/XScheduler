@@ -9,6 +9,7 @@ include ( "../inc/connect.inc.php" );
     <head>
         <title>UniScheduler</title>
         <link rel="stylesheet" type="text/css" href="../css/style.css" />
+        <link rel="stylesheet" type="text/css" href="../css/group_sche_create.css" />
     </head>
 
     <body>
