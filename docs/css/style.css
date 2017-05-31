@@ -194,6 +194,16 @@ a.logout_button {
     z-index: -1;
 }
 
+#home_content {
+min-height: 1000px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    background: #ccc;
+    z-index: -1;
+}
+
+
 div.calendar_main_container {
     width: 250px;
     height: 200px;
