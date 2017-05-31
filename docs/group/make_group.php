@@ -13,13 +13,13 @@ include ( "../inc/connect.inc.php" );
 
     <body>
         <?php
-        /*
+        
             if ( isset($_SESSION['u_id']) ) {
                 $curr_id = $_SESSION['u_id'];
 
                 $query = "SELECT f_u_id FROM friend WHERE u_id = '$curr_id'";
                 $result = mysqli_query($conn, $query);
-
+/*
                 if ($result) {
                     echo "<form action='#' method='post'>";
                     echo "<select name='group_members[]'>";
@@ -41,12 +41,12 @@ include ( "../inc/connect.inc.php" );
                         echo "You have selected :" . $member;
                     }
                 }
+*/
             }
 
             else {
                 cout << "Error: You are currently NOT logged in - Invalid Approach!";
             }
-            */
         ?> 
     </body>
 </html>
