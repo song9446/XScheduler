@@ -54,7 +54,7 @@ if ( isset($_SESSION['u_id']) )
 
         if ($result3 && $result4){
             echo "<br/>Friend " . $ui2 . " has been added.";
-            echo "<meta http-euiv='refresh' content='0;url=index.php'>";
+            echo "<meta http-equiv='refresh' content='0;url=index.php'>";
         }
 
         else {

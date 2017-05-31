@@ -1,7 +1,15 @@
 <?php
 session_start();
 include ( "./inc/connect.inc.php" );
+
+if( isset($_SESSION['u_id']) ){
+
+}
+else {
+    echo "<meta http-equiv='refresh' content='0;url=index.php'>";
+}
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -14,27 +22,24 @@ include ( "./inc/connect.inc.php" );
         <?php include ( "./headerMenu.php" ); ?>
 
         <div id="inner">
-            <div id="sidebar">
-                <?php
-                    if (isset($_SESSION['u_id'])){
-                        echo "<a href='friends/index.php' font-size: 20px> Friend </a>";
-                    }
-                ?>
-            </div>
-
             <div id="content">
                 <?php
-                    if (isset($_SESSION['u_id'])) {
-                        echo "<p>Logged in as ". $_SESSION['u_id'] . "</p>";
+                    $curr_u_id = $_SESSION['u_id'];
+                    $query = "SELECT g_id, g_name, pic_main FROM groups G, group_member GM WHERE GM.u_id = '$curr_u_id' AND GM.g_id = G.g_id";
+                    $result = mysqli_query($conn, $query);
+
+                    if ($result) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<div class='calendar_main_container'>" . "<a href='home.php?g_id=" . $row['g_id'] . " '>" . "<img class='calendar_main_pic' src='data;base64, " , $row['pic_main'] . " '>" . "</a>" . "<p style='font-size: 16px; margin-top: 10px;' align='center';>" . $row['g_name'] . "</p>" . "</div>";
+                        }
                     }
-                    echo "<a href='scheduler/index.php' font-size: 20px> Calendar <-- Song's Beautiful Calendar\n </a>";
+
+
                 ?>
-                <div id="description">
-                  </br>UniScheduler</br>
-                  <div id="info">This is Database lecture project.<br/>
-                  Contributor : Jason Kim, Eunchul Song, Dongju Shin</div>
-                </div>
             </div>
         </div>
     </body>
+
+
+
 </html>

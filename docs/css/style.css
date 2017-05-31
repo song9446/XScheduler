@@ -194,14 +194,14 @@ a.logout_button {
     z-index: -1;
 }
 
-div.harbor_main_container {
+div.calendar_main_container {
     width: 250px;
     height: 200px;
     margin: 50px 25px 25px 50px;
     display: inline-block;
 }
 
-img.harbor_main_logo {
+img.calendar_main_pic {
     width: 250px;
     height: 150px;
 }
