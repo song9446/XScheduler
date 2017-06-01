@@ -47,7 +47,7 @@ include ( "../inc/connect.inc.php" );
                         echo "<option value='" . $row['f_u_id'] . "'>" . $row['f_u_id'] . "</option>";
                     }
                     echo "</select>";
-                    echo "<input type='submit' id='submit_group' value='Submit' />";
+                    echo "<input type='submit' id='btn-submit' value='Submit' />";
                 }
 
                 else {
