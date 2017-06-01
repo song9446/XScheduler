@@ -32,7 +32,7 @@ include ( "../inc/connect.inc.php" );
                 echo "<form action='create_group.php' method='post'>";
                 echo "<div class='textbox'>";
                 echo "<label for='group_name'>Group name: </label>";
-                echo "<input type='text' name='group_name' placeholder='Enter group name' />";
+                echo "<input type='text' id='btn-submit' placeholder='Enter group name' />";
                 echo "</div>";
 
                 echo "<div class='container'>";
