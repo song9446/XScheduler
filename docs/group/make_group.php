@@ -16,6 +16,7 @@ include ( "../inc/connect.inc.php" );
           height: 600px;
           margin-left: 150px;
           margin-top: 100px;
+          float: left;
         }
         </style>
     </head>
@@ -32,7 +33,7 @@ include ( "../inc/connect.inc.php" );
                 echo "<form action='create_group.php' method='post'>";
                 echo "<div class='textbox'>";
                 echo "<label for='group_name'>Group name: </label>";
-                echo "<input type='text' id='btn-submit' placeholder='Enter group name' />";
+                echo "<input type='text' name='btn-submit' placeholder='Enter group name' />";
                 echo "</div>";
 
                 echo "<div class='container'>";
@@ -46,7 +47,7 @@ include ( "../inc/connect.inc.php" );
                         echo "<option value='" . $row['f_u_id'] . "'>" . $row['f_u_id'] . "</option>";
                     }
                     echo "</select>";
-                    echo "<input type='submit' name='submit_group' value='Submit' />";
+                    echo "<input type='submit' id='submit_group' value='Submit' />";
                 }
 
                 else {
