@@ -10,6 +10,14 @@ include ( "../inc/connect.inc.php" );
         <title>UniScheduler</title>
         <link rel="stylesheet" type="text/css" href="../css/style.css" />
         <link rel="stylesheet" type="text/css" href="../css/group_sche_create.css" />
+        <style>
+        .container select {
+          width: 300px;
+          height: 600px;
+          margin-left: 150px;
+          margin-top: 100px;
+        }
+        </style>
     </head>
 
     <body>
@@ -23,7 +31,7 @@ include ( "../inc/connect.inc.php" );
 
                 echo "<form action='create_group.php' method='post'>";
                 echo "<div class='textbox'>";
-                echo "<h2>Group name: </h2>";
+                echo "<label for='group_name'>Group name: </label>";
                 echo "<input type='text' name='group_name' placeholder='Enter group name' />";
                 echo "</div>";
 
@@ -38,7 +46,7 @@ include ( "../inc/connect.inc.php" );
                         echo "<option value='" . $row['f_u_id'] . "'>" . $row['f_u_id'] . "</option>";
                     }
                     echo "</select>";
-                    echo "<input type='submit' name='submit_group' value='get_selected_values' />";
+                    echo "<input type='submit' name='submit_group' value='Submit' />";
                 }
 
                 else {

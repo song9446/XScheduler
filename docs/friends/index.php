@@ -28,7 +28,7 @@ include ( "../inc/connect.inc.php" );
               $curr_u_id = $_SESSION['u_id'];
               $curr_search_u_id = $_POST['search_u_id'];
 
-              echo ("<table width='300'>");
+              echo ("<table>");
               if ( isset($_SESSION['u_id']) && isset($_POST['search_u_id']) ) {
                 $search_u_id = $_POST['search_u_id'];
                 $query = "SELECT u_id FROM user WHERE u_id = '$search_u_id'";
