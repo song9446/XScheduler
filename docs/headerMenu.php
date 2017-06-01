@@ -15,7 +15,7 @@
                 <a class="menuLink" href="group/make_group.php">Group schedule</a>
               </li>
               <li>
-                <a class="menuLink" href="52.78.81.68/friends/index.php">Friends</a>
+                <a class="menuLink" href="http://52.78.81.68/friends/index.php">Friends</a>
               </li>
           </ul>
         </nav>
