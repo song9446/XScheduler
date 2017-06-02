@@ -40,7 +40,7 @@ include ( "../inc/connect.inc.php" );
                 $gn = $_POST['group_name']; // group name
                 $query_update_GN = "UPDATE groups
                                     SET g_name = '$gn'
-                                    WHERE g_id = 'curr_g_id'";
+                                    WHERE g_id = '$curr_g_id'";
                 $result_update_GN = mysqli_query($conn, $query_update_GN);
             }
 
@@ -66,9 +66,9 @@ include ( "../inc/connect.inc.php" );
             }
 
             function saveimage($name,$image) {
-                $query="UPDATE groups SET pic_name='$name', pic_main='$image' WHERE g_id='$curr_g_id'";
-                $result=mysqli_query($conn, $query);
-                if($result) {
+                $query_update_image="UPDATE groups SET pic_name='$name', pic_main='$image' WHERE g_id='$curr_g_id'";
+                $result_update_image=mysqli_query($conn, $query_update_image);
+                if($result_update_image) {
                     echo "<br/>Image uploaded.";
                 }
                 else {
@@ -76,11 +76,10 @@ include ( "../inc/connect.inc.php" );
                 }
             }
         }
+
         else {
             echo "Failed to get group info. g_id: " . $curr_g_id;
         }
-
-
     ?>
   </body>
 </html>
