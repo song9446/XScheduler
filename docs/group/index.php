@@ -26,6 +26,7 @@
                   WHERE u_id = '$curr_u_id'
                   GROUP BY g_id";
 
+        $result = mysqli_query($conn, $query);
 
         if ($result){
             while ($row = mysqli_fetch_assoc($result)) {
