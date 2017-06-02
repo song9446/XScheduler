@@ -14,7 +14,7 @@
         $query = "SELECT G.g_id, G.g_name, G.g_creator, G.pic_main, MY_G_WITH_COUNT.member_num
                   FROM groups G, (SELECT g_id, COUNT(g_id) AS member_num
                                   FROM group_member 
-                                  WHERE u_id = $curr_u_id 
+                                  WHERE u_id = '$curr_u_id'
                                   GROUP BY g_id) AS MY_G_WITH_COUNT
                   WHERE G.g_id = MY_G_WITH_COUNT";
 
