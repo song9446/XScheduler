@@ -56,13 +56,6 @@ include ( "../inc/connect.inc.php" );
 
                 echo "</div>";
                 echo "</form>";
-
-                if ( isset($_POST['submit_group']) ) {
-                    foreach ($_POST['group_members'] as $member)
-                    {
-                        echo "You have selected :" . $member;
-                    }
-                }
             }
 
             else {

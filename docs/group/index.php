@@ -31,11 +31,11 @@ include ( "../inc/connect.inc.php" );
         if ($result){
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='calendar_main_container'>" . 
-                         "<a href='index.php?g_id=" . $row['g_id'] . " '>" . 
+                         "<a href='manage_group.php?g_id=" . $row['g_id'] . " '>" . 
                          "<img class='calendar_main_pic' src='data;base64, " . $row['pic_main'] . " '>" . "</a>" . 
                          "<p style='font-size: 10px';>" . $row['g_name'] . "</p>" . 
                          "<p style='font-size: 10px';>" . $row['g_creator'] . "</p>" . 
-                         "<p style='font-size: 10px';>" . $row['member_num'] . "</p>" . 
+                         "<p style='font-size: 10px';>" . $row['member_num'] . " members" . "</p>" . 
                      "</div>";
             }
         }
