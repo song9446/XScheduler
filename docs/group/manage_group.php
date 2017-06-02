@@ -59,6 +59,7 @@ include ( "../inc/connect.inc.php" );
                 }
                 else
                 {
+                    echo "!!!!!!!!!!!!!";
                     $image= addslashes($_FILES['image']['tmp_name']);
                     $name= addslashes($_FILES['image']['name']);
                     $image= file_get_contents($image);
