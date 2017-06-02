@@ -17,7 +17,7 @@ include ( "./inc/connect.inc.php" );
             <div id="content">
                <?php
                     if (isset($_SESSION['u_id'])) {
-                        <meta http-equiv='refresh' content='0;url=http://52.78.81.68/home.php'>
+                        echo "<meta http-equiv='refresh' content='0;url=http://52.78.81.68/home.php'>";
                     }
                 ?>
                 <div id="description">
