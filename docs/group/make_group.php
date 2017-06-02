@@ -66,7 +66,7 @@ include ( "../inc/connect.inc.php" );
             }
 
             else {
-                cout << "Error: You are currently NOT logged in - Invalid Approach!";
+                echo "Error: You are currently NOT logged in - Invalid Approach!";
             }
         ?> 
     </body>
