@@ -11,9 +11,6 @@ include ( "../inc/connect.inc.php" );
         <link rel="stylesheet" type="text/css" href="../css/friends.css"/>
     </head>
 
-
-
-
     <body>
         <?php include ( "../headerMenu.php" ); ?>
 
@@ -44,12 +41,22 @@ include ( "../inc/connect.inc.php" );
               }
               echo ("</table>");
             ?>
-
           </div>
           <div class="add_friends">
             <div id="Receive">Received Requests</div>
             <select size='100'>
-
+            <?php
+              $curr_u_id = $_SESSION['u_id'];
+              $query = "SELECT f_u_id FROM friend WHERE u_id = '$curr_u_id'";
+              
+              $count = 1;
+              while ($row = mysqli_fetch_assoc($result)) {
+                foreach($row as $key => $filed) {
+                  echo '<option value="' . $count . '">' . htmlspecialchars($field) . '</option>';
+                }
+                $count = $count+1;
+              } 
+            ?>
             </select>
           </div>
           <div class="friends">
