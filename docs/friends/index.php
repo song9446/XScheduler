@@ -47,11 +47,12 @@ include ( "../inc/connect.inc.php" );
             <select size='100'>
             <?php
               $curr_u_id = $_SESSION['u_id'];
-              $query = "SELECT f_u_id FROM friend WHERE u_id = '$curr_u_id'";
-              
+              $query = "SELECT u_id_from FROM friend_request WHERE u_id = '$curr_u_id'";
+              $result = mysqli_query($conn, $query);
+
               $count = 1;
               while ($row = mysqli_fetch_assoc($result)) {
-                foreach($row as $key => $filed) {
+                foreach($row as $key => $field) {
                   echo '<option value="' . $count . '">' . htmlspecialchars($field) . '</option>';
                 }
                 $count = $count+1;
