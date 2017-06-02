@@ -42,6 +42,8 @@ if ( isset($_SESSION['u_id']) )
                 echo "Failed to delete a friend request2!";
             }
         }
+        echo "<br/>Request rejected";
+        echo "<meta http-equiv='refresh' content='0;url=index.php'>";
     }
 }
 
