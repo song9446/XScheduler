@@ -55,7 +55,7 @@ include ( "../inc/connect.inc.php" );
                     echo "<div class='list_elem'>";
                     echo "<div class='elem_id'>" . $row['u_id_from'] . "</div>";
                     echo "<a href='reject_request.php?request_u_id=" . $row['u_id_from'] . "' >Reject" . "</a>";
-                    echo "<a href='accept_request.php?request_u_id=" . $row['u_id_from'] . "' >Accept" . "</a>";
+                    echo "<a href='add_friend.php?add_friend_u_id=" . $row['u_id_from'] . "' >Accept" . "</a>";
                     echo "</div>";
                     // echo "<a href='accept_request.php?request_u_id=" . $row['u_id_from'] . "' >ADD" . "</a>";
                   }
