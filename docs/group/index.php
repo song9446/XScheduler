@@ -8,26 +8,30 @@
 
   <body>
     <?php include ( "../headerMenu.php" ); ?>
-    <form>
-      <div class="textbox">
-        <label for="group_name">Group name: </label>
-        <input type="text" id="group_name" placeholder="Enter group name">
-      </div>
-      <div class='container'>
-        <div class="friends-select">
-          <select name='select' size='100' multiple>
-            <option value="1">Jason</option>
-            <option value="2">Eunchul</option>
-            <option value="3">Dongju</option>
-          </select>
-        </div>
-        <input type="submit" id="btn-submit" value="Submit">
-        <div class="selected">
-          <select size='100'>
-            <option value='1'>Should be implemented...</option>
-          </select>
-        </div>
-      </div>
-    </form>
+
+    <?php
+        $curr_u_id = $_SESSION['u_id'];
+        $query = "SELECT G.g_id, G.g_name, G.g_creator, G.pic_main, MY_G_WITH_COUNT.COUNT
+                  FROM groups G, (SELECT g_id, COUNT(g_id)
+                                  FROM group_member 
+                                  WHERE u_id = $curr_u_id 
+                                  GROUP BY g_id) AS MY_G_WITH_COUNT
+                  WHERE G.g_id = MY_G_WITH_COUNT";
+
+        $result = mysqli_query($conn, $query);
+
+        if ($result){
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<div class='calendar_main_container'>" . "<a href='index.php?g_id=" . $row['g_id'] . " '>" . "<img class='calendar_main_pic' src='data;base64, " . $row['pic_main'] . " '>" . "</a>" . "</div>";
+        }
+
+        
+
+
+        echo "</div>"'
+
+    ?>
+
+
   </body>
 </html>

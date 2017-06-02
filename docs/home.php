@@ -27,12 +27,9 @@ else {
                     $curr_u_id = $_SESSION['u_id'];
                     $query = "SELECT G.g_id, G.g_name, G.pic_main FROM groups G, group_member GM WHERE GM.u_id = '$curr_u_id' AND GM.g_id = G.g_id";
                     $result = mysqli_query($conn, $query);
-echo "1";
                     if ($result) {
-echo "2";
                         while ($row = mysqli_fetch_assoc($result)) {
-echo "3";
-                            echo "<div class='calendar_main_container'>" . "<a href='home.php?g_id=" . $row['g_id'] . " '>" . "<img class='calendar_main_pic' src='data;base64, " , $row['pic_main'] . " '>" . "</a>" . "<p style='font-size: 16px; margin-top: 10px;' align='center';>" . $row['g_name'] . "</p>" . "</div>";
+                            echo "<div class='calendar_main_container'>" . "<a href='home.php?g_id=" . $row['g_id'] . " '>" . "<img class='calendar_main_pic' src='data;base64, "  $row['pic_main'] . " '>" . "</a>" . "<p style='font-size: 16px; margin-top: 10px;' align='center';>" . $row['g_name'] . "</p>" . "</div>";
                         }
                     }
 
