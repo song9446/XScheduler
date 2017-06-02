@@ -25,7 +25,9 @@
                 echo "<div class='calendar_main_container'>" . "<a href='index.php?g_id=" . $row['g_id'] . " '>" . "<img class='calendar_main_pic' src='data;base64, " . $row['pic_main'] . " '>" . "</a>" . "</div>";
             }
         }
-        
+        else {
+            echo "Error: could not get my group data.";
+        }
 
 
 
