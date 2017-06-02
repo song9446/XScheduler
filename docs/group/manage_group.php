@@ -42,6 +42,8 @@ include ( "../inc/connect.inc.php" );
                                     SET g_name = '$gn'
                                     WHERE g_id = '$curr_g_id'";
                 $result_update_GN = mysqli_query($conn, $query_update_GN);
+
+                echo "<meta http-equiv='refresh' content='0;url=manage_group.php?g_id=" . $curr_g_id . "'>";
             }
 
             echo "<form method='post' enctype='multipart/form-data'>";
