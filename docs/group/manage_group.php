@@ -56,7 +56,6 @@ include ( "../inc/connect.inc.php" );
             // image update function
             function saveimage($name,$image) {
                 include ( "../inc/connect.inc.php" );
-                echo "$curr_g_id";
                 $curr_g_id = $_SESSION['g_id'];
                 echo "$curr_g_id     $name $image";
 
@@ -80,7 +79,6 @@ include ( "../inc/connect.inc.php" );
                 }
                 else
                 {
-                    echo "!!!!!!!!!!!!!";
                     $image= addslashes($_FILES['image']['tmp_name']);
                     $name= addslashes($_FILES['image']['name']);
                     $image= file_get_contents($image);
