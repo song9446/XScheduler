@@ -67,20 +67,19 @@ include ( "../inc/connect.inc.php" );
 
           <div class="friends">
             <div id="my_friends">Friends list</div>
-            <div class='friend_list'>
+            <div class='list'>
             <?php
-              echo "<h2>Friend List: </h2>";
-
               $curr_u_id = $_SESSION['u_id'];
               $query = "SELECT f_u_id FROM friend WHERE u_id = '$curr_u_id'";
               $result = mysqli_query($conn, $query);
 
-              $count = 1;
               while ($row = mysqli_fetch_assoc ($result)) {
                   foreach($row as $key => $field) {
-                      echo '<option value="' . $count . '">' . htmlspecialchars($field) . '</option>';
+                      echo "<div class='list_elem'>";
+                      echo "<div class='elem_id'>" . $row['f_u_id'] . "</div>";
+                      echo "</div>";
+                      //echo '<option value="' . $count . '">' . htmlspecialchars($field) . '</option>';
                   }
-                  $count = $count+1;
               }
             ?>
             </div>
