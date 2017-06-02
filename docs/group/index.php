@@ -25,19 +25,19 @@
 
         $result = mysqli_query($conn, $query);
 
-        if ($result){
-            while ($row = mysqli_fetch_assoc($result)) {
+//        if ($result){
+//            while ($row = mysqli_fetch_assoc($result)) {
                 echo $row['g_id'] . "   " . $row['member_num'];
 
 //                echo "<div class='calendar_main_container'>" . "<a href='index.php?g_id=" . $row['g_id'] . " '>" . "<img class='calendar_main_pic' src='data;base64, " . $row['pic_main'] . " '>" . "</a>" . "</div>";
-            }
+//            }
 
 
 
-        }
-        else {
-            echo "Error: could not get my group data.";
-        }
+//        }
+//        else {
+//            echo "Error: could not get my group data.";
+//        }
 
 
 
