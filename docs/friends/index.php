@@ -48,15 +48,17 @@ include ( "../inc/connect.inc.php" );
             <select size='100'>
             <?php
               $curr_u_id = $_SESSION['u_id'];
-              $query = "SELECT u_id_from FROM friend_request WHERE u_id = '$curr_u_id'";
-              $result = mysqli_query($conn, $query);
+              if(isset($_SESSION['u_id'])) {
+                $query = "SELECT u_id_from FROM friend_request WHERE u_id = '$curr_u_id'";
+                $result = mysqli_query($conn, $query);
 
-              $count = 1;
-              while ($row = mysqli_fetch_assoc($result)) {
-                foreach($row as $key => $field) {
-                  echo '<option value="' . $count . '">' . htmlspecialchars($field) . '</option>';
+                $count = 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+                  foreach($row as $key => $field) {
+                    echo '<option value="' . $count . '">' . htmlspecialchars($field) . '</option>';
+                  }
+                  $count = $count+1;
                 }
-                $count = $count+1;
               } 
             ?>
             </select>
@@ -165,12 +167,6 @@ include ( "../inc/connect.inc.php" );
 
             }
         ?>            
-
-
-
     </body>
-
-
-
 </html>
 
