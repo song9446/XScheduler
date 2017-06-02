@@ -3,7 +3,7 @@
 }
 .get_friends {
   width: 300px;
-  height: 700px;
+  height: 600px;
   padding-left: 100px;
   padding-top: 50px;
   float: left;
@@ -41,17 +41,18 @@
   height: 23px;
 }*/
 .friend_list {
+  height: 487px;
   margin-top: 20px;
   border-style: solid;
 }
 .friend_list_elem {
-
+  font-size: 18px;
 }
 .elem_id {
-
+  float: left;
 }
 .elem_send {
-
+  float: right;
 }
 .add_friends {
   width: 300px;
