@@ -48,8 +48,9 @@ include ( "../inc/connect.inc.php" );
             <select size='100'>
             <?php
               $curr_u_id = $_SESSION['u_id'];
+
               if(isset($_SESSION['u_id'])) {
-                $query = "SELECT u_id_from FROM friend_request WHERE u_id = '$curr_u_id'";
+                $query = "SELECT u_id_from FROM friend_request WHERE u_id_to = '$curr_u_id'";
                 $result = mysqli_query($conn, $query);
 
                 $count = 1;
