@@ -17,6 +17,7 @@ include ( "../inc/connect.inc.php" );
     <?php
         $curr_u_id = $_SESSION['u_id'];
         $curr_g_id = $_GET['g_id'];
+        $_SESSION['g_id'] = $curr_g_id;
 
         $query = "SELECT g_name, g_creator, pic_name, pic_main
                   FROM groups
@@ -55,7 +56,9 @@ include ( "../inc/connect.inc.php" );
             // image update function
             function saveimage($name,$image) {
                 include ( "../inc/connect.inc.php" );
-                echo "$name $image";
+                echo "$curr_g_id";
+                $curr_g_id = $_SESSION['g_id'];
+                echo "$curr_g_id     $name $image";
 
                 $query_update_image="UPDATE groups 
                                      SET pic_name='$name', pic_main='$image' 
