@@ -30,19 +30,10 @@ include ( "../inc/connect.inc.php" );
 
         $result = mysqli_query($conn, $query);
 
-//        $query = "SELECT g_id, COUNT(u_id) AS member_num FROM group_member WHERE g_id IN (SELECT g_id FROM group_member WHERE u_id = '$curr_u_id') GROUP BY g_id";
-
-//        $result = mysqli_query($conn, $query);
-
         if ($result){
             while ($row = mysqli_fetch_assoc($result)) {
-//                echo $row['g_id'] . "   " . $row['member_num'];
-
-                echo "<div class='calendar_main_container'>" . "<a href='index.php?g_id=" . $row['g_id'] . " '>" . "<img class='calendar_main_pic' src='data;base64, " . $row['pic_main'] . " '>" . "</a>" . "</div>";
+                echo "<div class='calendar_main_container'>" . "<a href='index.php?g_id=" . $row['g_id'] . " '>" . "<img class='calendar_main_pic' src='data;base64, " . $row['pic_main'] . " '>" . "</a>" . <p style='font-size: 10px';>" . row['g_name'] . </p> . <p style='font-size: 10px';>" . row['g_creator'] . </p> . <p style='font-size: 10px';>" . row['member_num'] . </p> . "</div>";
             }
-
-
-
         }
         else {
             echo "Error: could not get my group data.";
