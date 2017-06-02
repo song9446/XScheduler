@@ -31,7 +31,7 @@ include ( "../inc/connect.inc.php" );
             echo "<form action='#' method='post'>";
             echo "    <div class='textbox'>";
             echo "        <label for='group_name'>Group name: </label>";
-            echo "        <input type='text' name='group_name' placeholder=" . $row['g_name'] . "/>";
+            echo "        <input type='text' name='group_name' placeholder='" . $row['g_name'] . "'/>";
             echo "        <input type='submit' name='group_name_submit' id='btn-submit' value='Submit' />";
             echo "    </div>";
             echo "</form>";
