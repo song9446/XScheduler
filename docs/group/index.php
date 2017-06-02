@@ -21,10 +21,7 @@
 
         $result = mysqli_query($conn, $query);
 */
-        $query = "SELECT g_id, COUNT(u_id) AS member_num
-                  FROM group_member
-                  WHERE u_id = '$curr_u_id'
-                  GROUP BY g_id";
+        $query = "SELECT g_id, COUNT(u_id) AS member_num FROM group_member WHERE u_id = '$curr_u_id' GROUP BY g_id";
 
         $result = mysqli_query($conn, $query);
 
