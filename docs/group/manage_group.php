@@ -52,6 +52,19 @@ include ( "../inc/connect.inc.php" );
             echo "    <input type='submit' name='image_submit' value='Upload' />";
             echo "</form>";
 
+            // image update function
+            function saveimage($name,$image) {
+                echo "!!!!!!!!!!!!!!";
+                $query_update_image="UPDATE groups SET pic_name='$name', pic_main='$image' WHERE g_id='$curr_g_id'";
+                $result_update_image=mysqli_query($conn, $query_update_image);
+                if($result_update_image) {
+                    echo "<br/>Image uploaded.";
+                }
+                else {
+                    echo "<br/>Image not uploaded.";
+                }
+            }
+
             if ( isset($_POST['image_submit']) ){
                 if(getimagesize($_FILES['image']['tmp_name']) == FALSE)
                 {
@@ -65,18 +78,6 @@ include ( "../inc/connect.inc.php" );
                     $image= file_get_contents($image);
                     $image= base64_encode($image);
                     saveimage($name,$image);
-                }
-            }
-
-            function saveimage($name,$image) {
-                echo "!!!!!!!!!!!!!!";
-                $query_update_image="UPDATE groups SET pic_name='$name', pic_main='$image' WHERE g_id='$curr_g_id'";
-                $result_update_image=mysqli_query($conn, $query_update_image);
-                if($result_update_image) {
-                    echo "<br/>Image uploaded.";
-                }
-                else {
-                    echo "<br/>Image not uploaded.";
                 }
             }
         }
