@@ -17,13 +17,13 @@ include ( "./inc/connect.inc.php" );
             <div id="content">
                <?php
                     if (isset($_SESSION['u_id'])) {
-                        echo "<p>Logged in as ". $_SESSION['u_id'] . "</p>";
+                        <meta http-equiv='refresh' content='0;url=http://52.78.81.68/home.php'>
                     }
                 ?>
                 <div id="description">
                   </br>UniScheduler</br>
-                  <div id="info">This is Database lecture project.<br/>
-                  Contributor : Jason Kim, Eunchul Song, Dongju Shin</div>
+                  <div id="info">This is a Database Course Term Project.<br/>
+                  Contributors : Jason Kim, Eunchul Song, Dongju Shin</div>
                 </div>
             </div>
         </div>
