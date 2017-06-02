@@ -51,7 +51,7 @@
 .elem_id {
   float: left;
 }
-.elem_send {
+.friend_list_elem a {
   float: right;
 }
 .add_friends {
