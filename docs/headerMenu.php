@@ -24,8 +24,8 @@
                     echo "<a href='http://52.78.81.68/logout.php' class='logout_button'>Logout</a>";
                 }
                 else{
-                    include ( "http://52.78.81.68/login.php" );
-                    include ( "http://52.78.81.68/register.php" );
+                    include ( "./login.php" );
+                    include ( "./register.php" );
                 }
             ?>
     </div>

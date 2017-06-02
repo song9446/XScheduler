@@ -19,7 +19,6 @@ include ( "./inc/connect.inc.php" );
                     if (isset($_SESSION['u_id'])) {
                         echo "<p>Logged in as ". $_SESSION['u_id'] . "</p>";
                     }
-                    echo "<a href='scheduler/index.php' font-size: 20px> Calendar <-- Song's Beautiful Calendar\n </a>";
                 ?>
                 <div id="description">
                   </br>UniScheduler</br>
