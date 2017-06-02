@@ -17,8 +17,6 @@ include ( "../inc/connect.inc.php" );
     <?php
         $curr_u_id = $_SESSION['u_id'];
 
-        echo "$curr_u_id";
-
         $query = "SELECT G.g_id, G.g_name, G.g_creator, G.pic_main, MY_G_WITH_COUNT.member_num
                   FROM groups G, (SELECT g_id, COUNT(g_id) AS member_num
                                   FROM group_member 
