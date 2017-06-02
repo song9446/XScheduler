@@ -14,7 +14,7 @@ if ( isset($_SESSION['u_id']) )
 
         if ($result){
             echo "<br/>Request has been sent.";
-            echo "<meta http=euiv='refresh' content='0;url=index.php'>";
+            echo "<meta http=equiv='refresh' content='0;url=index.php'>";
         }
 
         else {
