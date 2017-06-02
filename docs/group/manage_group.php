@@ -54,6 +54,7 @@ include ( "../inc/connect.inc.php" );
 
             // image update function
             function saveimage($name,$image) {
+                include ( "../inc/connect.inc.php" );
                 echo "$name $image";
 
                 $query_update_image="UPDATE groups 
