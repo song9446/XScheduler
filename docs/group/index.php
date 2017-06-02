@@ -1,3 +1,8 @@
+<?php
+session_start();
+include ( "../inc/connect.inc.php" );
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,7 +18,7 @@
         $curr_u_id = $_SESSION['u_id'];
 
         echo "$curr_u_id";
-/*
+
         $query = "SELECT G.g_id, G.g_name, G.g_creator, G.pic_main, MY_G_WITH_COUNT.member_num
                   FROM groups G, (SELECT g_id, COUNT(g_id) AS member_num
                                   FROM group_member 
@@ -24,16 +29,16 @@
                   WHERE G.g_id = MY_G_WITH_COUNT.g_id";
 
         $result = mysqli_query($conn, $query);
-*/
-        $query = "SELECT g_id, COUNT(u_id) AS member_num FROM group_member WHERE g_id IN (SELECT g_id FROM group_member WHERE u_id = '$curr_u_id') GROUP BY g_id";
 
-        $result = mysqli_query($conn, $query);
+//        $query = "SELECT g_id, COUNT(u_id) AS member_num FROM group_member WHERE g_id IN (SELECT g_id FROM group_member WHERE u_id = '$curr_u_id') GROUP BY g_id";
+
+//        $result = mysqli_query($conn, $query);
 
         if ($result){
             while ($row = mysqli_fetch_assoc($result)) {
-                echo $row['g_id'] . "   " . $row['member_num'];
+//                echo $row['g_id'] . "   " . $row['member_num'];
 
-//                echo "<div class='calendar_main_container'>" . "<a href='index.php?g_id=" . $row['g_id'] . " '>" . "<img class='calendar_main_pic' src='data;base64, " . $row['pic_main'] . " '>" . "</a>" . "</div>";
+                echo "<div class='calendar_main_container'>" . "<a href='index.php?g_id=" . $row['g_id'] . " '>" . "<img class='calendar_main_pic' src='data;base64, " . $row['pic_main'] . " '>" . "</a>" . "</div>";
             }
 
 
