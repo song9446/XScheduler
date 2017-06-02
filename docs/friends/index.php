@@ -35,6 +35,7 @@ include ( "../inc/connect.inc.php" );
                     foreach ($row as $key => $field) {
                       echo "<td>" . htmlspecialchars($field) . '</td>';
                     }
+                    
                     echo "<td>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</td>";
                   echo '</tr>';
                 }
