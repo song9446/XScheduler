@@ -24,11 +24,9 @@
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='calendar_main_container'>" . "<a href='index.php?g_id=" . $row['g_id'] . " '>" . "<img class='calendar_main_pic' src='data;base64, " . $row['pic_main'] . " '>" . "</a>" . "</div>";
         }
-
         
 
 
-        echo "</div>"'
 
     ?>
 
