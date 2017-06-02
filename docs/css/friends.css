@@ -38,6 +38,20 @@
 /*.get_friends tr {
   height: 23px;
 }*/
+.friend_list {
+  height: 600px;
+  margin-top: 20px;
+  border-style: solid;
+}
+.friend_list_elem {
+
+}
+.elem_id {
+
+}
+.elem_send {
+
+}
 .add_friends {
   width: 300px;
   padding-left: 100px;
