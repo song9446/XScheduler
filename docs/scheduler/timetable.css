@@ -1,0 +1,5 @@
+.timetable_container{
+    min-width:300px;
+    max-height:600px;
+    overflow-y:scroll;
+}

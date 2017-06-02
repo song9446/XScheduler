@@ -68,7 +68,7 @@ var undoAction = function (action) {
 }
 
 var __id_auto_increament = 0;
-var createScheduler = function (container, year, month, id) {
+var createScheduler = function (container, year, month, id, g_id) {
     var cont = document.createElement("div");
     cont.id = id || "scheduler" + (++__id_auto_increament);
     //todo : make interactive object here...
@@ -78,30 +78,47 @@ var createScheduler = function (container, year, month, id) {
     year = date.getFullYear();
     month = date.getMonth()+1;
     cont.className = "scheduler";
+    if(g_id != null)
+        cont.classList.add("group");
     cont.year = year;
     cont.month = month;
+    cont.g_id = g_id;
     container.appendChild(cont);
     // create calendar
     var calendarCont = document.createElement("div");
     cont.appendChild(calendarCont);
     calendarCont.className = "calendar_container";
+    if(g_id != null)
+        calendarCont.classList.add("group");
     createDateController(calendarCont, cont.id, year, month);
-    createScheduleViewElement(calendarCont, year, month);
+    createScheduleViewElement(calendarCont, year, month, g_id);
+    // create timetable
+    var timetableCont = document.createElement("div");
+    timetableCont.className = "timetable_container";
+    if(g_id != null)
+        timetableCont.classList.add("group");
+    var timetable = createTimeTable(timetableCont, year, month, 1);
+    cont.appendChild(timetableCont);
     // create controller
     var controllerCont = document.createElement("div");
     cont.appendChild(controllerCont);
     controllerCont.className = "controller_container";
-    createScheduleController(controllerCont, calendarCont);
+    if(g_id != null)
+        controllerCont.classList.add("group");
+    controllerCont.timetable = timetable;
+    createScheduleController(controllerCont, calendarCont, g_id);
     return cont;
 };
 
-var createScheduleController = function (container, scheduleView) {
+var createScheduleController = function (container, scheduleView, g_id) {
     var cont = document.createElement('div');
     var form = document.createElement("form");
     var calendar = scheduleView.getElementsByClassName("calendar")[0];
     form.className = "schedule_controller";
+    if(g_id != null)
+        form.classList.add("group");
     var ret = "";
-    ret += "<span class='title'>Schedule</span>"
+    ret += "<span class='title'>Group Schedule</span>"
     ret += "<input type='hidden' id='s_id' name='s_id'>";
     ret += "<p><label id='s_name'>Name</label><input id='s_name' name='s_name'></p>";
     ret += "<p><label id='start_time'>Start time</label><input id='start_time' name='start_time'></p>";
@@ -112,18 +129,24 @@ var createScheduleController = function (container, scheduleView) {
         updateButton = document.createElement("button"),
         deleteButton = document.createElement("button");
     addButton.id = "add_schedule";
-    addButton.innerText = "Add";
+    if(g_id != null)
+        addButton.innerText = "Add to group";
+    else
+        addButton.innerText = "Add";
     deleteButton.id = "delete_schedule";
     deleteButton.innerText = "Delete";
     updateButton.id = "update_schedule";
     updateButton.innerText = "Update";
     addButton.type = deleteButton.type = updateButton.type = "button";
     addButton.onclick = function () {
+        json =  formToJson(form, function(name, value){
+                    if(name.endsWith("time"))return stringTime(value); 
+                    else return value;
+                });
+        if(g_id != null)
+            json.g_id = g_id;
         performAction(createAction("add_schedule", 
-            formToJson(form, function(name, value){
-                if(name.endsWith("time"))return stringTime(value); 
-                else return value;
-            }),
+            json,
             function (action) {
                 writeSchedule(calendar, action.result.s_id, action.args.s_name, action.args.start_time, action.args.end_time);
                 var boxCont = drawSchedule(calendar, action.result.s_id, action.args.s_name, action.args.start_time, action.args.end_time);
@@ -259,6 +282,9 @@ var createScheduleController = function (container, scheduleView) {
     timeline.innerHTML = "00:00";
     for(var i=0, l=datecells.length; i<l; i++){
         datecells[i].onclick = function (evt) {
+            date = "".concat(this.id.substr(-8,2)),
+            container.timetable.setDate(date);
+            
             if(!pinnedStartTimeLine){
                 drawHelperStart(evt, this);
             }
@@ -279,7 +305,7 @@ var createScheduleController = function (container, scheduleView) {
                 hour = ~~(time/60),
                 miniute = ~~(time%60);
                 if(timeline.parentElement && timeline.parentElement != this)timeline.parentElement.removeChild(timeline);
-                timeline.style.marginLeft = ~~(width*time/1440) + "px"
+                timeline.style.marginLeft = ~~(width*time/1440-1) + "px"
                 timeline.innerHTML = "".concat("<div>", date, "</div>", "<div>", hour, ":", miniute, "</div>");
                 if(timeline.parentElement == null)this.appendChild(timeline);
             if(!pinnedStartTimeLine){
@@ -345,9 +371,9 @@ function setDate(id, year, month) {
         cont = el.parentElement;
     cont.removeChild(el);
     el.id = null;
-    createScheduler(cont, year, month, id);
+    createScheduler(cont, year, month, id, cont.g_id);
 };
-var createScheduleViewElement = function (container, year, month) {
+var createScheduleViewElement = function (container, year, month, g_id) {
     var date = new Date();
     year = year || date.getFullYear();
     month = month || date.getMonth()+1;
@@ -365,6 +391,21 @@ var createScheduleViewElement = function (container, year, month) {
         writeSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
     }
 
+    if(g_id != null){
+    var schedules = xmlRequestJson(
+        'GET', 
+        {"op": "get_group_schedule_in_range",
+         "g_id": g_id,
+         "start_time": dateFormat(year, month, 1),
+         "end_time": dateFormat(year, month+1, 1)},
+        'schedule.php'
+        );
+    for(var i=0, l=schedules.length; i<l; i++){
+        drawSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
+        writeSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
+    }
+    }
+
     /*
     var names = calendar.getElementsByClassName("name");
     var i=0, j=0, l=names.length;
@@ -380,7 +421,12 @@ var createScheduleViewElement = function (container, year, month) {
 
 var eraseSchedule = function (calendar, id) {
     var ss = calendar.getElementsByClassName(id);
-    for(var i=0, l=ss.length; i<l; i++) if(ss[i])ss[i].parentElement.removeChild(ss[i]);
+    for(var i=0; i < ss.length; i++){ 
+        if(ss[i]){
+            ss[i].parentElement.removeChild(ss[i]);
+            --i;
+        }
+    }
     /*for(var i=0, l=ss.length; i<l; i++)
         ss[i].parentElement.removeChild(ss[i]);
         */
@@ -603,3 +649,4 @@ function formToJson(form, reduceCall) {
     }
     return json;
 }
+

@@ -33,15 +33,43 @@ QUERY;
     }
     echo json_encode($arr);
 }
+else if(strcmp($op, "get_group_schedule_in_range") == 0){
+    $start_time = $_GET['start_time'];
+    $end_time = $_GET['end_time'];
+    $g_id = $_GET['g_id'];
+    $query = <<<QUERY
+        SELECT p.s_id, s_name, DATE_FORMAT(start_time, '$date_format') AS start_time, DATE_FORMAT(end_time, '$date_format') AS end_time 
+        FROM p_schedule AS p, group_have_schedule AS ghs
+        WHERE EXISTS (SELECT 1 FROM group_member AS gm WHERE gm.g_id=$g_id and gm.u_id='$token') AND
+              p.s_id=ghs.s_id AND 
+              ghs.g_id=$g_id AND
+              ((p.end_time >= STR_TO_DATE('$start_time', '$date_format') AND p.end_time <= STR_TO_DATE('$end_time', '$date_format')) OR
+              (p.start_time >= STR_TO_DATE('$start_time', '$date_format') AND p.start_time <= STR_TO_DATE('$end_time', '$date_format'))); 
+QUERY;
+    //What I really want : 
+    //WHERE u_id=(SELECT u_id from user where token='$token') 
+    $result = mysqli_query($conn, $query);
+    if(!$result){
+        echo '{"error":"'.mysqli_error($conn).'"}';
+        mysqli_close($conn);
+        die();
+    }
+
+    $arr = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $arr[] = $row;
+    }
+    echo json_encode($arr);
+}
 else if(strcmp($op, "get_schedule_in_range") == 0){
     $start_time = $_GET['start_time'];
     $end_time = $_GET['end_time'];
     $query = <<<QUERY
         SELECT s_id, s_name, DATE_FORMAT(start_time, '$date_format') AS start_time, DATE_FORMAT(end_time, '$date_format') AS end_time 
-        FROM p_schedule 
-        WHERE u_id='$token' AND
-              end_time > STR_TO_DATE('$start_time', '$date_format') AND
-              start_time < STR_TO_DATE('$end_time', '$date_format'); 
+        FROM p_schedule AS p
+        WHERE p.u_id='$token' AND
+              ((p.end_time >= STR_TO_DATE('$start_time', '$date_format') AND p.end_time <= STR_TO_DATE('$end_time', '$date_format')) OR
+              (p.start_time >= STR_TO_DATE('$start_time', '$date_format') AND p.start_time <= STR_TO_DATE('$end_time', '$date_format'))); 
 QUERY;
     //What I really want : 
     //WHERE u_id=(SELECT u_id from user where token='$token') 
@@ -76,6 +104,21 @@ QUERY;
         echo mysqli_error($conn);
         mysqli_close($conn);
         die();
+    }
+    $s_id = mysqli_insert_id($conn);
+    if(isset($_GET['g_id'])){
+    $g_id = $_GET['g_id'];
+    $query = <<<QUERY
+        INSERT INTO group_have_schedule (g_id, s_id)
+        VALUES ($g_id, $s_id);
+QUERY;
+    $result = mysqli_query($conn, $query);
+    if(!$result){
+        echo '{"error":"'.mysqli_error($conn).'"}';
+        echo mysqli_error($conn);
+        mysqli_close($conn);
+        die();
+    }
     }
     echo '{"s_id":'.mysqli_insert_id($conn).'}';
 }
@@ -121,3 +164,4 @@ QUERY;
 
 
 mysqli_close($conn);
+?>

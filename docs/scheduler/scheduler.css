@@ -13,10 +13,16 @@ html *{
     font-size: 30px;
     margin-bottom : 20px;
 }
+.scheduler .calendar_container.group {
+    background-color:#afaba6;
+}
 .scheduler .calendar_container {
     display:inline-block;
     background-color:#efebd6;
     padding: 20px;
+}
+.scheduler .controller_container.group {
+    background-color:#969757;
 }
 .scheduler .controller_container {
     border: 1px;

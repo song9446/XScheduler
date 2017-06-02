@@ -81,3 +81,4 @@ function dateFormat(year, month, date, hour, miniute, second){
     if(second < 10)second = "0" + second;
     return "" + year + month + date + hour + miniute + second; 
 }
+
