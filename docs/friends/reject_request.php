@@ -4,9 +4,9 @@ include ( "../inc/connect.inc.php" );
 
 if ( isset($_SESSION['u_id']) )
 {
-    if( isset($_GET['add_friend_u_id']) ){
+    if( isset($_GET['delete_request_u_id']) ){
         $ui1=$_SESSION['u_id']; // u_id 1
-        $ui2=$_GET['add_friend_u_id']; // u_id 2
+        $ui2=$_GET['delete_request_u_id']; // u_id 2
 
 
         $query = "SELECT * FROM friend_request WHERE u_id_from = '$ui1' AND u_id_to = '$ui2'";
