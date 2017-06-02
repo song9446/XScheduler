@@ -29,10 +29,10 @@ include ( "../inc/connect.inc.php" );
 
             echo "Group creator: " . $row['g_creator'];
             echo "<form action='#' method='post'>";
-            echo "    <div class='textbox'";
+            echo "    <div class='textbox'>";
             echo "        <label for='group_name'>Group name: </label>";
             echo "        <input type='text' name='group_name' placeholder=" . $row['g_name'] . "/>";
-            echo "        <input type='submit' name='group_name_submit' id='btn-submit' value='Submit' />"
+            echo "        <input type='submit' name='group_name_submit' id='btn-submit' value='Submit' />";
             echo "    </div>";
             echo "</form>";
 
@@ -51,7 +51,7 @@ include ( "../inc/connect.inc.php" );
             echo "</form>";
 
             if ( isset($_POST['image_submit']) ){
-               if(getimagesize($_FILES['image']['tmp_name']) == FALSE)
+                if(getimagesize($_FILES['image']['tmp_name']) == FALSE)
                 {
                     echo "Please select an image.";
                 }
@@ -63,8 +63,18 @@ include ( "../inc/connect.inc.php" );
                     $image= base64_encode($image);
                     saveimage($name,$image);
                 }
-            } 
+            }
 
+            function saveimage($name,$image) {
+                $query="UPDATE groups SET pic_name='$name', pic_main='$image' WHERE g_id='$curr_g_id'";
+                $result=mysqli_query($conn, $query);
+                if($result) {
+                    echo "<br/>Image uploaded.";
+                }
+                else {
+                    echo "<br/>Image not uploaded.";
+                }
+            }
         }
         else {
             echo "Failed to get group info. g_id: " . $curr_g_id;
@@ -72,17 +82,5 @@ include ( "../inc/connect.inc.php" );
 
 
     ?>
-
-    function saveimage($name,$image) {
-        $query="UPDATE groups SET pic_name='$name', pic_main='$image' WHERE g_id='$curr_g_id'";
-        $result=mysqli_query($conn, $query);
-        if($result) {
-            echo "<br/>Image uploaded.";
-        }
-        else {
-            echo "<br/>Image not uploaded.";
-        }
-    }
-
   </body>
 </html>
