@@ -29,10 +29,10 @@ include ( "../inc/connect.inc.php" );
                   $query = "SELECT u_id FROM user WHERE u_id = '$search_u_id'";
                   $result = mysqli_query($conn, $query);
                 }
-                if(isset($result)) {
+                if($result) {
                   echo "<div class='friend_list_elem'>";
-                  echo "<div class='elem_id'>" . $result . "</div>";
-                  echo "<div class='elem_send>" . "<a href='send_friend_request.php?request_friend_u_id=" . $result . "' >SEND" . "</a>" . "</div>";
+                  echo "<div class='elem_id'>" . $result['u_id'] . "</div>";
+                  echo "<div class='elem_send>" . "<a href='send_friend_request.php?request_friend_u_id=" . $result['u_id'] . "' >SEND" . "</a>" . "</div>";
                   echo "</div>";
                 }
               ?>
