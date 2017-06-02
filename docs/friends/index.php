@@ -54,7 +54,7 @@ include ( "../inc/connect.inc.php" );
                   foreach($row as $key => $field) {
                     echo "<div class='list_elem'>";
                     echo "<div class='elem_id'>" . $row['u_id_from'] . "</div>";
-                    echo "<a id='Accept' href='accept_request.php?request_u_id=" . $row['u_id_from'] . "' >Accept" . "</a>";
+                    echo "<a href='accept_request.php?request_u_id=" . $row['u_id_from'] . "' >Accept" . "</a>";
                     echo "<a href='reject_request.php?request_u_id=" . $row['u_id_from'] . "' >Reject" . "</a>";
                     echo "</div>";
                     // echo "<a href='accept_request.php?request_u_id=" . $row['u_id_from'] . "' >ADD" . "</a>";
