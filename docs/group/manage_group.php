@@ -40,8 +40,10 @@ include ( "../inc/connect.inc.php" );
                 $gn = $_POST['group_name']; // group name
                 $query_update_GN = "UPDATE groups
                                     SET g_name = '$gn'
-                                    WHERE g_id = 'curr_g_id'";
+                                    WHERE g_id = '$curr_g_id'";
                 $result_update_GN = mysqli_query($conn, $query_update_GN);
+
+                echo "<meta http-equiv='refresh' content='0;url=manage_group.php?g_id=" . $curr_g_id . "'>";
             }
 
             echo "<form method='post' enctype='multipart/form-data'>";
@@ -50,6 +52,24 @@ include ( "../inc/connect.inc.php" );
             echo "    <input type='submit' name='image_submit' value='Upload' />";
             echo "</form>";
 
+            // image update function
+            function saveimage($name,$image) {
+                include ( "../inc/connect.inc.php" );
+                echo "$name $image";
+
+                $query_update_image="UPDATE groups 
+                                     SET pic_name='$name', pic_main='$image' 
+                                     WHERE g_id='$curr_g_id'";
+
+                $result_update_image=mysqli_query($conn, $query_update_image);
+                if($result_update_image) {
+                    echo "<br/>Image uploaded.";
+                }
+                else {
+                    echo "<br/>Image not uploaded.";
+                }
+            }
+
             if ( isset($_POST['image_submit']) ){
                 if(getimagesize($_FILES['image']['tmp_name']) == FALSE)
                 {
@@ -57,6 +77,7 @@ include ( "../inc/connect.inc.php" );
                 }
                 else
                 {
+                    echo "!!!!!!!!!!!!!";
                     $image= addslashes($_FILES['image']['tmp_name']);
                     $name= addslashes($_FILES['image']['name']);
                     $image= file_get_contents($image);
@@ -64,23 +85,11 @@ include ( "../inc/connect.inc.php" );
                     saveimage($name,$image);
                 }
             }
-
-            function saveimage($name,$image) {
-                $query="UPDATE groups SET pic_name='$name', pic_main='$image' WHERE g_id='$curr_g_id'";
-                $result=mysqli_query($conn, $query);
-                if($result) {
-                    echo "<br/>Image uploaded.";
-                }
-                else {
-                    echo "<br/>Image not uploaded.";
-                }
-            }
         }
+
         else {
             echo "Failed to get group info. g_id: " . $curr_g_id;
         }
-
-
     ?>
   </body>
 </html>

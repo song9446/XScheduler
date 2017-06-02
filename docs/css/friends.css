@@ -3,6 +3,7 @@
 }
 .get_friends {
   width: 300px;
+  height: 700px;
   padding-left: 100px;
   padding-top: 50px;
   float: left;
@@ -29,17 +30,32 @@
   height: 600px;
   margin-top: 20px;
 }*/
-.get_friends table {
+/*.get_friends table {
   height: 300px;
   border-style: solid;
   border-width: 2px;
   margin-top: 20px;
 }
+*/
 /*.get_friends tr {
   height: 23px;
 }*/
+.friend_list {
+  margin-top: 20px;
+  border-style: solid;
+}
+.friend_list_elem {
+
+}
+.elem_id {
+
+}
+.elem_send {
+
+}
 .add_friends {
   width: 300px;
+  height: 700px;
   padding-left: 100px;
   padding-top: 50px;
   float: left;
@@ -50,11 +66,11 @@
 }
 .add_friends select {
   width: 300px;
-  height: 600px;
   margin-top: 20px;
 }
 .friends {
   width: 300px;
+  height: 700px;
   padding-left: 100px;
   padding-top: 50px;
   float: left;
@@ -65,6 +81,5 @@
 }
 .friends select {
   width: 300px;
-  height: 600px;
   margin-top: 20px;
 }

@@ -22,19 +22,21 @@ include ( "../inc/connect.inc.php" );
               <input type="submit" name="search" value="Search" />
             </form>
             <div class='friend_list'>
-              <div class='friend_list_elem'>
-                <?php
-                  $curr_u_id = $_SESSION['u_id'];
-                  $search_u_id = $_POST['search_u_id'];
-                  if(isset($curr_u_id) && isset($search_u_id)) {
-                    $query = "SELECT u_id FROM user WHERE u_id = '$search_u_id'";
-                    $result = mysqli_query($conn, $query);
-                  }
-                  
-                  echo "<div class='elem_id'>" . $result . "</div>";
-                  echo "<a href='send_friend_request.php?request_friend_u_id=" . $result . "' >SEND" . "</a>";
-                ?>
-              </div>
+              <?php
+                $curr_u_id = $_SESSION['u_id'];
+                $search_u_id = $_POST['search_u_id'];
+                if(isset($curr_u_id) && isset($search_u_id)) {
+                  $query = "SELECT u_id FROM user WHERE u_id = '$search_u_id'";
+                  $result = mysqli_query($conn, $query);
+                  $row = mysqli_fetch_assoc($result);
+                }
+                if($result) {
+                  echo "<div class='friend_list_elem'>";
+                  echo "<div class='elem_id'>" . $row['u_id'] . "</div>";
+                  echo "<div class='elem_send>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</div>";
+                  echo "</div>";
+                }
+              ?>
             </div>
             <?php
             /*
