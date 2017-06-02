@@ -21,7 +21,7 @@
         </nav>
             <?php
                 if (isset($_SESSION['u_id'])){
-                    echo "<a href='logout.php' class='logout_button'>Logout</a>";
+                    echo "<a href='http://52.78.81.68/logout.php' class='logout_button'>Logout</a>";
                 }
                 else{
                     include ( "./login.php" );
