@@ -54,8 +54,12 @@ include ( "../inc/connect.inc.php" );
 
             // image update function
             function saveimage($name,$image) {
-                echo "!!!!!!!!!!!!!!";
-                $query_update_image="UPDATE groups SET pic_name='$name', pic_main='$image' WHERE g_id='$curr_g_id'";
+                echo "$name $image";
+
+                $query_update_image="UPDATE groups 
+                                     SET pic_name='$name', pic_main='$image' 
+                                     WHERE g_id='$curr_g_id'";
+
                 $result_update_image=mysqli_query($conn, $query_update_image);
                 if($result_update_image) {
                     echo "<br/>Image uploaded.";
