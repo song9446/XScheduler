@@ -21,7 +21,7 @@ include ( "../inc/connect.inc.php" );
               <input type="text" name="search_u_id" size"25" placeholder="Search ID" />
               <input type="submit" name="search" value="Search" />
             </form>
-            <div class='friend_list'>
+            <div class='search_list'>
               <?php
                 $curr_u_id = $_SESSION['u_id'];
                 $search_u_id = $_POST['search_u_id'];
@@ -31,41 +31,18 @@ include ( "../inc/connect.inc.php" );
                   $row = mysqli_fetch_assoc($result);
                 }
                 if($result) {
-                  echo "<div class='friend_list_elem'>";
+                  echo "<div class='list_elem'>";
                   echo "<div class='elem_id'>" . $row['u_id'] . "</div>";
                   echo "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>";
                   echo "</div>";
                 }
               ?>
             </div>
-            <?php
-            /*
-              $curr_u_id = $_SESSION['u_id'];
-              $curr_search_u_id = $_POST['search_u_id'];
-
-              echo ("<table>");
-              if ( isset($_SESSION['u_id']) && isset($_POST['search_u_id']) ) {
-                $search_u_id = $_POST['search_u_id'];
-                $query = "SELECT u_id FROM user WHERE u_id = '$search_u_id'";
-                $result = mysqli_query($conn, $query);
-                while ( $row = mysqli_fetch_assoc($result) ){
-                  echo "<tr height='23'>";
-                    foreach ($row as $key => $field) {
-                      echo "<td>" . htmlspecialchars($field) . '</td>';
-                    }
-                    
-                    echo "<td>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</td>";
-                  echo '</tr>';
-                }
-              }
-              echo ("</table>");
-              */
-            ?>
           </div>
 
           <div class="add_friends">
             <div id="Receive">Received Requests</div>
-            <select size='100'>
+            <div class='list'>
             <?php
               $curr_u_id = $_SESSION['u_id'];
 
@@ -73,23 +50,24 @@ include ( "../inc/connect.inc.php" );
                 $query = "SELECT u_id_from FROM friend_request WHERE u_id_to = '$curr_u_id'";
                 $result = mysqli_query($conn, $query);
 
-                $count = 1;
                 while ($row = mysqli_fetch_assoc($result)) {
                   foreach($row as $key => $field) {
-                    echo "<option value='" . $count . "'>" . htmlspecialchars($field) . "<a href='accept_request.php?request_u_id=" . $row['u_id_from'] . "' >Accept" . "</a>" . '</option>';
-                    //echo "<a href='accept_request.php?request_u_id=" . $row['u_id_from'] . "' >Accept" . "</a>";
+                    echo "<div class='list_elem'>";
+                    echo "<div class='elem_id'>" . $row['u_id_from'] . "</div>";
+                    echo "<a id='Accept' href='accept_request.php?request_u_id=" . $row['u_id_from'] . "' >Accept" . "</a>";
+                    echo "<a href='reject_request.php?request_u_id=" . $row['u_id_from'] . "' >Reject" . "</a>";
+                    echo "</div>";
                     // echo "<a href='accept_request.php?request_u_id=" . $row['u_id_from'] . "' >ADD" . "</a>";
                   }
-                  $count = $count+1;
                 }
               } 
             ?>
-            </select>
+            </div>
           </div>
 
           <div class="friends">
             <div id="my_friends">Friends list</div>
-            <select size='100'>
+            <div class='friend_list'>
             <?php
               echo "<h2>Friend List: </h2>";
 
@@ -105,7 +83,7 @@ include ( "../inc/connect.inc.php" );
                   $count = $count+1;
               }
             ?>
-            </select>
+            </div>
           </div>
         </div>
     </body>

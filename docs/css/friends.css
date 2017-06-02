@@ -40,18 +40,28 @@
 /*.get_friends tr {
   height: 23px;
 }*/
-.friend_list {
+.search_list {
   height: 487px;
   margin-top: 20px;
-  border-style: solid;
 }
-.friend_list_elem {
-  font-size: 18px;
+.list_elem {
+  border-style: solid;
+  border-width: 1px;
+  height: 29px;
+  margin-top: 2px;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 .elem_id {
+  margin-top: 3px;
+  margin-left: 10px;
+  font-size: 18px;
   float: left;
 }
-.friend_list_elem a {
+.list_elem a {
+  margin-top: 3px;
+  margin-right: 10px;
+  font-size: 18px;
   float: right;
 }
 .add_friends {
@@ -65,10 +75,18 @@
   margin-bottom: 15px;
   font-size: 20px;
 }
-.add_friends select {
-  width: 300px;
-  margin-top: 20px;
+#Accept {
+  /*margin-top: 3px;*/
+  margin-right: 3px;
+  /*font-size: 18px;
+  float: right;*/
 }
+/*#Reject {
+  margin-top: 3px;
+  margin-right: 10px;
+  font-size: 18px;
+  float: right;
+}*/
 .friends {
   width: 300px;
   height: 700px;
