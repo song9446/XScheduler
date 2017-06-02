@@ -57,7 +57,7 @@ include ( "../inc/connect.inc.php" );
                 $count = 1;
                 while ($row = mysqli_fetch_assoc($result)) {
                   foreach($row as $key => $field) {
-                    echo '<option value="' . $count . '">' . htmlspecialchars($field) . '<a href="accept_request.php?request_u_id=' . $row['u_id_from'] . '" >Accept' . '</a>' '</option>';
+                    echo '<option value="' . $count . '">' . htmlspecialchars($field) . '<a href="accept_request.php?request_u_id=' . $row['u_id_from'] . '" >Accept' . '</a>' . '</option>';
                     // echo "<a href='accept_request.php?request_u_id=" . $row['u_id_from'] . "' >ADD" . "</a>";
                   }
                   $count = $count+1;
