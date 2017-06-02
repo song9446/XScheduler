@@ -33,7 +33,7 @@ include ( "../inc/connect.inc.php" );
                 if($result) {
                   echo "<div class='friend_list_elem'>";
                   echo "<div class='elem_id'>" . $row['u_id'] . "</div>";
-                  echo "<div class='elem_send>" . "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>" . "</div>";
+                  echo "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>";
                   echo "</div>";
                 }
               ?>
