@@ -12,7 +12,7 @@
                 <a class="menuLink" href="http://52.78.81.68/scheduler/index.php">Personal schedule</a>
               </li>
               <li>
-                <a class="menuLink" href="http://52.78.81.68/group/make_group.php">Group schedule</a>
+                <a class="menuLink" href="http://52.78.81.68/group/index.php">Group schedule</a>
               </li>
               <li>
                 <a class="menuLink" href="http://52.78.81.68/friends/index.php">Friends</a>
