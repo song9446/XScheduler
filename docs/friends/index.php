@@ -30,7 +30,8 @@ include ( "../inc/connect.inc.php" );
                   $result = mysqli_query($conn, $query);
                   $row = mysqli_fetch_assoc($result);
                 }
-                if($result) {
+                //if($result) {
+                if(isset($row))
                   echo "<div class='list_elem'>";
                   echo "<div class='elem_id'>" . $row['u_id'] . "</div>";
                   echo "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>";
