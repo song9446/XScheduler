@@ -17,7 +17,6 @@ include ( "../inc/connect.inc.php" );
     <?php
         $curr_u_id = $_SESSION['u_id'];
         $curr_g_id = $_GET['g_id'];
-        $_SESSION['g_id'] = $curr_g_id;
 
         $query = "SELECT g_name, g_creator, pic_name, pic_main
                   FROM groups
@@ -33,7 +32,7 @@ include ( "../inc/connect.inc.php" );
             echo "    <div class='textbox'>";
             echo "        <label for='group_name'>Group name: </label>";
             echo "        <input type='text' name='group_name' placeholder='" . $row['g_name'] . "'/>";
-            echo "        <input type='submit' name='group_name_submit' id='btn-submit' value='Submit' />";
+            echo "        <input type='submit' name='group_name_submit' id='btn-submit' value='Change' />";
             echo "    </div>";
             echo "</form>";
 
@@ -54,11 +53,7 @@ include ( "../inc/connect.inc.php" );
             echo "</form>";
 
             // image update function
-            function saveimage($name,$image) {
-                include ( "../inc/connect.inc.php" );
-                $curr_g_id = $_SESSION['g_id'];
-                echo "$curr_g_id     $name $image";
-
+            function saveimage($name,$image,$conn,$curr_g_id) {
                 $query_update_image="UPDATE groups 
                                      SET pic_name='$name', pic_main='$image' 
                                      WHERE g_id='$curr_g_id'";
@@ -83,7 +78,7 @@ include ( "../inc/connect.inc.php" );
                     $name= addslashes($_FILES['image']['name']);
                     $image= file_get_contents($image);
                     $image= base64_encode($image);
-                    saveimage($name,$image);
+                    saveimage($name,$image,$conn,$curr_g_id);
                 }
             }
         }
