@@ -87,5 +87,32 @@ include ( "../inc/connect.inc.php" );
             echo "Failed to get group info. g_id: " . $curr_g_id;
         }
     ?>
+
+    <div class='get_friends'>
+        <div id="Send">Send Request</div>
+            <form action="index.php" method="POST">
+                <input type="text" name="search_u_id" size"25" placeholder="Search ID" />
+                <input type="submit" name="search" value="Search" />
+            </form>
+            <div class='search_list'>
+                <?php
+                    $curr_u_id = $_SESSION['u_id'];
+                    $search_u_id = $_POST['search_u_id'];
+                    if(isset($curr_u_id) && isset($search_u_id)) {
+                        $query = "SELECT u_id FROM user WHERE u_id = '$search_u_id'";
+                        $result = mysqli_query($conn, $query);
+                        $row = mysqli_fetch_assoc($result);
+                    }
+                    if($result) {
+                        echo "<div class='list_elem'>";
+                        echo "<div class='elem_id'>" . $row['u_id'] . "</div>";
+                        echo "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>";
+                        echo "</div>";
+                    }
+                ?>
+            </div>
+        </div>
+    </div>
+
   </body>
 </html>
