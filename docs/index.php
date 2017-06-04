@@ -20,7 +20,7 @@ include ( "./inc/connect.inc.php" );
                         echo "<meta http-equiv='refresh' content='0;url=http://52.78.81.68/home.php'>";
                     }
                 ?>
-                <div id="description">
+                <div id="index_descript">
                   </br>UniScheduler</br>
                   <div id="info">This is a Database Course Term Project.<br/>
                   Contributors : Jason Kim, Eunchul Song, Dongju Shin</div>
