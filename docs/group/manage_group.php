@@ -89,5 +89,22 @@ include ( "../inc/connect.inc.php" );
         }
     ?>
 
+    <div>
+        <div> Member list </div>
+        <div>
+            <?php
+                $curr_g_id = $_POST['g_id'];
+                $query = "SELECT u_id FROM groups WHERE g_id = '$curr_g_id'";
+                $result = mysqli_query($conn, $query);
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<div>";
+                    echo "    <div>" . $row['u_id'] . "</div>";
+                    echo "</div>";
+                }
+            ?>
+        </div>
+    </div>
+
   </body>
 </html>
