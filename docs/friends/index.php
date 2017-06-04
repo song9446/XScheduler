@@ -76,7 +76,7 @@ include ( "../inc/connect.inc.php" );
                   foreach($row as $key => $field) {
                       echo "<div class='list_elem'>";
                       echo "<div class='elem_id'>" . $row['f_u_id'] . "</div>";
-                      echo "<a href='delete_friend.php?f_u_id=" . $row['delete_f_u_id'] . "' >Delete" . "</a>";
+                      echo "<a href='delete_friend.php?delete_f_u_id=" . $row['f_u_id'] . "' >Delete" . "</a>";
                       echo "</div>";
                   }
               }
