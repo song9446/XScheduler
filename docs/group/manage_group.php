@@ -78,7 +78,7 @@ include ( "../inc/connect.inc.php" );
                     $name= addslashes($_FILES['image']['name']);
                     $image= file_get_contents($image);
                     $image= base64_encode($image);
-                    saveimage($name,$image,$conn,$g_id);
+                    saveimage($name,$image,$conn,$curr_g_id);
                 }
             }
         }
