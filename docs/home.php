@@ -25,6 +25,13 @@ else {
             <div id="home_content">
                 <?php
                     $curr_u_id = $_SESSION['u_id'];
+
+                    echo "<div class='calendar_main_container'>" .
+                             "<a href='/group/make_group.php'>" .
+                             "<img class='calendar_main_pic' src='http://52.78.81.68/img/plus.jpg' />" .
+                             "<p style='font-size: 20px; margin: 5px;' align='center';> Create a New Group </p>" .
+                         "</div>";
+
                     $query = "SELECT G.g_id, G.g_name, G.pic_main FROM groups G, group_member GM WHERE GM.u_id = '$curr_u_id' AND GM.g_id = G.g_id";
                     $result = mysqli_query($conn, $query);
                     if ($result) {
