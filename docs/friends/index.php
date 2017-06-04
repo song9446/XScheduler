@@ -44,6 +44,7 @@ include ( "../inc/connect.inc.php" );
                 else if(!isset($row)) {
                   echo "<div class='list_elem'>";
                   echo "<div class='elem_id'>" . No result . "</div>";
+                  echo "</div>";
                 }
                 else if(isset($row2)) {
                   echo "<div class='list_elem'>";
