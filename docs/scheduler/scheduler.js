@@ -379,31 +379,29 @@ var createScheduleViewElement = function (container, year, month, g_id) {
     month = month || date.getMonth()+1;
     var calendar = createCalendarElement(container, year, month);
     calendar.style.position = "relative";
-    var schedules = xmlRequestJson(
-        'GET', 
-        {"op": "get_schedule_in_range",
-         "start_time": dateFormat(year, month, 1),
-         "end_time": dateFormat(year, month+1, 1)},
-        'schedule.php'
+    var schedules = null;
+    if(g_id == null){
+        schedules = xmlRequestJson(
+            'GET', 
+            {"op": "get_schedule_in_range",
+                "start_time": dateFormat(year, month, 1),
+                "end_time": dateFormat(year, month+1, 1)},
+            'schedule.php'
         );
-    for(var i=0, l=schedules.length; i<l; i++){
-        drawSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
-        writeSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
-    }
 
-    if(g_id != null){
-    var schedules = xmlRequestJson(
-        'GET', 
-        {"op": "get_group_schedule_in_range",
-         "g_id": g_id,
-         "start_time": dateFormat(year, month, 1),
-         "end_time": dateFormat(year, month+1, 1)},
-        'schedule.php'
+    }else{
+        schedules = xmlRequestJson(
+            'GET', 
+            {"op": "get_group_schedule_in_range",
+                "g_id": g_id,
+                "start_time": dateFormat(year, month, 1),
+                "end_time": dateFormat(year, month+1, 1)},
+            'schedule.php'
         );
+    }
     for(var i=0, l=schedules.length; i<l; i++){
         drawSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
         writeSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
-    }
     }
 
     /*
