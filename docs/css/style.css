@@ -46,26 +46,6 @@ img.calendar_main_pic {
     height: 150px;
 }
 
-#topMenu {
-  height: 42px;
-  width: 450px;
-  margin-left: 100px;
-}
-#topMenu ul li {
-  list-style: none;
-  /*background-color: #eff5f9;*/
-  float: left;
-  line-height: 42px;
-  vertical-align: middle;
-  text-align: center;
-
-}
-#topMenu .menuLink {
-  text-decoration: none;
-  display: block;
-  width: 150px;
-  background-color: #eff5f9;
-}
 #index_descript {
   width: 500px;
   height: 400px;
