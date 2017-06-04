@@ -93,7 +93,7 @@ include ( "../inc/connect.inc.php" );
         <div> Member list </div>
         <div>
             <?php
-                $curr_g_id = $_POST['g_id'];
+                $curr_g_id = $_GET['g_id'];
                 $query = "SELECT u_id FROM group_member WHERE g_id = '$curr_g_id'";
                 $result = mysqli_query($conn, $query);
 
