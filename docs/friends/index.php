@@ -57,7 +57,6 @@ include ( "../inc/connect.inc.php" );
                     echo "<a href='reject_request.php?delete_request_u_id=" . $row['u_id_from'] . "' >Reject" . "</a>";
                     echo "<a href='accept_request.php?accept_request_u_id=" . $row['u_id_from'] . "' >Accept" . "</a>";
                     echo "</div>";
-                    // echo "<a href='accept_request.php?request_u_id=" . $row['u_id_from'] . "' >ADD" . "</a>";
                   }
                 }
               } 
@@ -77,8 +76,8 @@ include ( "../inc/connect.inc.php" );
                   foreach($row as $key => $field) {
                       echo "<div class='list_elem'>";
                       echo "<div class='elem_id'>" . $row['f_u_id'] . "</div>";
+                      echo "<a href='delete_friend.php?f_u_id=" . $row['delete_f_u_id'] . "' >Delete" . "</a>";
                       echo "</div>";
-                      //echo '<option value="' . $count . '">' . htmlspecialchars($field) . '</option>';
                   }
               }
             ?>
