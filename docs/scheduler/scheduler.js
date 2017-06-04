@@ -97,7 +97,7 @@ var createScheduler = function (container, year, month, id, g_id) {
     timetableCont.className = "timetable_container";
     if(g_id != null)
         timetableCont.classList.add("group");
-    var timetable = createTimeTable(timetableCont, year, month, 1);
+    var timetable = createTimeTable(timetableCont, year, month, 1, g_id);
     cont.appendChild(timetableCont);
     // create controller
     var controllerCont = document.createElement("div");
