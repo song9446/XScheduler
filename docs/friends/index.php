@@ -41,14 +41,14 @@ include ( "../inc/connect.inc.php" );
                   echo "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>";
                   echo "</div>";
                 }
-                else if(!isset($row)) {
+                else if(!isset($row) && isset($search_u_id)) {
                   echo "<div class='list_elem'>";
                   echo "<div class='elem_id'>" . "No result" . "</div>";
                   echo "</div>";
                 }
                 else if(isset($row2)) {
                   echo "<div class='list_elem'>";
-                  echo "<div class='elem_id'>" . $row['u_id'] . "is already your friend" . "</div>";
+                  echo "<div class='elem_id'>" . $row['u_id'] . " is already your friend" . "</div>";
                   echo "</div>";
                 }
               ?>
