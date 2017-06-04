@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="calendar.css"></link>
     <link rel="stylesheet" href="scheduler.css"></link>
     <link rel="stylesheet" href="timetable.css"></link>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <title> UniScheduler </title>
     </head>
     <body>
