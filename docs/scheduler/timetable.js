@@ -1,14 +1,25 @@
-var createTimeTable = function (container, year, month, date) {
+var createTimeTable = function (container, year, month, date, g_id) {
     // get schedules on date
     function render(){
-        var schedules = xmlRequestJson(
+        var schedules = null;
+        if(g_id == null)
+            schedules = xmlRequestJson(
                 'GET', 
                 {"op": "get_schedule_in_range",
-                "start_time": dateFormat(year, month, date, 0, 0, 0),
-                "end_time": dateFormat(year, month, date+1, 0, 0, 0),
+                    "start_time": dateFormat(year, month, date, 0, 0, 0),
+                    "end_time": dateFormat(year, month, date+1, 0, 0, 0),
                 },
                 'schedule.php'
-                );
+            );
+        else
+            schedules = xmlRequestJson(
+                'GET', 
+                {"op": "get_group_schedule_in_range",
+                    "g_id": g_id,
+                    "start_time": dateFormat(year, month, 1),
+                    "end_time": dateFormat(year, month+1, 1)},
+                'schedule.php'
+            );
         var d_min = 60,
             n_date = 60*24/d_min,
             current_min = 0;
@@ -55,9 +66,9 @@ var createTimeTable = function (container, year, month, date) {
             schedule.y_end = (schedule.end_date - first_date)/d_time * height + top_margin;
             console.log(schedule);
             table_ctx.fillRect(0, schedule.y_start,
-                    width, schedule.y_end-schedule.y_start);
+                width, schedule.y_end-schedule.y_start);
             table_ctx.strokeRect(0, schedule.y_start,
-                    width, schedule.y_end-schedule.y_start);
+                width, schedule.y_end-schedule.y_start);
             table_ctx.fillStyle = "rgba(0, 0, 0, 1)";
             table_ctx.textBaseline="middle"; 
             table_ctx.textAlign="center";
@@ -76,8 +87,8 @@ var createTimeTable = function (container, year, month, date) {
 
         // draw helper line on screen
         var helperline = {
-time: 0,
-      y: 0,
+            time: 0,
+            y: 0,
         };
         var drawhelperline = null;
         ctx.font = table_ctx.font.replace(/\d+px/, "10px");
@@ -88,19 +99,19 @@ time: 0,
             var time = Math.floor(60*24*(evt.offsetY+0.5 - top_margin)/height);
             helperline.y = evt.offsetY-0.5;
             helperline.time = _to_time_string(Math.floor(time/60), time%60)
-                if(drawhelperline == null)
-                    drawhelperline = setInterval(function () {
-                            ctx.clearRect(0, 0, width, height+top_margin+bottom_margin);
-                            ctx.drawImage(table_canv, 0, 0);
-                            ctx.fillText(helperline.time, 5, helperline.y);
-                            ctx.beginPath();
-                            ctx.lineWidth = 1;
-                            ctx.moveTo(0, helperline.y);
-                            ctx.lineTo(3, helperline.y);
-                            ctx.moveTo(30, helperline.y);
-                            ctx.lineTo(width, helperline.y);
-                            ctx.stroke();
-                            }, 1000/30);
+            if(drawhelperline == null)
+                drawhelperline = setInterval(function () {
+                    ctx.clearRect(0, 0, width, height+top_margin+bottom_margin);
+                    ctx.drawImage(table_canv, 0, 0);
+                    ctx.fillText(helperline.time, 5, helperline.y);
+                    ctx.beginPath();
+                    ctx.lineWidth = 1;
+                    ctx.moveTo(0, helperline.y);
+                    ctx.lineTo(3, helperline.y);
+                    ctx.moveTo(30, helperline.y);
+                    ctx.lineTo(width, helperline.y);
+                    ctx.stroke();
+                }, 1000/30);
         };
         canv.onmouseout = function (evt) {
             clearInterval(drawhelperline);
@@ -121,9 +132,9 @@ time: 0,
                         table_ctx.strokeStyle = highlight.strokeColor;
                         table_ctx.fillStyle = highlight.fillColor;
                         table_ctx.strokeRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                                width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                            width, (highlight.end_date - first_date)/d_time * height + top_margin);
                         table_ctx.fillRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                                width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                            width, (highlight.end_date - first_date)/d_time * height + top_margin);
                     }
                     if(highlight == schedule){
                         i = l;
@@ -133,9 +144,9 @@ time: 0,
                     table_ctx.strokeStyle = "#ff0000";
                     table_ctx.fillStyle = "#ff0000";
                     table_ctx.strokeRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                            width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                        width, (highlight.end_date - first_date)/d_time * height + top_margin);
                     table_ctx.fillRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                            width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                        width, (highlight.end_date - first_date)/d_time * height + top_margin);
                     break;
                 }
             }
@@ -143,9 +154,9 @@ time: 0,
                 table_ctx.strokeStyle = highlight.strokeColor;
                 table_ctx.fillStyle = highlight.fillColor;
                 table_ctx.strokeRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                        width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                    width, (highlight.end_date - first_date)/d_time * height + top_margin);
                 table_ctx.fillRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                        width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                    width, (highlight.end_date - first_date)/d_time * height + top_margin);
                 highlight = null;
             }
         }
