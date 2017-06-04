@@ -38,4 +38,6 @@
             ?>
         </div>
     </body>
+
+    <script src="./js/script1.js"></script>
 </html>
