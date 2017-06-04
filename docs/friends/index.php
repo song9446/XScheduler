@@ -30,11 +30,21 @@ include ( "../inc/connect.inc.php" );
                   $result = mysqli_query($conn, $query);
                   $row = mysqli_fetch_assoc($result);
                 }
+
+                $query2 = "SELECT u_id FROM friend WHERE u_id = '$curr_u_id' AND f_u_id = '$search_u_id'";
+                $result2 = mysqli_query($conn, $query2);
+                $row2 = mysqli_fetch_assoc($result2);
                 //if($result) {
-                if(isset($row)) {
+                if(isset($row) && !isset($row2)) {
                   echo "<div class='list_elem'>";
                   echo "<div class='elem_id'>" . $row['u_id'] . "</div>";
                   echo "<a href='send_friend_request.php?request_friend_u_id=" . $row['u_id'] . "' >SEND" . "</a>";
+                  echo "</div>";
+                }
+                else if(isset($row2)) {
+                  echo "<div class='list_elem'>";
+                  echo "<div class='elem_id'>" . $row['u_id'] . "</div>";
+                  echo " is aleady your friend.";
                   echo "</div>";
                 }
               ?>
