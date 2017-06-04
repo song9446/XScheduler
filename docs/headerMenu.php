@@ -2,7 +2,9 @@
 <html>
     <head>
         <title>UniScheduler</title>
-        <link rel="stylesheet" type="text/css" href="http://52.78.81.68/css/style.css" />
+        <!--
+            <link rel="stylesheet" type="text/css" href="http://52.78.81.68/css/style.css" />
+        -->
     </head>
 
     <body>
