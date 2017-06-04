@@ -7,7 +7,7 @@
     <title> UniScheduler </title>
     </head>
     <body>
-    <?php include ( "./headerMenu.php" ); ?>
+    <?php include ( "/headerMenu.php" ); ?>
     <script src="calendar.js"></script>
     <script src="scheduler.js"></script>
     <script src="timetable.js"></script>
