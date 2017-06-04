@@ -1,3 +1,8 @@
+<?php
+session_start();
+include ( "./inc/connect.inc.php" );
+?>
+
 <html>
     <head>
     <meta charset="UTF-8">
