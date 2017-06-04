@@ -40,8 +40,8 @@ else if(strcmp($op, "get_group_schedule_in_range") == 0){
     $query = <<<QUERY
         SELECT p.s_id, s_name, DATE_FORMAT(start_time, '$date_format') AS start_time, DATE_FORMAT(end_time, '$date_format') AS end_time 
         FROM p_schedule AS p
-        WHERE (p.s_id IN (SELECT gm.u_id FROM group_member AS gm WHERE gm.g_id=$g_id and gm.u_id='$token') OR
-              p.s_id IN (SELECT p2.s_id FROM p_schedule AS p2 WHERE p2.u_id IN (SELECT ghs.u_id FROM group_have_schedule AS ghs WHERE ghs.g_id=$g_id))) AND
+        WHERE (p.s_id IN (SELECT ghs.s_id FROM group_have_schedule AS ghs WHERE ghs.g_id=$g_id) OR
+              p.s_id IN (SELECT p2.s_id FROM p_schedule AS p2 WHERE p2.u_id IN (SELECT gm.u_id FROM group_member AS gm WHERE gm.g_id=$g_id))) AND
               ((p.end_time >= STR_TO_DATE('$start_time', '$date_format') AND p.end_time <= STR_TO_DATE('$end_time', '$date_format')) OR
               (p.start_time >= STR_TO_DATE('$start_time', '$date_format') AND p.start_time <= STR_TO_DATE('$end_time', '$date_format'))); 
 QUERY;
