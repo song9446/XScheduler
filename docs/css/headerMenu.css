@@ -31,7 +31,7 @@
     right: 50px;
     width: 70px;
 }
-login_headerMenu_toggle {
+#login_headerMenu_toggle {
     display: none;
     position: absolute;
     right: 0px;
@@ -135,5 +135,25 @@ a.logout_button {
     top: 7px;
     right: 50px;
     padding: 6px;
+}
+#topMenu {
+  height: 42px;
+  width: 450px;
+  margin-left: 100px;
+}
+#topMenu ul li {
+  list-style: none;
+  /*background-color: #eff5f9;*/
+  float: left;
+  line-height: 42px;
+  vertical-align: middle;
+  text-align: center;
+
+}
+#topMenu .menuLink {
+  text-decoration: none;
+  display: block;
+  width: 150px;
+  background-color: #eff5f9;
 }
 
