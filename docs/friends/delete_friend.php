@@ -19,8 +19,14 @@ if ( isset($_SESSION['u_id']) )
             echo "Successfully deleted.";
             echo "<meta http-equiv='refresh' content='0;url=index.php'>";
          }
+         else if(!$result1) {
+             echo "Deletion 1 failed!";
+         }
+         else if(!$result2) {
+             echo "Deletion 2 failed!";
+         }
          else {
-             echo "Deletion failed!";
+             echo "both failed";
          }
      }
 }
