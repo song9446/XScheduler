@@ -93,12 +93,12 @@ include ( "../inc/connect.inc.php" );
       </div>
     </div>
     <div class='member_list'>
-      <div id='creator'>
-      <?php
-        echo "Group creator: " . $row['g_creator'];
-      ?>
-      </div>
         <p> Member list </p>
+        <div id='creator'>
+        <?php
+          echo "Group creator: " . $row['g_creator'];
+        ?>
+        </div>
         <div class='list'>
             <?php
                 $curr_g_id = $_GET['g_id'];
