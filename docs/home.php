@@ -28,7 +28,7 @@ else {
 
                     echo "<div class='calendar_main_container'>" .
                              "<a href='/group/make_group.php'>" .
-                             "<img class='calendar_main_pic' src='http://52.78.81.68/img/plus.jpg' />" .
+                             "<img class='calendar_main_pic' src='/img/plus.jpg' />" .
                              "<p style='font-size: 20px; margin: 5px;' align='center';> Create a New Group </p>" .
                          "</div>";
 

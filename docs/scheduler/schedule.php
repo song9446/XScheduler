@@ -10,7 +10,31 @@ $op = $_GET['op'];
 $date_format = "%Y%m%d%H%i%s";
 $query = "";
 
-if(strcmp($op, "get_schedule") == 0){
+if(strcmp($op, "get_candidate") == 0){
+    $g_id = $_GET['g_id'];
+    $query = <<<QUERY
+        SELECT p.s_id FROM p_schedule AS p, group_have_schedule AS ghs WHERE p.s_id=ghs.s_id AND ghs.g_id=$g_id GROUP BY p.s_name HAVING COUNT(g.s_id)>1;
+QUERY;
+    if(!$result){
+        echo '{"error":"'.mysqli_error($conn).'"}';
+        mysqli_close($conn);
+        die();
+    }
+
+    $arr = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $arr[] = $row;
+    }
+    echo json_encode($arr);
+}
+else if(strcmp($op, "get_group_schedule_in_range") == 0){
+    $start_time = $_GET['start_time'];
+    $end_time = $_GET['end_time'];
+    $g_id = $_GET['g_id'];
+    $query = <<<QUERY
+        SELECT p.s_id, s_name, DATE_FORMAT(start_time, '$date_format') AS start_time, DATE_FORMAT(end_time, '$date_format') AS end_time 
+}
+else if(strcmp($op, "get_schedule") == 0){
     $s_id = $_GET['s_id'];
     $query = <<<QUERY
         SELECT s_id, s_name, DATE_FORMAT(start_time, '$date_format') AS start_time, DATE_FORMAT(end_time, '$date_format') AS end_time, description
@@ -91,9 +115,12 @@ else if(strcmp($op, "add_schedule") == 0){
     $start_time = $_GET['start_time'];
     $end_time = $_GET['end_time'];
     $description = $_GET['description'];
+    $u_id = $token
+    if(isset($_GET['g_id']))
+        $u_id='Null'
     $query = <<<QUERY
         INSERT INTO p_schedule (s_name, start_time, end_time, u_id, description) 
-        VALUES ('$s_name', STR_TO_DATE('$start_time', '$date_format'), STR_TO_DATE('$end_time', '$date_format'), '$token', '$description'); 
+        VALUES ('$s_name', STR_TO_DATE('$start_time', '$date_format'), STR_TO_DATE('$end_time', '$date_format'), '$u_id', '$description'); 
 QUERY;
     //What I really want : 
     //WHERE u_id=(SELECT u_id from user where token='$token') 

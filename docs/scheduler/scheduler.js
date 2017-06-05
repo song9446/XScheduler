@@ -17,6 +17,14 @@ var performAction = function (action) {
     var op = action.op,
         args = action.args;
     switch(op){
+    case "get_candidate": 
+        args.op = "get_candidate";
+        action.result = xmlRequestJson(
+            'GET', 
+            args,
+            'schedule.php'
+            );
+    break;
     case "add_schedule": 
         args.op = "add_schedule";
         action.result = xmlRequestJson(
@@ -380,6 +388,7 @@ var createScheduleViewElement = function (container, year, month, g_id) {
     var calendar = createCalendarElement(container, year, month);
     calendar.style.position = "relative";
     var schedules = null;
+    var candidates = [];
     if(g_id == null){
         schedules = xmlRequestJson(
             'GET', 
@@ -398,9 +407,20 @@ var createScheduleViewElement = function (container, year, month, g_id) {
                 "end_time": dateFormat(year, month+1, 1)},
             'schedule.php'
         );
+        args = {};
+        args.op = "get_candidate";
+        args.g_id = g_id;
+        result = xmlRequestJson(
+            'GET', 
+            args,
+            'schedule.php'
+            );
+        if(result != null){
+            candidates = result.map(function(t){return t.s_id});
+        }
     }
     for(var i=0, l=schedules.length; i<l; i++){
-        drawSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
+        drawSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time, candidates.includes(schedules[i].s_id));
         writeSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
     }
 
@@ -450,7 +470,7 @@ var writeSchedule = function (calendar, id, name, startTime, endTime) {
         else cont.insertBefore(content, writes[j]);
     }
 }
-var drawSchedule = function (calendar, id, name, startTime, endTime) {
+var drawSchedule = function (calendar, id, name, startTime, endTime, is_candidate) {
     var startCalendarDateElement = document.getElementById(calendar.id + "-" + startTime.substr(0,8) + "000000");
     var endCalendarDateElement = document.getElementById(calendar.id + "-" + endTime.substr(0, 8) + "000000");
     var tds = calendar.getElementsByClassName("datecell");
@@ -487,21 +507,25 @@ var drawSchedule = function (calendar, id, name, startTime, endTime) {
     var contentEndTime = "<span class='end_time'>".concat("~", parsedEndTime, "</span>");
     var contentName = "<span class='name'>".concat(name, "</span>");
     var contentEmpty = "<span class='name'>".concat("&nbsp;", "</span>");
+    var candidateCheckbox = "<input type='checkbox' class='candidate'/>"
 
     if(ey-dh+1<sy){ 
     // case1 : schedule represent in one line
-        var box = createBox(container, sx, sy, ex-sx, dh, id, box_style, contentStartTime.concat(contentName, contentEndTime));
+        var box = createBox(container, sx, sy, ex-sx, dh, id, box_style, //contentStartTime.concat(contentName, contentEndTime));
+            candidateCheckBox);
         box.classList.add(box_class);
     }else {
     // case2 : schedule represent in more than one line
-        var box = createBox(container, sx, sy, w-sx, dh, id, box_style, contentStartTime.concat(contentName, contentEmpty));
+        var box = createBox(container, sx, sy, w-sx, dh, id, box_style, //contentStartTime.concat(contentName, contentEmpty));
+            candidateCheckBox);
         box.classList.add(box_class);
         // case3 : schedule represent in more than two lines
         for(var i=1, l=~~((ey-sy+1)/dh); i<l; i++){
             var box = createBox(container, 0, sy + dh*i, w, dh, id, box_style, contentEmpty.concat(contentName, contentEmpty));
             box.classList.add(box_class);
         }
-        box = createBox(container, 0, ey, ex, dh, id, box_style, contentEmpty.concat(contentName, contentEndTime));
+        box = createBox(container, 0, ey, ex, dh, id, box_style, //contentEmpty.concat(contentName, contentEndTime));
+            candidateCheckBox);
         box.classList.add(box_class);
     }
     calendar.appendChild(container);
