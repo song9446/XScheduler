@@ -13,8 +13,9 @@ $query = "";
 if(strcmp($op, "get_candidate") == 0){
     $g_id = $_GET['g_id'];
     $query = <<<QUERY
-        SELECT p.s_id FROM p_schedule AS p, group_have_schedule AS ghs WHERE p.s_id=ghs.s_id AND ghs.g_id=$g_id GROUP BY p.s_name HAVING COUNT(g.s_id)>1;
+        SELECT p.s_id FROM p_schedule AS p, group_have_schedule AS ghs WHERE p.s_id=ghs.s_id AND p.s_name IN (SELECT p2.s_name FROM p_schedule AS p2, group_have_schedule AS ghs2 WHERE p2.s_id=ghs2.s_id AND ghs2.g_id=$g_id GROUP BY p2.s_name HAVING COUNT(ghs2.s_id)>1);
 QUERY;
+    $result = mysqli_query($conn, $query);
     if(!$result){
         echo '{"error":"'.mysqli_error($conn).'"}';
         mysqli_close($conn);
@@ -26,13 +27,6 @@ QUERY;
         $arr[] = $row;
     }
     echo json_encode($arr);
-}
-else if(strcmp($op, "get_group_schedule_in_range") == 0){
-    $start_time = $_GET['start_time'];
-    $end_time = $_GET['end_time'];
-    $g_id = $_GET['g_id'];
-    $query = <<<QUERY
-        SELECT p.s_id, s_name, DATE_FORMAT(start_time, '$date_format') AS start_time, DATE_FORMAT(end_time, '$date_format') AS end_time 
 }
 else if(strcmp($op, "get_schedule") == 0){
     $s_id = $_GET['s_id'];
@@ -115,9 +109,9 @@ else if(strcmp($op, "add_schedule") == 0){
     $start_time = $_GET['start_time'];
     $end_time = $_GET['end_time'];
     $description = $_GET['description'];
-    $u_id = $token
-    if(isset($_GET['g_id']))
-        $u_id='Null'
+    $u_id = $token;
+    if(isset($_GET['g_id']));
+        #$u_id='';
     $query = <<<QUERY
         INSERT INTO p_schedule (s_name, start_time, end_time, u_id, description) 
         VALUES ('$s_name', STR_TO_DATE('$start_time', '$date_format'), STR_TO_DATE('$end_time', '$date_format'), '$u_id', '$description'); 

@@ -223,6 +223,9 @@ var createScheduleController = function (container, scheduleView, g_id) {
                     },
                     'schedule.php'
                 )[0];
+                if(schedule == null){
+                    s_id = -1;
+                }
                 for(var name in schedule){
                     if(form[name] != null){
                         if(name.endsWith("time")) form[name].value = timeString(schedule[name]);
@@ -232,7 +235,11 @@ var createScheduleController = function (container, scheduleView, g_id) {
             }
             focusingSID = s_id;
         }
-        if(focusingSID == null){
+        if(focusingSID == -1){
+            deleteButton.style.display = "none";
+            updateButton.style.display = "none";
+            addButton.style.display = "none";
+        }else if(focusingSID == null){
             deleteButton.style.display = "none";
             updateButton.style.display = "none";
             addButton.style.display = "inline-block";
@@ -417,6 +424,7 @@ var createScheduleViewElement = function (container, year, month, g_id) {
             );
         if(result != null){
             candidates = result.map(function(t){return t.s_id});
+            console.log("candidate", candidates);
         }
     }
     for(var i=0, l=schedules.length; i<l; i++){
@@ -493,8 +501,8 @@ var drawSchedule = function (calendar, id, name, startTime, endTime, is_candidat
         w = calendar.clientWidth;
     var box_class = "schedule_box";
     var box_style = {
-        backgroundColor: genRandomColor(name, 0.3),
-        color: genCounterBlackOrWhite(name),
+        backgroundColor: genRandomColor(__user_id__ + name, 0.3),
+        color: genCounterBlackOrWhite(__user_id__ + name),
     };
     var container = document.createElement("div");
     container.style.position = "absolute";
@@ -506,14 +514,20 @@ var drawSchedule = function (calendar, id, name, startTime, endTime, is_candidat
     var contentStartTime = "<span class='start_time'>".concat(parsedStartTime, "~", "</span>");
     var contentEndTime = "<span class='end_time'>".concat("~", parsedEndTime, "</span>");
     var contentName = "<span class='name'>".concat(name, "</span>");
-    var contentEmpty = "<span class='name'>".concat("&nbsp;", "</span>");
-    var candidateCheckbox = "<input type='checkbox' class='candidate'/>"
+    var contentEmpty = "<span class='empty'>".concat("&nbsp;", "</span>");
+    var candidateCheckBox = "";
+    var candidate_class = "candidate";
+    if(is_candidate){
+        candidateCheckBox = contentEmpty + "<span class='candidate'><input type='checkbox'/></span>" + contentEmpty;
+    }
 
     if(ey-dh+1<sy){ 
     // case1 : schedule represent in one line
         var box = createBox(container, sx, sy, ex-sx, dh, id, box_style, //contentStartTime.concat(contentName, contentEndTime));
             candidateCheckBox);
         box.classList.add(box_class);
+        if(is_candidate)
+            box.classList.add(candidate_class);
     }else {
     // case2 : schedule represent in more than one line
         var box = createBox(container, sx, sy, w-sx, dh, id, box_style, //contentStartTime.concat(contentName, contentEmpty));
@@ -523,10 +537,14 @@ var drawSchedule = function (calendar, id, name, startTime, endTime, is_candidat
         for(var i=1, l=~~((ey-sy+1)/dh); i<l; i++){
             var box = createBox(container, 0, sy + dh*i, w, dh, id, box_style, contentEmpty.concat(contentName, contentEmpty));
             box.classList.add(box_class);
+            if(is_candidate)
+                box.classList.add(candidate_class);
         }
         box = createBox(container, 0, ey, ex, dh, id, box_style, //contentEmpty.concat(contentName, contentEndTime));
             candidateCheckBox);
         box.classList.add(box_class);
+        if(is_candidate)
+            box.classList.add(candidate_class);
     }
     calendar.appendChild(container);
     return container;

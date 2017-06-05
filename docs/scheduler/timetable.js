@@ -27,13 +27,15 @@ var createTimeTable = function (container, year, month, date, g_id) {
         // draw background table with schedules
         var canv = document.createElement("canvas");
         var table_canv = document.createElement("canvas");
-        var width = canv.width = table_canv.width = 300,
-            height = canv.height = table_canv.height = 1800;
+        var helper_canv = document.createElement("canvas");
+        var width = helper_canv.width = canv.width = table_canv.width = 300,
+            height = helper_canv.height = canv.height = table_canv.height = 1800;
         container.appendChild(canv);
         var top_margin = 50.5;
         var bottom_margin = 30;
         var height = height-top_margin-bottom_margin;
         var table_ctx = table_canv.getContext("2d");
+        var helper_ctx = helper_canv.getContext("2d");
         table_ctx.textBaseline="middle"; 
         table_ctx.textAlign="center";
         table_ctx.font = table_ctx.font.replace(/\d+px/, "20px");
@@ -103,6 +105,7 @@ var createTimeTable = function (container, year, month, date, g_id) {
                 drawhelperline = setInterval(function () {
                     ctx.clearRect(0, 0, width, height+top_margin+bottom_margin);
                     ctx.drawImage(table_canv, 0, 0);
+                    ctx.drawImage(helper_canv, 0, 0);
                     ctx.fillText(helperline.time, 5, helperline.y);
                     ctx.beginPath();
                     ctx.lineWidth = 1;
@@ -125,41 +128,52 @@ var createTimeTable = function (container, year, month, date, g_id) {
         // draw highlight
         var highlight = null;
         canv.onclick = function (evt) {
+            helper_ctx.clearRect(0, 0, width, height+top_margin+bottom_margin);
             for(var i=0, l=schedules.length; i<l; i++){
                 var schedule = schedules[i];
                 if(evt.offsetY >= schedule.y_start && evt.offsetY <= schedule.y_end){
                     if(highlight != null){
-                        table_ctx.strokeStyle = highlight.strokeColor;
-                        table_ctx.fillStyle = highlight.fillColor;
-                        table_ctx.strokeRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                            width, (highlight.end_date - first_date)/d_time * height + top_margin);
-                        table_ctx.fillRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                            width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                        /*
+                        helper_ctx.strokeStyle = highlight.strokeColor;
+                        helper_ctx.fillStyle = highlight.fillColor;
+                        helper_ctx.strokeRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
+                                width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                        helper_ctx.fillRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
+                                width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                        */
                     }
                     if(highlight == schedule){
+                        highlight = null;
                         i = l;
                         break;
                     }
                     highlight = schedule;
-                    table_ctx.strokeStyle = "#ff0000";
-                    table_ctx.fillStyle = "#ff0000";
-                    table_ctx.strokeRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                        width, (highlight.end_date - first_date)/d_time * height + top_margin);
-                    table_ctx.fillRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                        width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                    helper_ctx.strokeStyle = "#ff0000";
+                    //helper_ctx.fillStyle = "#ff0000";
+                    helper_ctx.strokeRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
+                            width, (highlight.end_date - highlight.start_date)/d_time * height + top_margin);
+                    //helper_ctx.fillRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
+                    //        width, (highlight.end_date - highlight.start_date)/d_time * height + top_margin);
                     break;
                 }
             }
             if(i == l && highlight != null){ 
-                table_ctx.strokeStyle = highlight.strokeColor;
-                table_ctx.fillStyle = highlight.fillColor;
-                table_ctx.strokeRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                    width, (highlight.end_date - first_date)/d_time * height + top_margin);
-                table_ctx.fillRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
-                    width, (highlight.end_date - first_date)/d_time * height + top_margin);
                 highlight = null;
+                /*
+                helper_ctx.strokeStyle = highlight.strokeColor;
+                helper_ctx.fillStyle = highlight.fillColor;
+                helper_ctx.strokeRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
+                        width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                helper_ctx.fillRect(0, (highlight.start_date - first_date)/d_time * height + top_margin, 
+                        width, (highlight.end_date - first_date)/d_time * height + top_margin);
+                highlight = null;
+                */
             }
+            ctx.drawImage(table_canv, 0, 0);
+            ctx.drawImage(helper_canv, 0, 0);
         }
+        ctx.clearRect(0, 0, width, height+top_margin+bottom_margin);
+        ctx.drawImage(table_canv, 0, 0);
     }
     render();
     return {

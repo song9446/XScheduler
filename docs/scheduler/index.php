@@ -1,6 +1,8 @@
 <?php
 session_start();
 include ( "./inc/connect.inc.php" );
+
+echo "<script> __user_id__ = '".$_SESSION['u_id']."';</script>"
 ?>
 
 <html>
