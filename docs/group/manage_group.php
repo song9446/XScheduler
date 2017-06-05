@@ -14,8 +14,9 @@ include ( "../inc/connect.inc.php" );
 
   <body>
     <?php include ( "../headerMenu.php" ); ?>
-
-    <?php
+    <div class='info'>
+      <div class='group_name'>
+      <?php
         $curr_u_id = $_SESSION['u_id'];
         $curr_g_id = $_GET['g_id'];
 
@@ -27,8 +28,9 @@ include ( "../inc/connect.inc.php" );
 
         if ($result){
             $row = mysqli_fetch_assoc($result);
-
+            echo "<div class=group_creator>";
             echo "Group creator: " . $row['g_creator'];
+            echo "</div>";
             echo "<form action='#' method='post'>";
             echo "    <div class='textbox'>";
             echo "        <label for='group_name'>Group name: </label>";
@@ -46,7 +48,11 @@ include ( "../inc/connect.inc.php" );
 
                 echo "<meta http-equiv='refresh' content='0;url=manage_group.php?g_id=" . $curr_g_id . "'>";
             }
+      ?>
+      </div>
 
+      <div class='upload_logo'>
+      <?php
             echo "<form method='post' enctype='multipart/form-data'>";
             echo "<br />";
             echo "    <input type='file' name='image' />";
@@ -87,11 +93,17 @@ include ( "../inc/connect.inc.php" );
         else {
             echo "Failed to get group info. g_id: " . $curr_g_id;
         }
+      ?>
+      </div>
+    </div>
+    <div id='creator'>
+    <?php
+      echo "Group creator: " . $row['g_creator'];
     ?>
-
-    <div>
-        <div> Member list </div>
-        <div>
+    </div>
+    <div class='member_list'>
+        <p> Member list </p>
+        <div class='list'>
             <?php
                 $curr_g_id = $_GET['g_id'];
                 $query = "SELECT u_id FROM group_member WHERE g_id = '$curr_g_id'";
