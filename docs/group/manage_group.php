@@ -10,6 +10,7 @@ include ( "../inc/connect.inc.php" );
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/group_sche_create.css" />
     <link rel="stylesheet" type="text/css" href="../css/friend.css" />
+    <link rel="stylesheet" type="text/css" href=".../css/manage_group.css"/>
   </head>
 
   <body>
