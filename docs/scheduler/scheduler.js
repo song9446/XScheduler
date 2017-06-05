@@ -122,11 +122,14 @@ var createScheduleController = function (container, scheduleView, g_id) {
     var cont = document.createElement('div');
     var form = document.createElement("form");
     var calendar = scheduleView.getElementsByClassName("calendar")[0];
+    var name = "Schedule";
     form.className = "schedule_controller";
-    if(g_id != null)
+    if(g_id != null){
         form.classList.add("group");
+        name = "Group " + name;
+    }
     var ret = "";
-    ret += "<span class='title'>Group Schedule</span>"
+    ret += "<span class='title'>" + name + "</span>"
     ret += "<input type='hidden' id='s_id' name='s_id'>";
     ret += "<p><label id='s_name'>Name</label><input id='s_name' name='s_name'></p>";
     ret += "<p><label id='start_time'>Start time</label><input id='start_time' name='start_time'></p>";
