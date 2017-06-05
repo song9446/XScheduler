@@ -1,8 +1,25 @@
 .info {
+  padding-top: 100px;
+  padding-left: 200px;
   float: left;
 }
 .group_name {
 
+}
+.textbox {
+  font-size: 20px;
+  margin-right: 10px;
+}
+.textbox input[type="text"] {
+  height: 45px;
+  width: 300px;
+}
+.textbox input[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  text-align: center;
+  background-color: #2ECC71;
+  float: left;
 }
 .upload_logo {
 
