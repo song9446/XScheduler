@@ -156,5 +156,6 @@ a.logout_button {
   width: 150px;
   background-color: #eff5f9;
   font-size: 16px;
+  font-family: -webkit-body;
 }
 
