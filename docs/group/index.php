@@ -34,9 +34,9 @@ include ( "../inc/connect.inc.php" );
                 echo "<div class='calendar_main_container'>" . 
                          "<a href='manage_group.php?g_id=" . $row['g_id'] . " '>" . 
                          "<img class='calendar_main_pic' src='data:image;base64, " . $row['pic_main'] . " '>" . "</a>" . 
-                         "<p style='font-size: 10px';>" . $row['g_name'] . "</p>" . 
-                         "<p style='font-size: 10px';>" . $row['g_creator'] . "</p>" . 
-                         "<p style='font-size: 10px';>" . $row['member_num'] . " members" . "</p>" . 
+                         "<p style='font-size: 15px';>" . $row['g_name'] . "</p>" . 
+                         "<p style='font-size: 15px';>" . $row['g_creator'] . "</p>" . 
+                         "<p style='font-size: 15px';>" . $row['member_num'] . " members" . "</p>" . 
                      "</div>";
             }
         }
