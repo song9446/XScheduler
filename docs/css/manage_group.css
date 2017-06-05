@@ -6,20 +6,20 @@
 .group_name {
 
 }
-.textbox {
+.textbox label {
   font-size: 20px;
   margin-right: 10px;
 }
 .textbox input[type="text"] {
   height: 45px;
   width: 300px;
+  font-size: 20px;
 }
 .textbox input[type="submit"] {
   padding: 10px 20px;
   border: none;
   text-align: center;
   background-color: #2ECC71;
-  float: left;
 }
 .upload_logo {
 
@@ -31,11 +31,17 @@
 .member_list {
   width: 300px;
   height: 700px;
+  padding-top: 100px;
   padding-left: 100px;
-  padding-top: 50px;
   float: left;
 }
 .member_list p {
   margin-bottom: 15px;
   font-size: 20px;
+}
+.list {
+  height: 600px;
+  margin-top: 20px;
+  border-style: solid;
+  border-width: 2px;
 }
