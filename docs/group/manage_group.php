@@ -47,12 +47,6 @@ include ( "../inc/connect.inc.php" );
       ?>
       </div>
 
-      <div id='creator'>
-      <?php
-        echo "Group creator: " . $row['g_creator'];
-      ?>
-      </div>
-
       <div class='upload_logo'>
       <?php
             echo "<form method='post' enctype='multipart/form-data'>";
@@ -99,6 +93,11 @@ include ( "../inc/connect.inc.php" );
       </div>
     </div>
     <div class='member_list'>
+      <div id='creator'>
+      <?php
+        echo "Group creator: " . $row['g_creator'];
+      ?>
+      </div>
         <p> Member list </p>
         <div class='list'>
             <?php
