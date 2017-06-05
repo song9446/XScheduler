@@ -8,8 +8,6 @@ include ( "../inc/connect.inc.php" );
   <head>
     <title>UniScheduler</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
-    <link rel="stylesheet" type="text/css" href="../css/group_sche_create.css" />
-    <link rel="stylesheet" type="text/css" href="../css/friend.css" />
     <link rel="stylesheet" type="text/css" href="../css/manage_group.css"/>
   </head>
 
@@ -29,9 +27,6 @@ include ( "../inc/connect.inc.php" );
 
         if ($result){
             $row = mysqli_fetch_assoc($result);
-            echo "<div class=group_creator>";
-            echo "Group creator: " . $row['g_creator'];
-            echo "</div>";
             echo "<form action='#' method='post'>";
             echo "    <div class='textbox'>";
             echo "        <label for='group_name'>Group name: </label>";
