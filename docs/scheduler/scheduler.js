@@ -431,6 +431,7 @@ var createScheduleViewElement = function (container, year, month, g_id) {
     calendar.style.position = "relative";
     var schedules = null;
     var candidates = null
+    var mapped_candidate = {};
     if(g_id == null){
         schedules = xmlRequestJson(
             'GET', 
@@ -454,7 +455,6 @@ var createScheduleViewElement = function (container, year, month, g_id) {
             {op: "get_candidate", g_id: g_id},
             'schedule.php'
             );
-        var mapped_candidate = null;
         if(candidates != null){
             mapped_candidate = {};
             var mapped_vote_num = {};
@@ -481,6 +481,7 @@ var createScheduleViewElement = function (container, year, month, g_id) {
             console.log("candidate", mapped_candidate);
         }
     }
+        console.log(schedules);
     for(var i=0, l=schedules.length; i<l; i++){
         drawSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time, mapped_candidate[schedules[i].s_id]);
         writeSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
