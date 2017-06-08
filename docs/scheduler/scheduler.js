@@ -17,6 +17,22 @@ var performAction = function (action) {
     var op = action.op,
         args = action.args;
     switch(op){
+    case "get_vote_num":
+        args.op = "get_vote_num";
+        action.result = xmlRequestJson(
+            'GET', 
+            args,
+            'schedule.php'
+            );
+    break;
+    case "vote": 
+        args.op = "vote";
+        action.result = xmlRequestJson(
+            'GET', 
+            args,
+            'schedule.php'
+            );
+    break;
     case "get_candidate": 
         args.op = "get_candidate";
         action.result = xmlRequestJson(
@@ -138,7 +154,8 @@ var createScheduleController = function (container, scheduleView, g_id) {
     form.innerHTML += ret;
     var addButton = document.createElement("button"),
         updateButton = document.createElement("button"),
-        deleteButton = document.createElement("button");
+        deleteButton = document.createElement("button"),
+        voteButton = document.createElement("button");
     addButton.id = "add_schedule";
     if(g_id != null)
         addButton.innerText = "Add to group";
@@ -148,7 +165,9 @@ var createScheduleController = function (container, scheduleView, g_id) {
     deleteButton.innerText = "Delete";
     updateButton.id = "update_schedule";
     updateButton.innerText = "Update";
-    addButton.type = deleteButton.type = updateButton.type = "button";
+    voteButton.id = "vote_schedule";
+    voteButton.innerText = "Vote";
+    addButton.type = deleteButton.type = updateButton.type = voteButton.type = "button";
     addButton.onclick = function () {
         json =  formToJson(form, function(name, value){
                     if(name.endsWith("time"))return stringTime(value); 
@@ -175,6 +194,18 @@ var createScheduleController = function (container, scheduleView, g_id) {
                 eraseSchedule(calendar, action.args.s_id);
                 focusOn(null);
             }));
+    }
+    voteButton.onclick = function () {
+        var cb = document.getElementsByName("vote_box");
+        for(var i=0, l=cb.length; i<l; i++){
+           console.log(cb[i].parentElement.parentElement.parentElement.id, " voted ", cb[i].checked?1:0);
+            performAction(createAction("vote", 
+                {"s_id": cb[i].parentElement.parentElement.parentElement.id, "vote": cb[i].checked?1:0},
+                function (action) {
+                    //focusOn(null);
+                    
+                }));
+       }
     }
     updateButton.onclick = function () {
         performAction(createAction("update_schedule", 
@@ -258,6 +289,7 @@ var createScheduleController = function (container, scheduleView, g_id) {
     form.appendChild(addButton);
     form.appendChild(updateButton);
     form.appendChild(deleteButton);
+    form.appendChild(voteButton);
     container.appendChild(form);
     for(var i=0, l=scheduleBoxes.length;i<l; i++){
         scheduleBoxes[i].onclick = function () {
@@ -398,7 +430,7 @@ var createScheduleViewElement = function (container, year, month, g_id) {
     var calendar = createCalendarElement(container, year, month);
     calendar.style.position = "relative";
     var schedules = null;
-    var candidates = [];
+    var candidates = null
     if(g_id == null){
         schedules = xmlRequestJson(
             'GET', 
@@ -417,21 +449,40 @@ var createScheduleViewElement = function (container, year, month, g_id) {
                 "end_time": dateFormat(year, month+1, 1)},
             'schedule.php'
         );
-        args = {};
-        args.op = "get_candidate";
-        args.g_id = g_id;
-        result = xmlRequestJson(
+        candidates = xmlRequestJson(
             'GET', 
-            args,
+            {op: "get_candidate", g_id: g_id},
             'schedule.php'
             );
-        if(result != null){
-            candidates = result.map(function(t){return t.s_id});
-            console.log("candidate", candidates);
+        var mapped_candidate = null;
+        if(candidates != null){
+            mapped_candidate = {};
+            var mapped_vote_num = {};
+            var mapped_my_vote = {};
+            var vote_num = xmlRequestJson(
+                'GET', 
+                {op: "get_vote_num", g_id: g_id},
+                'schedule.php'
+                );
+            var my_vote = xmlRequestJson(
+                'GET', 
+                {op: "get_my_vote", g_id: g_id},
+                'schedule.php'
+                );
+            for(var i=0, l=vote_num.length; i<l; i++)
+                mapped_vote_num[vote_num[i].s_id] = vote_num[i].vote_num;
+            for(var i=0, l=my_vote.length; i<l; i++)
+                mapped_my_vote[my_vote[i].s_id] = true;
+            for(var i=0,l=candidates.length; i<l; ++i){
+                mapped_candidate[candidates[i].s_id] = candidates[i];
+                mapped_candidate[candidates[i].s_id].vote_num = mapped_vote_num[candidates[i].s_id] || 0;
+                mapped_candidate[candidates[i].s_id].my_vote = mapped_my_vote[candidates[i].s_id];
+            }
+            console.log("candidate", mapped_candidate);
         }
     }
     for(var i=0, l=schedules.length; i<l; i++){
-        drawSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time, candidates.includes(schedules[i].s_id));
+        drawSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time, mapped_candidate[schedules[i].s_id]);
         writeSchedule(calendar, schedules[i].s_id, schedules[i].s_name, schedules[i].start_time, schedules[i].end_time);
     }
 
@@ -447,9 +498,31 @@ var createScheduleViewElement = function (container, year, month, g_id) {
             */
     return calendar;
 };
-
+var transCandidateToSchedule = function (calendar, id) {
+    var ss = calendar.getElementsByClassName(id);
+    if(ss[0]){
+        //var contentEmpty = "<span class='empty'>".concat("&nbsp;", "</span>");
+        ss[0].innerHTML = "";
+        ss[0].classList.remove("candidate");
+    }
+}
+var transScheduleToCandidate = function (calendar, id) {
+    var ss = calendar.getElementsByClassName(id);
+    if(ss[1]){
+        ss[1].classList.add("candidate");
+        var contentEmpty = "<span class='empty'>".concat("&nbsp;", "</span>");
+        ss[1].innerHTML = contentEmpty + "<span class='candidate'><input name='vote_box' type='checkbox' onchange='prevote.call(this)'/></span><span>"+0+"</span>";
+    }
+};
 var eraseSchedule = function (calendar, id) {
     var ss = calendar.getElementsByClassName(id);
+    if(!ss.length)return;
+    if(SCHEDULE_NAME_NUM_SET[ss[ss.length-1].name]==2){
+        var els = document.getElementsByName(ss[ss.length-1].name);
+        for(var i=0; i<els.length; i++)
+            if(els[i].id != id) transCandidateToSchedule(calendar, els[i].id);
+    }
+    SCHEDULE_NAME_NUM_SET[ss[ss.length-1].name]-=1;
     for(var i=0; i < ss.length; i++){ 
         if(ss[i]){
             ss[i].parentElement.removeChild(ss[i]);
@@ -481,7 +554,19 @@ var writeSchedule = function (calendar, id, name, startTime, endTime) {
         else cont.insertBefore(content, writes[j]);
     }
 }
-var drawSchedule = function (calendar, id, name, startTime, endTime, is_candidate) {
+var SCHEDULE_NAME_SET = {};
+var SCHEDULE_NAME_NUM_SET = {};
+var drawSchedule = function (calendar, id, name, startTime, endTime, candidate_info) {
+    if(SCHEDULE_NAME_SET[name] != null){
+        if(SCHEDULE_NAME_NUM_SET[name]==1)
+            transScheduleToCandidate(calendar, SCHEDULE_NAME_SET[name]);
+        if(!candidate_info)
+            candidate_info = {vote_num:0};
+    }
+    if(!candidate_info)
+        SCHEDULE_NAME_SET[name]=id;
+    if(!SCHEDULE_NAME_NUM_SET[name]) SCHEDULE_NAME_NUM_SET[name]=0;
+    SCHEDULE_NAME_NUM_SET[name] += 1;
     var startCalendarDateElement = document.getElementById(calendar.id + "-" + startTime.substr(0,8) + "000000");
     var endCalendarDateElement = document.getElementById(calendar.id + "-" + endTime.substr(0, 8) + "000000");
     var tds = calendar.getElementsByClassName("datecell");
@@ -520,33 +605,40 @@ var drawSchedule = function (calendar, id, name, startTime, endTime, is_candidat
     var contentEmpty = "<span class='empty'>".concat("&nbsp;", "</span>");
     var candidateCheckBox = "";
     var candidate_class = "candidate";
-    if(is_candidate){
-        candidateCheckBox = contentEmpty + "<span class='candidate'><input type='checkbox'/></span>" + contentEmpty;
+    if(candidate_info){
+        if(candidate_info.my_vote)
+            candidateCheckBox = contentEmpty + "<span class='candidate'><input name='vote_box' type='checkbox' checked='checked' onchange='prevote.call(this)'/></span><span>" + candidate_info.vote_num+"</span>";
+        else
+            candidateCheckBox = contentEmpty + "<span class='candidate'><input name='vote_box' type='checkbox' onchange='prevote.call(this)'/></span><span>"+candidate_info.vote_num+"</span>";
     }
 
     if(ey-dh+1<sy){ 
     // case1 : schedule represent in one line
         var box = createBox(container, sx, sy, ex-sx, dh, id, box_style, //contentStartTime.concat(contentName, contentEndTime));
             candidateCheckBox);
+        box.name=name;
         box.classList.add(box_class);
-        if(is_candidate)
+        if(candidate_info)
             box.classList.add(candidate_class);
     }else {
     // case2 : schedule represent in more than one line
         var box = createBox(container, sx, sy, w-sx, dh, id, box_style, //contentStartTime.concat(contentName, contentEmpty));
             candidateCheckBox);
+        box.name=name;
         box.classList.add(box_class);
         // case3 : schedule represent in more than two lines
         for(var i=1, l=~~((ey-sy+1)/dh); i<l; i++){
             var box = createBox(container, 0, sy + dh*i, w, dh, id, box_style, contentEmpty.concat(contentName, contentEmpty));
+            box.name=name;
             box.classList.add(box_class);
-            if(is_candidate)
+            if(candidate_info)
                 box.classList.add(candidate_class);
         }
         box = createBox(container, 0, ey, ex, dh, id, box_style, //contentEmpty.concat(contentName, contentEndTime));
             candidateCheckBox);
+        box.name=name;
         box.classList.add(box_class);
-        if(is_candidate)
+        if(candidate_info)
             box.classList.add(candidate_class);
     }
     calendar.appendChild(container);
@@ -692,4 +784,7 @@ function formToJson(form, reduceCall) {
     }
     return json;
 }
-
+function prevote(){
+    console.log(this);
+    this.parentElement.nextSibling.innerHTML -= this.checked?-1:1;
+}

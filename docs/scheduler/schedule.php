@@ -10,7 +10,67 @@ $op = $_GET['op'];
 $date_format = "%Y%m%d%H%i%s";
 $query = "";
 
-if(strcmp($op, "get_candidate") == 0){
+if(strcmp($op, "vote") == 0){
+    $s_id = $_GET['s_id'];
+    $vote = $_GET['vote'];
+    if($vote == '1'){
+    $query = <<<QUERY
+        INSERT INTO vote (u_id, s_id)
+        VALUES ('$token', $s_id)
+QUERY;
+    }
+    else {
+    $query = <<<QUERY
+        DELETE FROM vote 
+        WHERE u_id='$token' AND s_id='$s_id';
+QUERY;
+    }
+    $result = mysqli_query($conn, $query);
+    if(!$result){
+        echo '{"error":"'.mysqli_error($conn).'"}';
+        mysqli_close($conn);
+        die();
+    }
+
+    echo '{"s_id":'.$s_id.'}';
+}
+if(strcmp($op, "get_my_vote") == 0){
+    $g_id = $_GET['g_id'];
+    $query = <<<QUERY
+        SELECT v.s_id FROM vote AS v WHERE $g_id=(SELECT ghs.g_id FROM group_have_schedule AS ghs WHERE ghs.s_id=v.s_id) AND v.u_id='$token';
+QUERY;
+    $result = mysqli_query($conn, $query);
+    if(!$result){
+        echo '{"error":"'.mysqli_error($conn).'"}';
+        mysqli_close($conn);
+        die();
+    }
+
+    $arr = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $arr[] = $row;
+    }
+    echo json_encode($arr);
+}
+else if(strcmp($op, "get_vote_num") == 0){
+    $g_id = $_GET['g_id'];
+    $query = <<<QUERY
+        SELECT v.s_id, COUNT(v.s_id) AS vote_num FROM vote AS v WHERE $g_id=(SELECT ghs.g_id FROM group_have_schedule AS ghs WHERE ghs.s_id=v.s_id) GROUP BY v.s_id;
+QUERY;
+    $result = mysqli_query($conn, $query);
+    if(!$result){
+        echo '{"error":"'.mysqli_error($conn).'"}';
+        mysqli_close($conn);
+        die();
+    }
+
+    $arr = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $arr[] = $row;
+    }
+    echo json_encode($arr);
+}
+else if(strcmp($op, "get_candidate") == 0){
     $g_id = $_GET['g_id'];
     $query = <<<QUERY
         SELECT p.s_id FROM p_schedule AS p, group_have_schedule AS ghs WHERE p.s_id=ghs.s_id AND p.s_name IN (SELECT p2.s_name FROM p_schedule AS p2, group_have_schedule AS ghs2 WHERE p2.s_id=ghs2.s_id AND ghs2.g_id=$g_id GROUP BY p2.s_name HAVING COUNT(ghs2.s_id)>1);
@@ -140,7 +200,7 @@ QUERY;
         die();
     }
     }
-    echo '{"s_id":'.mysqli_insert_id($conn).'}';
+    echo '{"s_id":'.$s_id.'}';
 }
 else if(strcmp($op, "delete_schedule") == 0){
     $s_id = $_GET['s_id'];
