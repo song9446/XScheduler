@@ -144,9 +144,9 @@ else if(strcmp($op, "get_schedule_in_range") == 0){
     $query = <<<QUERY
         SELECT s_id, s_name, DATE_FORMAT(start_time, '$date_format') AS start_time, DATE_FORMAT(end_time, '$date_format') AS end_time 
         FROM p_schedule AS p
-        WHERE p.u_id='$token' AND
+        WHERE (p.u_id='$token' AND
               ((p.end_time >= STR_TO_DATE('$start_time', '$date_format') AND p.end_time <= STR_TO_DATE('$end_time', '$date_format')) OR
-              (p.start_time >= STR_TO_DATE('$start_time', '$date_format') AND p.start_time <= STR_TO_DATE('$end_time', '$date_format'))); 
+              (p.start_time >= STR_TO_DATE('$start_time', '$date_format') AND p.start_time <= STR_TO_DATE('$end_time', '$date_format')))) OR (p.s_id IN (SELECT ghs.s_id FROM group_have_schedule AS ghs WHERE ghs.g_id IN (SELECT gm.g_id FROM group_member AS gm WHERE gm.u_id='$token'))); 
 QUERY;
     //What I really want : 
     //WHERE u_id=(SELECT u_id from user where token='$token') 

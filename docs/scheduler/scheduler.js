@@ -93,6 +93,8 @@ var undoAction = function (action) {
 
 var __id_auto_increament = 0;
 var createScheduler = function (container, year, month, id, g_id) {
+    SCHEDULE_NAME_SET = {};
+    SCHEDULE_NAME_NUM_SET = {};
     var cont = document.createElement("div");
     cont.id = id || "scheduler" + (++__id_auto_increament);
     //todo : make interactive object here...
@@ -558,7 +560,7 @@ var writeSchedule = function (calendar, id, name, startTime, endTime) {
 var SCHEDULE_NAME_SET = {};
 var SCHEDULE_NAME_NUM_SET = {};
 var drawSchedule = function (calendar, id, name, startTime, endTime, candidate_info) {
-    if(SCHEDULE_NAME_SET[name] != null){
+    if(id!="helper_box" && SCHEDULE_NAME_SET[name] != null){
         if(SCHEDULE_NAME_NUM_SET[name]==1)
             transScheduleToCandidate(calendar, SCHEDULE_NAME_SET[name]);
         if(!candidate_info)
@@ -590,8 +592,10 @@ var drawSchedule = function (calendar, id, name, startTime, endTime, candidate_i
         w = calendar.clientWidth;
     var box_class = "schedule_box";
     var box_style = {
-        backgroundColor: genRandomColor(__user_id__ + name, 0.3),
-        color: genCounterBlackOrWhite(__user_id__ + name),
+        //backgroundColor: genRandomColor(__user_id__ + name, 0.3),
+        //color: genCounterBlackOrWhite(__user_id__ + name),
+        backgroundColor: genRandomColor(name, 0.3),
+        color: genCounterBlackOrWhite(name),
     };
     var container = document.createElement("div");
     container.style.position = "absolute";
